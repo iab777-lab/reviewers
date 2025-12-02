@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philippine Topography Study Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            background: #f8f9fa;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            background: #e9ecef;
+        }
+
+        .tab.active {
+            background: white;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .content {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .reviewer-section {
+            margin-bottom: 30px;
+        }
+
+        .reviewer-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .reviewer-section h3 {
+            color: #764ba2;
+            margin: 20px 0 10px 0;
+            font-size: 1.2em;
+        }
+
+        .reviewer-section ul {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .reviewer-section p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .question {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.05em;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .option.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .option.correct {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        .option.incorrect {
+            background: #ef4444;
+            color: white;
+            border-color: #ef4444;
+        }
+
+        .input-answer {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .input-answer:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .feedback.correct {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .feedback.incorrect {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .score-display h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .score-display p {
+            font-size: 1.2em;
+        }
+
+        .reset-btn {
+            background: #6b7280;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .reset-btn:hover {
+            background: #4b5563;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            height: 8px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            transition: width 0.3s;
+        }
+
+        strong {
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏔️ Philippine Topography Study Tool 🌊</h1>
+            <p>Master the landforms and water forms of the Philippines!</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('reviewer')">📚 Reviewer</button>
+            <button class="tab" onclick="showTab('quiz')">✏️ Interactive Quiz</button>
+        </div>
+
+        <div class="content">
+            <!-- REVIEWER TAB -->
+            <div id="reviewer" class="tab-content">
+                <div class="reviewer-section">
+                    <h2>What is Topography?</h2>
+                    <p><strong>Topography</strong> is the arrangement of the natural and artificial physical features of an area. The Philippine topography is varied and rich, with landforms and water forms in different forms and sizes, abundant in natural resources.</p>
+                </div>
+
+                <div class="reviewer-section">
+                    <h2>🏔️ Different Landforms</h2>
+                    
+                    <h3>1. Plain</h3>
+                    <ul>
+                        <li><strong>Description:</strong> A landform that is wide, low, and flat</li>
+                        <li><strong>Example:</strong> Central plain in Luzon</li>
+                        <li><strong>Uses:</strong> Rice fields, planting rice, fruit-bearing trees, vegetables, and medicinal plants</li>
+                    </ul>
+
+                    <h3>2. Mountain</h3>
+                    <ul>
+                        <li><strong>Description:</strong> A very high landform</li>
+                        <li><strong>Examples:</strong> Mt. Makiling, Mt. Halcon, Mt. Apo (tallest)</li>
+                        <li><strong>Mountain Ranges:</strong> Sierra Madre Mountains, Caraballo Mountains</li>
+                        <li><strong>Resources:</strong> Tropical rainforests, wood, wildlife, minerals (gold, silver, copper, iron)</li>
+                    </ul>
+
+                    <h3>3. Hill</h3>
+                    <ul>
+                        <li><strong>Description:</strong> A high landform but lower and smaller than a mountain</li>
+                        <li><strong>Uses:</strong> Growing plants, raising animals (goats, cattle, sheep)</li>
+                    </ul>
+
+                    <h3>4. Valley</h3>
+                    <ul>
+                        <li><strong>Description:</strong> A level landform between ranges of hills or mountains</li>
+                        <li><strong>Examples:</strong> Trinidad Valley, Cagayan Valley</li>
+                        <li><strong>Crops:</strong> Palay, corn, root crops, vegetables</li>
+                        <li><strong>Animals:</strong> Chickens, cows, carabaos</li>
+                    </ul>
+
+                    <h3>5. Plateau</h3>
+                    <ul>
+                        <li><strong>Description:</strong> A flat high ground</li>
+                        <li><strong>Example:</strong> Baguio City in Benguet</li>
+                        <li><strong>Features:</strong> Cool climate, tourist destination, fresh vegetables and fruits</li>
+                    </ul>
+
+                    <h3>6. Volcano</h3>
+                    <ul>
+                        <li><strong>Description:</strong> A mountain with an opening (crater) on top</li>
+                        <li><strong>When erupts:</strong> Smoke, hot lava, and stones thrown out</li>
+                        <li><strong>Examples:</strong> Mayon Volcano, Taal Volcano, Mount Pinatubo</li>
+                    </ul>
+
+                    <h3>7. Peninsula</h3>
+                    <ul>
+                        <li><strong>Description:</strong> A protruding land along shores, almost surrounded by water</li>
+                        <li><strong>Examples:</strong> Bicol, Bataan, Zamboanga</li>
+                    </ul>
+                </div>
+
+                <div class="reviewer-section">
+                    <h2>🌊 Different Water Forms</h2>
+
+                    <h3>1. Ocean</h3>
+                    <ul>
+                        <li><strong>Description:</strong> The largest body of water, very deep and wide</li>
+                        <li><strong>Water type:</strong> Salty</li>
+                        <li><strong>Example:</strong> Pacific Ocean</li>
+                        <li><strong>Uses:</strong> Transportation for ships carrying travelers and goods</li>
+                    </ul>
+
+                    <h3>2. Sea</h3>
+                    <ul>
+                        <li><strong>Description:</strong> A big body of water, not as deep and wide as ocean</li>
+                        <li><strong>Water type:</strong> Salty</li>
+                        <li><strong>Uses:</strong> Fishing (fish, shrimp, squid), pearl diving</li>
+                        <li><strong>Philippine Seas:</strong> Philippine Sea (east), West Philippine Sea (west), Sulu Sea (southwest), Celebes Sea</li>
+                    </ul>
+
+                    <h3>3. Lake</h3>
+                    <ul>
+                        <li><strong>Description:</strong> A body of water surrounded by land</li>
+                        <li><strong>Water type:</strong> Not salty, does not flow to the sea</li>
+                        <li><strong>Example:</strong> Taal Lake</li>
+                        <li><strong>Uses:</strong> Source of fish income</li>
+                    </ul>
+
+                    <h3>4. River</h3>
+                    <ul>
+                        <li><strong>Description:</strong> A natural-flowing water form, usually freshwater</li>
+                        <li><strong>Source:</strong> Tributaries</li>
+                        <li><strong>Example:</strong> Loboc River</li>
+                        <li><strong>Resources:</strong> Fish, shrimp, crabs, mussels</li>
+                    </ul>
+
+                    <h3>5. Waterfall</h3>
+                    <ul>
+                        <li><strong>Description:</strong> Water falls from a high place</li>
+                        <li><strong>Uses:</strong> Tourist spots</li>
+                        <li><strong>Examples:</strong> Pagsanjan Falls, Maria Cristina Falls</li>
+                    </ul>
+
+                    <h3>6. Spring</h3>
+                    <ul>
+                        <li><strong>Description:</strong> Water comes out from the ground</li>
+                        <li><strong>Types:</strong> Hot and cold springs</li>
+                        <li><strong>Example:</strong> Los Baños, Laguna (hot springs)</li>
+                        <li><strong>Uses:</strong> Taking baths, hot spring resorts</li>
+                    </ul>
+
+                    <h3>7. Bay</h3>
+                    <ul>
+                        <li><strong>Description:</strong> Part of the sea but reaches into the land</li>
+                        <li><strong>Example:</strong> Manila Bay</li>
+                        <li><strong>Uses:</strong> Ships anchor, strolling, watching sunset</li>
+                    </ul>
+
+                    <h3>8. Strait</h3>
+                    <ul>
+                        <li><strong>Description:</strong> Water passage between islands</li>
+                        <li><strong>Examples:</strong> San Bernardino Strait, Verde Island Passage, Surigao Strait, Mindoro Strait</li>
+                    </ul>
+                </div>
+
+                <div class="reviewer-section">
+                    <h2>🔑 Key Facts to Remember</h2>
+                    <ul>
+                        <li><strong>Tallest Mountain:</strong> Mt. Apo</li>
+                        <li><strong>Philippine Deep:</strong> Approximately 10,430 m (34,219 ft) deep</li>
+                        <li><strong>Mountain Ranges in Luzon:</strong> Sierra Madre, Caraballo</li>
+                        <li><strong>Minerals from Mountains:</strong> Gold, silver, copper, iron</li>
+                        <li><strong>Peninsula Examples:</strong> Bicol, Bataan, Zamboanga</li>
+                        <li><strong>Valleys:</strong> Trinidad Valley, Cagayan Valley</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- QUIZ TAB -->
+            <div id="quiz" class="tab-content hidden">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                </div>
+                <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                    Question <span id="currentQ">1</span> of <span id="totalQ">20</span>
+                </p>
+                <div id="quizContainer"></div>
+                <button class="submit-btn" id="submitBtn" onclick="submitQuiz()">Submit Quiz</button>
+                <div id="resultContainer" class="hidden"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "1. What is topography?",
+                type: "multiple",
+                options: [
+                    "The study of rocks",
+                    "The arrangement of natural and artificial physical features of an area",
+                    "The study of weather",
+                    "The movement of water"
+                ],
+                correct: 1
+            },
+            {
+                question: "2. Which is the tallest mountain in the Philippines?",
+                type: "multiple",
+                options: ["Mt. Makiling", "Mt. Halcon", "Mt. Apo", "Mt. Pinatubo"],
+                correct: 2
+            },
+            {
+                question: "3. What landform is wide, low, and flat?",
+                type: "multiple",
+                options: ["Mountain", "Hill", "Plain", "Valley"],
+                correct: 2
+            },
+            {
+                question: "4. What do you call connected mountains?",
+                type: "multiple",
+                options: ["Mountain group", "Mountain ranges", "Mountain chains", "Mountain cluster"],
+                correct: 1
+            },
+            {
+                question: "5. Which city is built on a plateau?",
+                type: "multiple",
+                options: ["Manila", "Cebu", "Davao", "Baguio"],
+                correct: 3
+            },
+            {
+                question: "6. What is the opening at the top of a volcano called?",
+                type: "multiple",
+                options: ["Hole", "Crater", "Peak", "Summit"],
+                correct: 1
+            },
+            {
+                question: "7. What is the largest body of water?",
+                type: "multiple",
+                options: ["Sea", "Lake", "Ocean", "River"],
+                correct: 2
+            },
+            {
+                question: "8. Plains are used for planting rice, fruit-bearing trees, and vegetables.",
+                type: "truefalse",
+                correct: true
+            },
+            {
+                question: "9. Mountains are shorter than hills.",
+                type: "truefalse",
+                correct: false
+            },
+            {
+                question: "10. Ocean water is salty.",
+                type: "truefalse",
+                correct: true
+            },
+            {
+                question: "11. A lake's water flows directly to the sea.",
+                type: "truefalse",
+                correct: false
+            },
+            {
+                question: "12. The Philippine Sea is located in the east of the Philippines.",
+                type: "truefalse",
+                correct: true
+            },
+            {
+                question: "13. What is a level landform between ranges of hills or mountains?",
+                type: "input",
+                correct: ["valley"]
+            },
+            {
+                question: "14. What is a high landform but lower and smaller than a mountain?",
+                type: "input",
+                correct: ["hill"]
+            },
+            {
+                question: "15. What is a body of water where water falls from a high place?",
+                type: "input",
+                correct: ["waterfall"]
+            },
+            {
+                question: "16. What is a natural-flowing water form that is usually freshwater?",
+                type: "input",
+                correct: ["river"]
+            },
+            {
+                question: "17. Select all the volcanoes in the Philippines:",
+                type: "checkbox",
+                options: ["Mayon Volcano", "Mt. Everest", "Taal Volcano", "Mount Pinatubo", "Mt. Fuji"],
+                correct: [0, 2, 3]
+            },
+            {
+                question: "18. Select all the mountain ranges found in Luzon:",
+                type: "checkbox",
+                options: ["Sierra Madre Mountains", "Rocky Mountains", "Caraballo Mountains", "Himalayas"],
+                correct: [0, 2]
+            },
+            {
+                question: "19. Select all bodies of water that are salty:",
+                type: "checkbox",
+                options: ["Ocean", "Lake", "Sea", "River"],
+                correct: [0, 2]
+            },
+            {
+                question: "20. Select all the peninsulas in the Philippines:",
+                type: "checkbox",
+                options: ["Bicol", "Palawan", "Bataan", "Zamboanga", "Mindanao"],
+                correct: [0, 2, 3]
+            }
+        ];
+
+        let userAnswers = new Array(quizData.length).fill(null);
+        let currentQuestion = 0;
+
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.remove('hidden');
+            
+            if (tabName === 'quiz') {
+                renderQuiz();
+            }
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            container.innerHTML = '';
+            
+            document.getElementById('totalQ').textContent = quizData.length;
+            
+            quizData.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `<div class="question-text">${q.question}</div>`;
+                
+                if (q.type === 'multiple') {
+                    const optionsDiv = document.createElement('div');
+                    optionsDiv.className = 'options';
+                    q.options.forEach((option, optIndex) => {
+                        const optionDiv = document.createElement('div');
+                        optionDiv.className = 'option';
+                        optionDiv.textContent = option;
+                        optionDiv.onclick = () => selectOption(index, optIndex, optionDiv);
+                        optionsDiv.appendChild(optionDiv);
+                    });
+                    questionDiv.appendChild(optionsDiv);
+                } else if (q.type === 'truefalse') {
+                    const optionsDiv = document.createElement('div');
+                    optionsDiv.className = 'options';
+                    ['True', 'False'].forEach((option, optIndex) => {
+                        const optionDiv = document.createElement('div');
+                        optionDiv.className = 'option';
+                        optionDiv.textContent = option;
+                        optionDiv.onclick = () => selectOption(index, optIndex === 0, optionDiv);
+                        optionsDiv.appendChild(optionDiv);
+                    });
+                    questionDiv.appendChild(optionsDiv);
+                } else if (q.type === 'input') {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'input-answer';
+                    input.placeholder = 'Type your answer here...';
+                    input.onchange = (e) => {
+                        userAnswers[index] = e.target.value.toLowerCase().trim();
+                        updateProgress();
+                    };
+                    questionDiv.appendChild(input);
+                } else if (q.type === 'checkbox') {
+                    const optionsDiv = document.createElement('div');
+                    optionsDiv.className = 'options';
+                    q.options.forEach((option, optIndex) => {
+                        const label = document.createElement('label');
+                        label.className = 'checkbox-option';
+                        label.innerHTML = `
+                            <input type="checkbox" onchange="selectCheckbox(${index}, ${optIndex})">
+                            ${option}
+                        `;
+                        optionsDiv.appendChild(label);
+                    });
+                    questionDiv.appendChild(optionsDiv);
+                    userAnswers[index] = [];
+                }
+                
+                container.appendChild(questionDiv);
+            });
+        }
+
+        function selectOption(questionIndex, optionIndex, element) {
+            const question = document.querySelectorAll('.question')[questionIndex];
+            question.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            userAnswers[questionIndex] = optionIndex;
+            updateProgress();
+        }
+
+        function selectCheckbox(questionIndex, optionIndex) {
+            if (!Array.isArray(userAnswers[questionIndex])) {
+                userAnswers[questionIndex] = [];
+            }
+            
+            const idx = userAnswers[questionIndex].indexOf(optionIndex);
+            if (idx > -1) {
+                userAnswers[questionIndex].splice(idx, 1);
+            } else {
+                userAnswers[questionIndex].push(optionIndex);
+            }
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const answered = userAnswers.filter(a => a !== null && (Array.isArray(a) ? a.length > 0 : true)).length;
+            const progress = (answered / quizData.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('currentQ').textContent = answered;
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            const questions = document.querySelectorAll('.question');
+            
+            quizData.forEach((q, index) => {
+                const questionDiv = questions[index];
+                let isCorrect = false;
+                
+                if (q.type === 'multiple' || q.type === 'truefalse') {
+                    isCorrect = userAnswers[index] === q.correct;
+                    const options = questionDiv.querySelectorAll('.option');
+                    options.forEach((opt, optIndex) => {
+                        if (optIndex === q.correct) {
+                            opt.classList.add('correct');
+                        } else if (optIndex === userAnswers[index]) {
+                            opt.classList.add('incorrect');
+                        }
+                    });
+                } else if (q.type === 'input') {
+                    isCorrect = q.correct.includes(userAnswers[index]);
+                    const input = questionDiv.querySelector('.input-answer');
+                    const feedback = document.createElement('div');
+                    feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+                    feedback.textContent = isCorrect ? '✓ Correct!' : `✗ Correct answer: ${q.correct[0]}`;
+                    questionDiv.appendChild(feedback);
+                } else if (q.type === 'checkbox') {
+                    const userSet = new Set(userAnswers[index] || []);
+                    const correctSet = new Set(q.correct);
+                    isCorrect = userSet.size === correctSet.size && 
+                                [...userSet].every(val => correctSet.has(val));
+                    
+                    const feedback = document.createElement('div');
+                    feedback.className = 'feedback ' + (isCorrect ? 'correct' : 'incorrect');
+                    if (isCorrect) {
+                        feedback.textContent = '✓ Correct!';
+                    } else {
+                        const correctAnswers = q.correct.map(i => q.options[i]).join(', ');
+                        feedback.textContent = `✗ Correct answers: ${correctAnswers}`;
+                    }
+                    questionDiv.appendChild(feedback);
+                }
+                
+                if (isCorrect) score++;
+            });
+            
+            const percentage = Math.round((score / quizData.length) * 100);
+            const resultDiv = document.getElementById('resultContainer');
+            resultDiv.className = 'score-display';
+            resultDiv.innerHTML = `
+                <h2>🎉 Quiz Complete!</h2>
+                <p>Your Score: ${score} / ${quizData.length}</p>
+                <p style="font-size: 2em; margin: 20px 0;">${percentage}%</p>
+                <p>${getScoreMessage(percentage)}</p>
+                <button class="reset-btn" onclick="resetQuiz()">Take Quiz Again</button>
+            `;
+            
+            document.getElementById('submitBtn').disabled = true;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function getScoreMessage(percentage) {
+            if (percentage === 100) return "Perfect! You're a Philippine Topography Expert! 🏆";
+            if (percentage >= 80) return "Excellent work! You really know your stuff! 🌟";
+            if (percentage >= 60) return "Good job! Keep studying to improve! 👍";
+            return "Keep practicing! Review the material and try again! 📚";
+        }
+
+        function resetQuiz() {
+            userAnswers = new Array(quizData.length).fill(null);
+            document.getElementById('resultContainer').className = 'hidden';
+            document.getElementById('submitBtn').disabled = false;
+            renderQuiz();
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize
+        renderQuiz();
+    </script>
+</body>
+</html>
