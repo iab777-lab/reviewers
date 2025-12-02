@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject Reviewers Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .subject-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .subject-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            margin: 0 auto 20px;
+            color: white;
+        }
+
+        .math { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .science { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .makabansa { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .gmrc { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .filipino { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
+        .english { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
+
+        .subject-card h2 {
+            text-align: center;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .subject-card p {
+            text-align: center;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Subject Reviewers Hub</h1>
+            <p>Select a subject to access review materials and resources</p>
+        </header>
+
+        <div class="subjects-grid">
+            <a href="#" class="subject-card" onclick="alert('Math reviewer coming soon!'); return false;">
+                <div class="subject-icon math">🔢</div>
+                <h2>Math</h2>
+                <p>Numbers, equations, problem-solving, and mathematical concepts</p>
+            </a>
+
+            <a href="#" class="subject-card" onclick="alert('Science reviewer coming soon!'); return false;">
+                <div class="subject-icon science">🔬</div>
+                <h2>Science</h2>
+                <p>Biology, chemistry, physics, and scientific investigations</p>
+            </a>
+
+            <a href="#" class="subject-card" onclick="alert('Makabansa reviewer coming soon!'); return false;">
+                <div class="subject-icon makabansa">🇵🇭</div>
+                <h2>Makabansa</h2>
+                <p>Philippine history, culture, values, and national identity</p>
+            </a>
+
+            <a href="#" class="subject-card" onclick="alert('GMRC reviewer coming soon!'); return false;">
+                <div class="subject-icon gmrc">❤️</div>
+                <h2>GMRC</h2>
+                <p>Good manners, right conduct, values, and character education</p>
+            </a>
+
+            <a href="#" class="subject-card" onclick="alert('Filipino reviewer coming soon!'); return false;">
+                <div class="subject-icon filipino">📖</div>
+                <h2>Filipino</h2>
+                <p>Wika, panitikan, gramatika, at pagbasa ng Filipino</p>
+            </a>
+
+            <a href="#" class="subject-card" onclick="alert('English reviewer coming soon!'); return false;">
+                <div class="subject-icon english">📝</div>
+                <h2>English</h2>
+                <p>Grammar, reading comprehension, writing, and literature</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
