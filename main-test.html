@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Page for My Son</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        h2 {
+            margin-top: 30px;
+            color: #34495e;
+        }
+        .box {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .answer {
+            display: none;
+            margin-top: 10px;
+            background: #dff9fb;
+            padding: 10px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Your Lesson!</h1>
+        <p>Hi! This page was created especially for you. Let's have fun learning 😄</p>
+
+        <h2>📖 Lesson</h2>
+        <div class="box">
+            <p>This is where you can put your lesson content. You can include:</p>
+            <ul>
+                <li>Text explanations</li>
+                <li>Examples</li>
+                <li>Images</li>
+                <li>Videos (YouTube embed)</li>
+            </ul>
+        </div>
+
+        <h2>📝 Practice Question</h2>
+        <div class="box">
+            <p><strong>Question:</strong> What is 7 × 6?</p>
+            <button onclick="document.getElementById('ans1').style.display='block'">Show Answer</button>
+            <div id="ans1" class="answer">
+                Answer: 42 🎉
+            </div>
+        </div>
+
+        <h2>💬 Message for You</h2>
+        <p>You are doing great! Keep practicing and have fun learning. I'm proud of you!</p>
+    </div>
+</body>
+</html>
