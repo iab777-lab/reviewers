@@ -1,0 +1,647 @@
+import React, { useState } from ‘react’;
+import { ChevronRight, ChevronLeft, RefreshCw } from ‘lucide-react’;
+
+const PhilippinesReviewer = () => {
+const [currentSection, setCurrentSection] = useState(0);
+const [showAnswers, setShowAnswers] = useState({});
+const [quizAnswers, setQuizAnswers] = useState({});
+const [showResults, setShowResults] = useState(false);
+
+const sections = [
+{
+title: “Classification of Natural Resources”,
+content: [
+{
+question: “What are the three classifications of natural resources?”,
+answer: “Inexhaustible, Replaceable, and Irreplaceable”
+},
+{
+question: “What are inexhaustible resources?”,
+answer: “Resources that will never run out. Examples: sand and gravel”
+},
+{
+question: “What are replaceable resources?”,
+answer: “Resources that can be restored through natural processes and replenished over a certain period. Examples: plants and marine resources”
+},
+{
+question: “What are irreplaceable resources?”,
+answer: “Resources that cannot be replaced or replenished. Examples: minerals like gold, iron, silver, and steel”
+}
+]
+},
+{
+title: “Land Resources”,
+content: [
+{
+question: “Why is fertile land important to the Philippines?”,
+answer: “Fertile land is the primary source of livelihood of the Filipinos”
+},
+{
+question: “Where are the rich and wide plains suitable for farming found?”,
+answer: “Cagayan Valley, Central Luzon, Southwestern Bicol, parts of Visayas (Panay and Negros), and parts of Mindanao (Davao, Cotabato, Agusan, and Bukidnon)”
+},
+{
+question: “What are the major crops of the Philippines?”,
+answer: “Rice, corn, sugarcane, coconut, abaca, and tobacco. Also banana and pineapple (all except rice and corn are exported)”
+},
+{
+question: “What other crops are grown in the Philippines?”,
+answer: “Mangoes, coffee, cocoa, rubber, sweet potatoes, and cassava”
+},
+{
+question: “What trees are abundant in Philippine forests?”,
+answer: “Narra, yakal, molave, tanguile, ipil, and lauan”
+},
+{
+question: “How many kinds of flowering plants can be found in Philippine forests?”,
+answer: “More than 8,000 kinds, with almost 1,000 being orchids and another 1,000 being ferns”
+},
+{
+question: “What is the most famous orchid in the Philippines?”,
+answer: “The waling-waling, which is only found in the Philippines”
+}
+]
+},
+{
+title: “Philippine Flora and Fauna”,
+content: [
+{
+question: “What are some flowers and plants found around the Philippines?”,
+answer: “Sampaguita, rose, ilang-ilang, gumamela, calachuchi, and donya aurora”
+},
+{
+question: “What are some examples of Philippine wildlife?”,
+answer: “Tamaraw of Mindoro, monkey-eating eagle (Mt. Apo), mouse dear (pilandok), and tarsier (smallest primate in the world, found in Bohol)”
+},
+{
+question: “What are some exotic birds found in the Philippines?”,
+answer: “Philippine eagle, tipol, kalaw, cockatoo, woodpecker, Luzon bleeding heart dove, and colorful parrots”
+},
+{
+question: “What reptiles are found in the Philippines?”,
+answer: “Philippine cobra (one of the deadliest snakes), large pythons, and crocodiles (found in rivers and swampy interiors of Mindanao and Sulu)”
+},
+{
+question: “Why are Philippine forests in danger?”,
+answer: “Deforestation has resulted in a lot of problems. Unless Filipinos will be strict in implementing the laws, forests will disappear”
+}
+]
+},
+{
+title: “Water Resources”,
+content: [
+{
+question: “How many species of fish are found in Philippine waters?”,
+answer: “Approximately 2,000 species”
+},
+{
+question: “What are the most common fish species?”,
+answer: “Dalag, ayungin, carpa, dilis, tamban, talakitok, maya-maya, tanigue, and bangus”
+},
+{
+question: “What is the world’s smallest commercial fish and where is it found?”,
+answer: “Misricthys Luzonensis or tablos, found in Lake Buhi, Camarines Sur”
+},
+{
+question: “What is the largest fish in the world and where is it seen?”,
+answer: “Butanding or whale shark, seen in Sorsogon, Bicol”
+},
+{
+question: “What are some other marine products from the Philippines?”,
+answer: “Shellfish, sponges, corals, seaweeds, pearls, snails, crabs, mollusks, and shrimps”
+},
+{
+question: “What special shells and pearls are found in the Philippines?”,
+answer: “Gloria Maris Cone, Golden Cowrie (very expensive and rare), Tridacna gigas (largest shell in the world), pisidium (smallest shell), and the ‘Pearl of Allah’ (largest natural pearl in the world - pawikan) and giant tortoises”
+}
+]
+},
+{
+title: “Mineral Resources”,
+content: [
+{
+question: “What are the two types of minerals found in the Philippines?”,
+answer: “Metallic and Nonmetallic”
+},
+{
+question: “What are the metallic minerals?”,
+answer: “Gold, silver, iron, copper, chromium, manganese, nickel, mercury, platinum, lead, and zinc”
+},
+{
+question: “What are the nonmetallic minerals?”,
+answer: “Clay, sand and gravel, silica sand, limestone, gypsum, salt, pyrite, adobe, marble, sulfur, and asbestos”
+},
+{
+question: “What is the Philippines’ estimated copper reserves?”,
+answer: “3.6 billion tons (one of Asia’s leading producers)”
+},
+{
+question: “Where are gold deposits found?”,
+answer: “Mountain Province and Mt. Diwalwal in Mindanao”
+},
+{
+question: “Where are the largest iron deposits found?”,
+answer: “Surigao del Norte and Surigao del Sur”
+},
+{
+question: “Where are other major mineral deposits located?”,
+answer: “Nonoc Island (nickel), Rizal and Cebu (cement), Biliran/Camiguin/Davao (sulfur), Polilio Island/Cebu/Masbate/Mindanao (coal), Palawan (tin and quicksilver), Romblon (marble), and oil exploration in Palawan”
+}
+]
+},
+{
+title: “Energy Resources”,
+content: [
+{
+question: “What are the Philippines’ sources of energy?”,
+answer: “Hydroelectricity, natural gas, coal, and geothermal energy”
+},
+{
+question: “What is special about the Philippines’ geothermal energy production?”,
+answer: “It is the second largest producer of geothermal energy after the United States”
+},
+{
+question: “How much of the country’s electricity comes from geothermal energy?”,
+answer: “27% of the total electricity generated”
+},
+{
+question: “Where are geothermal plants located?”,
+answer: “Luzon, Negros, Albay, Leyte, and Mindanao. The first geothermal plants were developed in Leyte”
+},
+{
+question: “What are some hydroelectric plants in the Philippines?”,
+answer: “Maria Cristina Falls (Lanao del Norte), Ambuklao Dam (Benguet), and Pantabangan Dam (Nueva Ecija)”
+}
+]
+}
+];
+
+const quiz = [
+// Multiple Choice Questions
+{
+type: “multiple”,
+question: “Sand and gravel are examples of what type of resource?”,
+options: [“Inexhaustible”, “Replaceable”, “Irreplaceable”],
+correct: 0
+},
+{
+type: “multiple”,
+question: “Which of the following is NOT a major crop exported from the Philippines?”,
+options: [“Rice”, “Coconut”, “Banana”, “Sugarcane”],
+correct: 0
+},
+{
+type: “multiple”,
+question: “What is the most famous orchid found only in the Philippines?”,
+options: [“Sampaguita”, “Waling-waling”, “Gumamela”, “Ilang-ilang”],
+correct: 1
+},
+{
+type: “multiple”,
+question: “The world’s smallest commercial fish is found in which location?”,
+options: [“Manila Bay”, “Lake Buhi, Camarines Sur”, “Sorsogon, Bicol”, “Palawan”],
+correct: 1
+},
+{
+type: “multiple”,
+question: “The Philippines is one of Asia’s leading producers of which mineral?”,
+options: [“Silver”, “Copper”, “Platinum”, “Lead”],
+correct: 1
+},
+{
+type: “multiple”,
+question: “The Philippines ranks second in the world for production of what energy source?”,
+options: [“Hydroelectricity”, “Coal”, “Geothermal energy”, “Natural gas”],
+correct: 2
+},
+{
+type: “multiple”,
+question: “Which of these is an irreplaceable resource?”,
+options: [“Plants”, “Marine resources”, “Gold”, “Sand”],
+correct: 2
+},
+{
+type: “multiple”,
+question: “What is the smallest primate in the world, found in Bohol?”,
+options: [“Mouse deer”, “Tamaraw”, “Tarsier”, “Pilandok”],
+correct: 2
+},
+{
+type: “multiple”,
+question: “Where are the largest iron deposits in the Philippines found?”,
+options: [“Palawan”, “Mountain Province”, “Surigao del Norte and Sur”, “Romblon”],
+correct: 2
+},
+{
+type: “multiple”,
+question: “How much of the Philippines’ electricity comes from geothermal energy?”,
+options: [“15%”, “20%”, “27%”, “35%”],
+correct: 2
+},
+{
+type: “multiple”,
+question: “Which dam is located in Benguet?”,
+options: [“Pantabangan Dam”, “Ambuklao Dam”, “Maria Cristina Falls”, “Angat Dam”],
+correct: 1
+},
+{
+type: “multiple”,
+question: “Approximately how many species of fish are found in Philippine waters?”,
+options: [“500”, “1,000”, “2,000”, “5,000”],
+correct: 2
+},
+// True or False Questions
+{
+type: “truefalse”,
+question: “Plants and marine resources are examples of replaceable resources.”,
+correct: true
+},
+{
+type: “truefalse”,
+question: “Both rice and corn are exported from the Philippines.”,
+correct: false
+},
+{
+type: “truefalse”,
+question: “There are more than 8,000 kinds of flowering plants in Philippine forests.”,
+correct: true
+},
+{
+type: “truefalse”,
+question: “The waling-waling orchid can be found in many Southeast Asian countries.”,
+correct: false
+},
+{
+type: “truefalse”,
+question: “The tamaraw is found in Mindoro.”,
+correct: true
+},
+{
+type: “truefalse”,
+question: “The Philippine cobra is one of the deadliest snakes.”,
+correct: true
+},
+{
+type: “truefalse”,
+question: “Crocodiles are found in the rivers and swampy interiors of Mindanao and Sulu.”,
+correct: true
+},
+{
+type: “truefalse”,
+question: “The butanding or whale shark is the smallest fish in the world.”,
+correct: false
+},
+{
+type: “truefalse”,
+question: “The Pearl of Allah is the largest natural pearl in the world.”,
+correct: true
+},
+{
+type: “truefalse”,
+question: “Clay is classified as a metallic mineral.”,
+correct: false
+},
+{
+type: “truefalse”,
+question: “The Philippines has an estimated 3.6 billion tons of copper reserves.”,
+correct: true
+},
+{
+type: “truefalse”,
+question: “Romblon is known for its marble deposits.”,
+correct: true
+},
+{
+type: “truefalse”,
+question: “The first geothermal plants in the Philippines were developed in Albay.”,
+correct: false
+},
+{
+type: “truefalse”,
+question: “Fertile land is the primary source of livelihood for Filipinos.”,
+correct: true
+},
+{
+type: “truefalse”,
+question: “The government allows unlimited cutting of logs in Philippine forests.”,
+correct: false
+}
+];
+
+const toggleAnswer = (sectionIdx, contentIdx) => {
+const key = `${sectionIdx}-${contentIdx}`;
+setShowAnswers(prev => ({
+…prev,
+[key]: !prev[key]
+}));
+};
+
+const handleQuizAnswer = (questionIdx, answerIdx) => {
+setQuizAnswers(prev => ({
+…prev,
+[questionIdx]: answerIdx
+}));
+};
+
+const calculateScore = () => {
+let correct = 0;
+quiz.forEach((q, idx) => {
+if (q.type === “truefalse”) {
+if (quizAnswers[idx] === q.correct) correct++;
+} else {
+if (quizAnswers[idx] === q.correct) correct++;
+}
+});
+return correct;
+};
+
+const resetQuiz = () => {
+setQuizAnswers({});
+setShowResults(false);
+};
+
+return (
+<div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">
+<div className="max-w-4xl mx-auto">
+<div className="bg-white rounded-lg shadow-xl p-8 mb-6">
+<h1 className="text-4xl font-bold text-green-800 mb-2">The Philippines’ Rich Resources</h1>
+<p className="text-gray-600 mb-6">An Interactive Reviewer</p>
+
+```
+      <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+        {sections.map((section, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentSection(idx)}
+            className={`px-4 py-2 rounded-lg whitespace-nowrap transition-colors ${
+              currentSection === idx
+                ? 'bg-green-600 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            {section.title}
+          </button>
+        ))}
+        <button
+          onClick={() => setCurrentSection(sections.length)}
+          className={`px-4 py-2 rounded-lg whitespace-nowrap transition-colors ${
+            currentSection === sections.length
+              ? 'bg-blue-600 text-white'
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+          }`}
+        >
+          Quiz ({quiz.length} items)
+        </button>
+      </div>
+
+      {currentSection < sections.length ? (
+        <div>
+          <h2 className="text-2xl font-bold text-green-700 mb-6">
+            {sections[currentSection].title}
+          </h2>
+          
+          <div className="space-y-4">
+            {sections[currentSection].content.map((item, idx) => (
+              <div key={idx} className="border border-green-200 rounded-lg p-4 bg-green-50">
+                <div className="flex justify-between items-start gap-4">
+                  <p className="font-semibold text-gray-800 flex-1">{item.question}</p>
+                  <button
+                    onClick={() => toggleAnswer(currentSection, idx)}
+                    className="px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors text-sm whitespace-nowrap"
+                  >
+                    {showAnswers[`${currentSection}-${idx}`] ? 'Hide' : 'Show'} Answer
+                  </button>
+                </div>
+                {showAnswers[`${currentSection}-${idx}`] && (
+                  <p className="mt-3 text-gray-700 bg-white p-3 rounded border-l-4 border-green-600">
+                    {item.answer}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div>
+          <h2 className="text-2xl font-bold text-blue-700 mb-2">Quiz Time!</h2>
+          <p className="text-gray-600 mb-6">Test your knowledge with {quiz.length} questions (Multiple Choice and True/False)</p>
+          
+          {!showResults ? (
+            <div className="space-y-6">
+              {quiz.map((q, qIdx) => (
+                <div key={qIdx} className="border border-blue-200 rounded-lg p-4 bg-blue-50">
+                  <div className="flex items-start gap-2 mb-3">
+                    <span className="font-bold text-blue-700">{qIdx + 1}.</span>
+                    <div className="flex-1">
+                      <p className="font-semibold text-gray-800 mb-1">{q.question}</p>
+                      <span className="text-xs bg-blue-200 text-blue-800 px-2 py-1 rounded">
+                        {q.type === "multiple" ? "Multiple Choice" : "True or False"}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {q.type === "multiple" ? (
+                    <div className="space-y-2 ml-6">
+                      {q.options.map((option, oIdx) => (
+                        <label
+                          key={oIdx}
+                          className={`flex items-center p-3 rounded cursor-pointer transition-colors ${
+                            quizAnswers[qIdx] === oIdx
+                              ? 'bg-blue-200 border-2 border-blue-600'
+                              : 'bg-white border-2 border-gray-200 hover:border-blue-300'
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name={`question-${qIdx}`}
+                            checked={quizAnswers[qIdx] === oIdx}
+                            onChange={() => handleQuizAnswer(qIdx, oIdx)}
+                            className="mr-3"
+                          />
+                          <span>{option}</span>
+                        </label>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="space-y-2 ml-6">
+                      <label
+                        className={`flex items-center p-3 rounded cursor-pointer transition-colors ${
+                          quizAnswers[qIdx] === true
+                            ? 'bg-blue-200 border-2 border-blue-600'
+                            : 'bg-white border-2 border-gray-200 hover:border-blue-300'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name={`question-${qIdx}`}
+                          checked={quizAnswers[qIdx] === true}
+                          onChange={() => handleQuizAnswer(qIdx, true)}
+                          className="mr-3"
+                        />
+                        <span>True</span>
+                      </label>
+                      <label
+                        className={`flex items-center p-3 rounded cursor-pointer transition-colors ${
+                          quizAnswers[qIdx] === false
+                            ? 'bg-blue-200 border-2 border-blue-600'
+                            : 'bg-white border-2 border-gray-200 hover:border-blue-300'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name={`question-${qIdx}`}
+                          checked={quizAnswers[qIdx] === false}
+                          onChange={() => handleQuizAnswer(qIdx, false)}
+                          className="mr-3"
+                        />
+                        <span>False</span>
+                      </label>
+                    </div>
+                  )}
+                </div>
+              ))}
+              
+              <button
+                onClick={() => setShowResults(true)}
+                disabled={Object.keys(quizAnswers).length !== quiz.length}
+                className="w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed font-semibold"
+              >
+                Submit Quiz ({Object.keys(quizAnswers).length}/{quiz.length} answered)
+              </button>
+            </div>
+          ) : (
+            <div className="text-center">
+              <div className="bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg p-8 mb-6">
+                <h3 className="text-3xl font-bold mb-2">Your Score</h3>
+                <p className="text-6xl font-bold">{calculateScore()} / {quiz.length}</p>
+                <p className="text-xl mt-2">
+                  {calculateScore() === quiz.length
+                    ? '🎉 Perfect! Excellent work!'
+                    : calculateScore() >= quiz.length * 0.8
+                    ? '👏 Great job!'
+                    : calculateScore() >= quiz.length * 0.6
+                    ? '👍 Good effort!'
+                    : '📚 Keep studying!'}
+                </p>
+                <p className="text-lg mt-1">
+                  {Math.round((calculateScore() / quiz.length) * 100)}%
+                </p>
+              </div>
+
+              <div className="space-y-4 text-left mb-6">
+                {quiz.map((q, qIdx) => {
+                  const isCorrect = q.type === "truefalse" 
+                    ? quizAnswers[qIdx] === q.correct
+                    : quizAnswers[qIdx] === q.correct;
+                  
+                  return (
+                    <div
+                      key={qIdx}
+                      className={`border rounded-lg p-4 ${
+                        isCorrect
+                          ? 'bg-green-50 border-green-300'
+                          : 'bg-red-50 border-red-300'
+                      }`}
+                    >
+                      <div className="flex items-start gap-2 mb-2">
+                        <span className={`text-2xl ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
+                          {isCorrect ? '✓' : '✗'}
+                        </span>
+                        <div className="flex-1">
+                          <p className="font-semibold mb-1">
+                            {qIdx + 1}. {q.question}
+                          </p>
+                          <span className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded">
+                            {q.type === "multiple" ? "Multiple Choice" : "True or False"}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      <div className="ml-8">
+                        {q.type === "multiple" ? (
+                          <>
+                            <p className="text-sm">
+                              <span className="font-medium">Your answer: </span>
+                              <span className={isCorrect ? 'text-green-700' : 'text-red-700'}>
+                                {q.options[quizAnswers[qIdx]]}
+                              </span>
+                            </p>
+                            {!isCorrect && (
+                              <p className="text-sm mt-1">
+                                <span className="font-medium">Correct answer: </span>
+                                <span className="text-green-700">{q.options[q.correct]}</span>
+                              </p>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            <p className="text-sm">
+                              <span className="font-medium">Your answer: </span>
+                              <span className={isCorrect ? 'text-green-700' : 'text-red-700'}>
+                                {quizAnswers[qIdx] ? "True" : "False"}
+                              </span>
+                            </p>
+                            {!isCorrect && (
+                              <p className="text-sm mt-1">
+                                <span className="font-medium">Correct answer: </span>
+                                <span className="text-green-700">{q.correct ? "True" : "False"}</span>
+                              </p>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <button
+                onClick={resetQuiz}
+                className="flex items-center justify-center gap-2 w-full py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+              >
+                <RefreshCw size={20} />
+                Try Again
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
+      <div className="flex justify-between mt-8">
+        <button
+          onClick={() => setCurrentSection(Math.max(0, currentSection - 1))}
+          disabled={currentSection === 0}
+          className="flex items-center gap-2 px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <ChevronLeft size={20} />
+          Previous
+        </button>
+        <button
+          onClick={() => setCurrentSection(Math.min(sections.length, currentSection + 1))}
+          disabled={currentSection === sections.length}
+          className="flex items-center gap-2 px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Next
+          <ChevronRight size={20} />
+        </button>
+      </div>
+    </div>
+
+    <div className="bg-white rounded-lg shadow-xl p-6">
+      <h3 className="font-bold text-gray-800 mb-2">Study Tips:</h3>
+      <ul className="text-sm text-gray-600 space-y-1">
+        <li>• Go through each section and try to answer before revealing</li>
+        <li>• Take the quiz when you feel ready (now with {quiz.length} questions!)</li>
+        <li>• Review sections where you scored low</li>
+        <li>• Focus on understanding, not just memorizing</li>
+        <li>• Pay attention to both multiple choice and true/false questions</li>
+      </ul>
+    </div>
+  </div>
+</div>
+```
+
+);
+};
+
+export default PhilippinesReviewer;
