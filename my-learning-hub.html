@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Learning Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Fredoka+One&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #f0f4ff;
+      --white:       #ffffff;
+      --ink:         #1a1a2e;
+      --ink-soft:    #4a4a6a;
+      --line:        #dde3f5;
+
+      /* Subject colors */
+      --math:        #ff6b6b;
+      --math-light:  #fff0f0;
+      --math-dark:   #c0392b;
+
+      --sci:         #2ecc71;
+      --sci-light:   #edfaf3;
+      --sci-dark:    #1a9e55;
+
+      --eng:         #3498db;
+      --eng-light:   #eaf5fd;
+      --eng-dark:    #1a6fab;
+
+      --maka:        #f39c12;
+      --maka-light:  #fef9ec;
+      --maka-dark:   #b8730d;
+
+      --grmc:        #9b59b6;
+      --grmc-light:  #f6effe;
+      --grmc-dark:   #6c3483;
+
+      --fil:         #e74c3c;
+      --fil-light:   #fdf0ef;
+      --fil-dark:    #a93226;
+
+      --hub:         #5b7fff;
+      --hub-light:   #eef1ff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOTEBOOK LINES BACKGROUND ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          transparent 0px, transparent 27px,
+          rgba(100,130,255,0.08) 28px, rgba(100,130,255,0.08) 29px
+        );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── TOP BAR ─── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 2.5rem;
+      box-shadow: 0 2px 20px rgba(91,127,255,0.08);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+    .logo-icon {
+      width: 40px; height: 40px;
+      background: var(--hub);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 12px rgba(91,127,255,0.35);
+      flex-shrink: 0;
+    }
+    .logo-text {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.5rem;
+      color: var(--hub);
+      letter-spacing: 0.02em;
+    }
+    .logo-text span { color: var(--ink); }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .back-btn {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--hub-light);
+      border: 2px solid var(--hub);
+      color: var(--hub);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 0.45rem 1.1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .back-btn:hover { background: var(--hub); color: #fff; }
+    .progress-badge {
+      background: var(--hub-light);
+      border: 2px solid var(--hub);
+      color: var(--hub);
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+    }
+
+    /* ─── MAIN WRAPPER ─── */
+    main { position: relative; z-index: 1; }
+
+    /* ─── HOME VIEW ─── */
+    #home-view {
+      padding: 3.5rem 2rem 5rem;
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .home-hero {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .home-hero h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+    .home-hero h1 span { color: var(--hub); }
+    .home-hero p {
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+
+    /* Floating doodles */
+    .doodle {
+      position: absolute;
+      opacity: 0.12;
+      font-size: 2.5rem;
+      pointer-events: none;
+      animation: floaty 6s ease-in-out infinite;
+    }
+    .doodle:nth-child(1)  { top: 2rem;  left: 3rem;   animation-delay: 0s; }
+    .doodle:nth-child(2)  { top: 4rem;  right: 5rem;  animation-delay: 1s; font-size: 2rem; }
+    .doodle:nth-child(3)  { top: 10rem; left: 8%;     animation-delay: 2s; font-size: 1.8rem; }
+    .doodle:nth-child(4)  { top: 8rem;  right: 12%;   animation-delay: 0.5s; }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50%       { transform: translateY(-12px) rotate(5deg); }
+    }
+
+    /* Subject grid */
+    .subjects-label {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      letter-spacing: 0.05em;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .subjects-label::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: var(--line);
+      border-radius: 2px;
+    }
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.5rem;
+    }
+    .subject-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 1.8rem;
+      border: 2.5px solid var(--line);
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .subject-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      border-radius: 20px 20px 0 0;
+    }
+    .subject-card:hover {
+      transform: translateY(-6px) rotate(-0.5deg);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+    }
+    .subject-card .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .card-icon {
+      width: 58px; height: 58px;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+    .card-arrow {
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      transition: transform 0.2s;
+    }
+    .subject-card:hover .card-arrow { transform: translate(3px, -3px); }
+    .card-subject {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.45rem;
+      line-height: 1.1;
+      margin-bottom: 0.35rem;
+    }
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      font-weight: 600;
+      line-height: 1.5;
+      margin-bottom: 1.2rem;
+    }
+    .card-topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .chip {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.3rem 0.7rem;
+      border-radius: 50px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .card-progress {
+      margin-top: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .progress-bar {
+      flex: 1;
+      height: 6px;
+      background: var(--line);
+      border-radius: 50px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 50px;
+      width: 0%;
+      transition: width 1s ease 0.3s;
+    }
+    .progress-text {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--ink-soft);
+    }
+
+    /* Color themes per card */
+    .math-card::before      { background: var(--math); }
+    .math-card:hover        { border-color: var(--math); }
+    .math-card .card-icon   { background: var(--math-light); }
+    .math-card .card-subject { color: var(--math-dark); }
+    .math-card .card-arrow  { background: var(--math-light); color: var(--math); }
+    .math-card .chip        { background: var(--math-light); color: var(--math-dark); }
+    .math-card .progress-fill { background: var(--math); }
+
+    .sci-card::before      { background: var(--sci); }
+    .sci-card:hover        { border-color: var(--sci); }
+    .sci-card .card-icon   { background: var(--sci-light); }
+    .sci-card .card-subject { color: var(--sci-dark); }
+    .sci-card .card-arrow  { background: var(--sci-light); color: var(--sci); }
+    .sci-card .chip        { background: var(--sci-light); color: var(--sci-dark); }
+    .sci-card .progress-fill { background: var(--sci); }
+
+    .eng-card::before      { background: var(--eng); }
+    .eng-card:hover        { border-color: var(--eng); }
+    .eng-card .card-icon   { background: var(--eng-light); }
+    .eng-card .card-subject { color: var(--eng-dark); }
+    .eng-card .card-arrow  { background: var(--eng-light); color: var(--eng); }
+    .eng-card .chip        { background: var(--eng-light); color: var(--eng-dark); }
+    .eng-card .progress-fill { background: var(--eng); }
+
+    .maka-card::before      { background: var(--maka); }
+    .maka-card:hover        { border-color: var(--maka); }
+    .maka-card .card-icon   { background: var(--maka-light); }
+    .maka-card .card-subject { color: var(--maka-dark); }
+    .maka-card .card-arrow  { background: var(--maka-light); color: var(--maka); }
+    .maka-card .chip        { background: var(--maka-light); color: var(--maka-dark); }
+    .maka-card .progress-fill { background: var(--maka); }
+
+    .grmc-card::before      { background: var(--grmc); }
+    .grmc-card:hover        { border-color: var(--grmc); }
+    .grmc-card .card-icon   { background: var(--grmc-light); }
+    .grmc-card .card-subject { color: var(--grmc-dark); }
+    .grmc-card .card-arrow  { background: var(--grmc-light); color: var(--grmc); }
+    .grmc-card .chip        { background: var(--grmc-light); color: var(--grmc-dark); }
+    .grmc-card .progress-fill { background: var(--grmc); }
+
+    .fil-card::before      { background: var(--fil); }
+    .fil-card:hover        { border-color: var(--fil); }
+    .fil-card .card-icon   { background: var(--fil-light); }
+    .fil-card .card-subject { color: var(--fil-dark); }
+    .fil-card .card-arrow  { background: var(--fil-light); color: var(--fil); }
+    .fil-card .chip        { background: var(--fil-light); color: var(--fil-dark); }
+    .fil-card .progress-fill { background: var(--fil); }
+
+    /* ─── SUBJECT VIEW ─── */
+    #subject-view {
+      display: none;
+      padding: 2rem 2rem 5rem;
+      max-width: 860px;
+      margin: 0 auto;
+      animation: slideIn 0.35s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(30px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .subj-hero {
+      border-radius: 24px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .subj-hero::after {
+      content: attr(data-emoji);
+      position: absolute;
+      right: 2rem;
+      font-size: 8rem;
+      opacity: 0.12;
+      line-height: 1;
+      bottom: -0.5rem;
+    }
+    .subj-hero-icon {
+      width: 72px; height: 72px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem;
+      flex-shrink: 0;
+      backdrop-filter: blur(4px);
+    }
+    .subj-hero-text h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.2rem;
+      color: #fff;
+      line-height: 1.1;
+    }
+    .subj-hero-text p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.8);
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+
+    /* Reviewer sections */
+    .reviewer-section {
+      background: var(--white);
+      border-radius: 20px;
+      border: 2px solid var(--line);
+      margin-bottom: 1.4rem;
+      overflow: hidden;
+    }
+    .reviewer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 1.6rem;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    .reviewer-header:hover { background: var(--bg); }
+    .reviewer-header-left {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+    .reviewer-num {
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .reviewer-title {
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+    .reviewer-toggle {
+      font-size: 1.1rem;
+      transition: transform 0.3s;
+      color: var(--ink-soft);
+    }
+    .reviewer-toggle.open { transform: rotate(90deg); }
+    .reviewer-body {
+      display: none;
+      padding: 0 1.6rem 1.6rem;
+      border-top: 2px solid var(--line);
+    }
+    .reviewer-body.open { display: block; }
+
+    /* Content blocks */
+    .content-block {
+      margin-top: 1.2rem;
+    }
+    .content-block h4 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px dashed var(--line);
+    }
+    .content-block p {
+      font-size: 0.93rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+    .content-block ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .content-block ul li {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      font-weight: 600;
+      padding-left: 1.4rem;
+      position: relative;
+      line-height: 1.5;
+    }
+    .content-block ul li::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      font-size: 0.55rem;
+      top: 0.3rem;
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    /* Formula cards */
+    .formula-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+    }
+    .formula-card {
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      text-align: center;
+    }
+    .formula-card .f-name {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .formula-card .f-val {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.15rem;
+    }
+
+    /* Quiz mini */
+    .quiz-box {
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem;
+      margin-top: 1rem;
+    }
+    .quiz-box .q-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .quiz-box .q-text {
+      font-weight: 800;
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+    }
+    .quiz-choices {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .quiz-choice {
+      background: rgba(255,255,255,0.6);
+      border: 2px solid rgba(255,255,255,0.4);
+      border-radius: 8px;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: left;
+    }
+    .quiz-choice:hover     { background: rgba(255,255,255,0.9); }
+    .quiz-choice.correct   { background: #d4f8e0; border-color: #2ecc71; color: #1a9e55; }
+    .quiz-choice.wrong     { background: #fde8e8; border-color: #e74c3c; color: #c0392b; }
+    .quiz-result {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      font-weight: 800;
+      display: none;
+    }
+
+    /* ─── STUDY TIP ─── */
+    .study-tip {
+      background: linear-gradient(135deg, #fff9db, #fff3ba);
+      border: 2px dashed #f39c12;
+      border-radius: 14px;
+      padding: 1rem 1.2rem;
+      margin-top: 1rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #7a5c00;
+    }
+    .study-tip strong { display: block; margin-bottom: 0.25rem; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 640px) {
+      header { padding: 0.75rem 1.2rem; }
+      #home-view { padding: 2rem 1rem 4rem; }
+      #subject-view { padding: 1.5rem 1rem 4rem; }
+      .subjects-grid { grid-template-columns: 1fr; }
+      .formula-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.vis { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo" onclick="showHome(); return false;">
+    <div class="logo-icon">📚</div>
+    <span class="logo-text">My <span>Learning Hub</span></span>
+  </a>
+  <div class="header-right">
+    <button class="back-btn" id="back-btn" onclick="showHome()">← Back to Subjects</button>
+    <div class="progress-badge" id="progress-badge">6 Subjects</div>
+  </div>
+</header>
+
+<main>
+
+<!-- ─── HOME VIEW ─── -->
+<div id="home-view">
+  <!-- Floating doodles -->
+  <span class="doodle">✏️</span>
+  <span class="doodle">📐</span>
+  <span class="doodle">🔬</span>
+  <span class="doodle">📖</span>
+
+  <div class="home-hero">
+    <h1>Welcome to <span>My Learning Hub</span> 🎒</h1>
+    <p>Your all-in-one school reviewer — pick a subject and start studying!</p>
+  </div>
+
+  <div class="subjects-label">📂 Choose a Subject</div>
+
+  <div class="subjects-grid">
+
+    <!-- MATH -->
+    <div class="subject-card math-card reveal" onclick="openSubject('math')">
+      <div class="card-top">
+        <div class="card-icon">➕</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-subject">Mathematics</div>
+      <div class="card-desc">Numbers, operations, geometry, fractions, and problem-solving.</div>
+      <div class="card-topics">
+        <span class="chip">Numbers</span>
+        <span class="chip">Fractions</span>
+        <span class="chip">Geometry</span>
+        <span class="chip">Word Problems</span>
+      </div>
+      <div class="card-progress">
+        <div class="progress-bar"><div class="progress-fill" data-w="72"></div></div>
+        <span class="progress-text">4 Topics</span>
+      </div>
+    </div>
+
+    <!-- SCIENCE -->
+    <div class="subject-card sci-card reveal" onclick="openSubject('sci')">
+      <div class="card-top">
+        <div class="card-icon">🔬</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-subject">Science</div>
+      <div class="card-desc">Living things, matter, energy, and the natural world around us.</div>
+      <div class="card-topics">
+        <span class="chip">Living Things</span>
+        <span class="chip">Matter</span>
+        <span class="chip">Energy</span>
+        <span class="chip">Earth</span>
+      </div>
+      <div class="card-progress">
+        <div class="progress-bar"><div class="progress-fill" data-w="65"></div></div>
+        <span class="progress-text">4 Topics</span>
+      </div>
+    </div>
+
+    <!-- ENGLISH -->
+    <div class="subject-card eng-card reveal" onclick="openSubject('eng')">
+      <div class="card-top">
+        <div class="card-icon">📝</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-subject">English</div>
+      <div class="card-desc">Grammar, reading comprehension, vocabulary, and writing skills.</div>
+      <div class="card-topics">
+        <span class="chip">Grammar</span>
+        <span class="chip">Reading</span>
+        <span class="chip">Vocabulary</span>
+        <span class="chip">Writing</span>
+      </div>
+      <div class="card-progress">
+        <div class="progress-bar"><div class="progress-fill" data-w="80"></div></div>
+        <span class="progress-text">4 Topics</span>
+      </div>
+    </div>
+
+    <!-- MAKABANSA -->
+    <div class="subject-card maka-card reveal" onclick="openSubject('maka')">
+      <div class="card-top">
+        <div class="card-icon">🇵🇭</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-subject">Makabansa</div>
+      <div class="card-desc">Araling Panlipunan — kasaysayan, kultura, at lipunan ng Pilipinas.</div>
+      <div class="card-topics">
+        <span class="chip">Kasaysayan</span>
+        <span class="chip">Kultura</span>
+        <span class="chip">Lipunan</span>
+        <span class="chip">Pamahalaan</span>
+      </div>
+      <div class="card-progress">
+        <div class="progress-bar"><div class="progress-fill" data-w="60"></div></div>
+        <span class="progress-text">4 Topics</span>
+      </div>
+    </div>
+
+    <!-- GRMC -->
+    <div class="subject-card grmc-card reveal" onclick="openSubject('grmc')">
+      <div class="card-top">
+        <div class="card-icon">✝️</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-subject">GRMC</div>
+      <div class="card-desc">Good Manners & Right Conduct — values, character, and citizenship.</div>
+      <div class="card-topics">
+        <span class="chip">Values</span>
+        <span class="chip">Manners</span>
+        <span class="chip">Character</span>
+        <span class="chip">Citizenship</span>
+      </div>
+      <div class="card-progress">
+        <div class="progress-bar"><div class="progress-fill" data-w="55"></div></div>
+        <span class="progress-text">4 Topics</span>
+      </div>
+    </div>
+
+    <!-- FILIPINO -->
+    <div class="subject-card fil-card reveal" onclick="openSubject('fil')">
+      <div class="card-top">
+        <div class="card-icon">🌺</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-subject">Filipino</div>
+      <div class="card-desc">Wikang Filipino — gramatika, pagbabasa, pagsulat, at bokabularyo.</div>
+      <div class="card-topics">
+        <span class="chip">Gramatika</span>
+        <span class="chip">Pagbabasa</span>
+        <span class="chip">Pagsulat</span>
+        <span class="chip">Bokabularyo</span>
+      </div>
+      <div class="card-progress">
+        <div class="progress-bar"><div class="progress-fill" data-w="70"></div></div>
+        <span class="progress-text">4 Topics</span>
+      </div>
+    </div>
+
+  </div><!-- /subjects-grid -->
+</div><!-- /home-view -->
+
+
+<!-- ─── SUBJECT VIEW ─── -->
+<div id="subject-view">
+
+  <!-- MATH -->
+  <div id="page-math" class="subj-page" style="display:none">
+    <div class="subj-hero" data-emoji="➕" style="background: linear-gradient(135deg, #ff6b6b, #c0392b);">
+      <div class="subj-hero-icon">➕</div>
+      <div class="subj-hero-text">
+        <h2>Mathematics</h2>
+        <p>Master numbers, operations, and problem solving</p>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#ff6b6b">1</div>
+          <span class="reviewer-title">Place Value & Number Sense</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#c0392b">What is Place Value?</h4>
+          <p>Place value tells us the <strong>value of each digit</strong> based on its position in a number.</p>
+          <div class="formula-grid">
+            <div class="formula-card" style="background:#fff0f0; color:#c0392b">
+              <div class="f-name">Ones</div><div class="f-val">1</div>
+            </div>
+            <div class="formula-card" style="background:#fff0f0; color:#c0392b">
+              <div class="f-name">Tens</div><div class="f-val">10</div>
+            </div>
+            <div class="formula-card" style="background:#fff0f0; color:#c0392b">
+              <div class="f-name">Hundreds</div><div class="f-val">100</div>
+            </div>
+            <div class="formula-card" style="background:#fff0f0; color:#c0392b">
+              <div class="f-name">Thousands</div><div class="f-val">1,000</div>
+            </div>
+          </div>
+          <div class="highlight-box" style="background:#fff0f0; color:#c0392b; border-left:4px solid #ff6b6b;">
+            Example: In the number <strong>3,482</strong> — the digit 3 is in the Thousands place (value = 3,000), 4 is in the Hundreds place (value = 400), 8 is in the Tens place (value = 80), and 2 is in the Ones place (value = 2).
+          </div>
+        </div>
+        <div class="study-tip"><strong>💡 Study Tip</strong>Use a place value chart and practice writing numbers in expanded form: 3,482 = 3,000 + 400 + 80 + 2.</div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#ff6b6b">2</div>
+          <span class="reviewer-title">Fractions</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#c0392b">Parts of a Fraction</h4>
+          <div class="formula-grid">
+            <div class="formula-card" style="background:#fff0f0; color:#c0392b">
+              <div class="f-name">Numerator</div><div class="f-val">Top Number</div>
+            </div>
+            <div class="formula-card" style="background:#fff0f0; color:#c0392b">
+              <div class="f-name">Denominator</div><div class="f-val">Bottom Number</div>
+            </div>
+          </div>
+          <ul style="margin-top:1rem">
+            <li><strong>Proper fraction:</strong> numerator &lt; denominator (e.g., ¾)</li>
+            <li><strong>Improper fraction:</strong> numerator &gt; denominator (e.g., 7/4)</li>
+            <li><strong>Mixed number:</strong> whole + fraction (e.g., 1¾)</li>
+            <li><strong>Like fractions:</strong> same denominator (e.g., ⅓ and 2/3)</li>
+            <li><strong>Unlike fractions:</strong> different denominators (e.g., ½ and ⅓)</li>
+          </ul>
+        </div>
+        <div class="quiz-box" style="background:#fff0f0;">
+          <div class="q-label" style="color:#c0392b">⚡ Quick Check</div>
+          <div class="q-text">Which is an improper fraction?</div>
+          <div class="quiz-choices">
+            <button class="quiz-choice" onclick="checkAnswer(this, false)">A. ¾</button>
+            <button class="quiz-choice" onclick="checkAnswer(this, true)">B. 9/4</button>
+            <button class="quiz-choice" onclick="checkAnswer(this, false)">C. ½</button>
+          </div>
+          <div class="quiz-result" id="qr1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#ff6b6b">3</div>
+          <span class="reviewer-title">Basic Operations</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#c0392b">The Four Operations</h4>
+          <ul>
+            <li><strong>Addition (+):</strong> Combines two or more numbers. Result = Sum</li>
+            <li><strong>Subtraction (−):</strong> Finds the difference between numbers. Result = Difference</li>
+            <li><strong>Multiplication (×):</strong> Repeated addition. Result = Product</li>
+            <li><strong>Division (÷):</strong> Splits into equal groups. Result = Quotient</li>
+          </ul>
+          <div class="highlight-box" style="background:#fff0f0; color:#c0392b; border-left:4px solid #ff6b6b; margin-top:1rem;">
+            <strong>Order of Operations (PEMDAS):</strong> Parentheses → Exponents → Multiplication & Division → Addition & Subtraction. Always work left to right within the same level.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#ff6b6b">4</div>
+          <span class="reviewer-title">Geometry Basics</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#c0392b">Shapes & Formulas</h4>
+          <div class="formula-grid">
+            <div class="formula-card" style="background:#fff0f0; color:#c0392b">
+              <div class="f-name">Square Area</div><div class="f-val">s × s</div>
+            </div>
+            <div class="formula-card" style="background:#fff0f0; color:#c0392b">
+              <div class="f-name">Rectangle Area</div><div class="f-val">l × w</div>
+            </div>
+            <div class="formula-card" style="background:#fff0f0; color:#c0392b">
+              <div class="f-name">Triangle Area</div><div class="f-val">½ × b × h</div>
+            </div>
+            <div class="formula-card" style="background:#fff0f0; color:#c0392b">
+              <div class="f-name">Circle Area</div><div class="f-val">π × r²</div>
+            </div>
+          </div>
+          <ul style="margin-top:1rem">
+            <li><strong>Perimeter:</strong> Total distance around a shape (add all sides)</li>
+            <li><strong>Area:</strong> Amount of space inside a shape</li>
+            <li><strong>Volume:</strong> Amount of space inside a 3D figure (l × w × h for rectangular prism)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div><!-- /math -->
+
+  <!-- SCIENCE -->
+  <div id="page-sci" class="subj-page" style="display:none">
+    <div class="subj-hero" data-emoji="🔬" style="background: linear-gradient(135deg, #2ecc71, #1a9e55);">
+      <div class="subj-hero-icon">🔬</div>
+      <div class="subj-hero-text">
+        <h2>Science</h2>
+        <p>Explore living things, matter, energy & the Earth</p>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#2ecc71">1</div>
+          <span class="reviewer-title">Living Things & Their Needs</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#1a9e55">Characteristics of Living Things</h4>
+          <ul>
+            <li>Made of one or more <strong>cells</strong></li>
+            <li>Need <strong>food, water, and air</strong> to survive</li>
+            <li>Can <strong>grow and develop</strong></li>
+            <li>Can <strong>respond to their environment</strong></li>
+            <li>Can <strong>reproduce</strong> (make offspring)</li>
+            <li>Produce and use <strong>energy</strong></li>
+          </ul>
+          <div class="highlight-box" style="background:#edfaf3; color:#1a9e55; border-left:4px solid #2ecc71; margin-top:1rem;">
+            <strong>Classification:</strong> Scientists group living things into Kingdoms: Animals, Plants, Fungi, Protists, and Bacteria (Monera).
+          </div>
+        </div>
+        <div class="study-tip"><strong>💡 Study Tip</strong>Remember the 7 characteristics with "MRS GREN": Movement, Respiration, Sensitivity, Growth, Reproduction, Excretion, Nutrition.</div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#2ecc71">2</div>
+          <span class="reviewer-title">Matter & Its Properties</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#1a9e55">States of Matter</h4>
+          <div class="formula-grid">
+            <div class="formula-card" style="background:#edfaf3; color:#1a9e55">
+              <div class="f-name">Solid</div><div class="f-val">Fixed shape & volume</div>
+            </div>
+            <div class="formula-card" style="background:#edfaf3; color:#1a9e55">
+              <div class="f-name">Liquid</div><div class="f-val">Fixed volume, no fixed shape</div>
+            </div>
+            <div class="formula-card" style="background:#edfaf3; color:#1a9e55">
+              <div class="f-name">Gas</div><div class="f-val">No fixed shape or volume</div>
+            </div>
+          </div>
+          <ul style="margin-top:1rem">
+            <li><strong>Physical change:</strong> Changes shape/size but NOT the substance (e.g., cutting paper, melting ice)</li>
+            <li><strong>Chemical change:</strong> Forms a NEW substance (e.g., burning wood, rusting metal)</li>
+          </ul>
+        </div>
+        <div class="quiz-box" style="background:#edfaf3;">
+          <div class="q-label" style="color:#1a9e55">⚡ Quick Check</div>
+          <div class="q-text">Which is an example of a chemical change?</div>
+          <div class="quiz-choices">
+            <button class="quiz-choice" onclick="checkAnswer(this, false)">A. Cutting a piece of cloth</button>
+            <button class="quiz-choice" onclick="checkAnswer(this, false)">B. Ice melting into water</button>
+            <button class="quiz-choice" onclick="checkAnswer(this, true)">C. Wood burning into ash</button>
+          </div>
+          <div class="quiz-result"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#2ecc71">3</div>
+          <span class="reviewer-title">Energy & Its Forms</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#1a9e55">Forms of Energy</h4>
+          <ul>
+            <li><strong>Light energy:</strong> from the sun, can travel through space</li>
+            <li><strong>Heat (thermal) energy:</strong> produced by moving particles</li>
+            <li><strong>Sound energy:</strong> produced by vibrations, needs a medium to travel</li>
+            <li><strong>Electrical energy:</strong> movement of electrons</li>
+            <li><strong>Mechanical energy:</strong> energy of motion (kinetic) + stored energy (potential)</li>
+            <li><strong>Chemical energy:</strong> stored in food and fuel</li>
+          </ul>
+          <div class="highlight-box" style="background:#edfaf3; color:#1a9e55; border-left:4px solid #2ecc71; margin-top:1rem;">
+            Energy can be <strong>transferred</strong> from one object to another and <strong>converted</strong> from one form to another. Example: Chemical energy in food → Mechanical energy when we move.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#2ecc71">4</div>
+          <span class="reviewer-title">Earth & Space</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#1a9e55">The Solar System</h4>
+          <ul>
+            <li>The <strong>Sun</strong> is the center of our solar system — it provides light and heat</li>
+            <li>8 planets orbit the Sun: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune</li>
+            <li>Earth rotates on its axis causing <strong>day and night</strong></li>
+            <li>Earth revolves around the Sun causing the <strong>four seasons</strong></li>
+            <li>The Moon orbits Earth and causes <strong>tides</strong> and the <strong>phases of the moon</strong></li>
+          </ul>
+        </div>
+        <div class="study-tip"><strong>💡 Study Tip</strong>Remember the planets in order: "My Very Excellent Mother Just Served Us Nachos" (Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune)</div>
+      </div>
+    </div>
+  </div><!-- /sci -->
+
+  <!-- ENGLISH -->
+  <div id="page-eng" class="subj-page" style="display:none">
+    <div class="subj-hero" data-emoji="📝" style="background: linear-gradient(135deg, #3498db, #1a6fab);">
+      <div class="subj-hero-icon">📝</div>
+      <div class="subj-hero-text">
+        <h2>English</h2>
+        <p>Grammar, reading, vocabulary & writing skills</p>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#3498db">1</div>
+          <span class="reviewer-title">Parts of Speech</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#1a6fab">The 8 Parts of Speech</h4>
+          <ul>
+            <li><strong>Noun:</strong> Names a person, place, thing, or idea (e.g., teacher, school, book)</li>
+            <li><strong>Pronoun:</strong> Replaces a noun (e.g., he, she, it, they)</li>
+            <li><strong>Verb:</strong> Shows action or state of being (e.g., run, jump, is, are)</li>
+            <li><strong>Adjective:</strong> Describes a noun (e.g., big, beautiful, cold)</li>
+            <li><strong>Adverb:</strong> Describes a verb, adjective, or another adverb (e.g., quickly, very)</li>
+            <li><strong>Preposition:</strong> Shows relationship (e.g., in, on, under, beside)</li>
+            <li><strong>Conjunction:</strong> Connects words or clauses (e.g., and, but, or, because)</li>
+            <li><strong>Interjection:</strong> Expresses emotion (e.g., Oh! Wow! Hurray!)</li>
+          </ul>
+        </div>
+        <div class="quiz-box" style="background:#eaf5fd;">
+          <div class="q-label" style="color:#1a6fab">⚡ Quick Check</div>
+          <div class="q-text">In "The big dog runs fast," what part of speech is "fast"?</div>
+          <div class="quiz-choices">
+            <button class="quiz-choice" onclick="checkAnswer(this, false)">A. Adjective</button>
+            <button class="quiz-choice" onclick="checkAnswer(this, true)">B. Adverb</button>
+            <button class="quiz-choice" onclick="checkAnswer(this, false)">C. Noun</button>
+          </div>
+          <div class="quiz-result"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#3498db">2</div>
+          <span class="reviewer-title">Sentence Structure</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#1a6fab">Parts of a Sentence</h4>
+          <ul>
+            <li><strong>Subject:</strong> Who or what the sentence is about</li>
+            <li><strong>Predicate:</strong> What the subject does or is</li>
+            <li><strong>Object:</strong> Receives the action of the verb</li>
+          </ul>
+          <div class="highlight-box" style="background:#eaf5fd; color:#1a6fab; border-left:4px solid #3498db; margin-top:1rem;">
+            <strong>Types of Sentences:</strong><br>
+            • <strong>Declarative</strong> – makes a statement (ends with period)<br>
+            • <strong>Interrogative</strong> – asks a question (ends with ?)<br>
+            • <strong>Imperative</strong> – gives a command (ends with period or !)<br>
+            • <strong>Exclamatory</strong> – shows strong emotion (ends with !)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#3498db">3</div>
+          <span class="reviewer-title">Vocabulary & Context Clues</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#1a6fab">Types of Context Clues</h4>
+          <ul>
+            <li><strong>Definition clue:</strong> The meaning is directly stated in the sentence</li>
+            <li><strong>Synonym clue:</strong> A word with similar meaning is nearby</li>
+            <li><strong>Antonym clue:</strong> A word with opposite meaning gives contrast</li>
+            <li><strong>Example clue:</strong> Examples around the word hint at its meaning</li>
+            <li><strong>Inference clue:</strong> You use logic from the rest of the sentence</li>
+          </ul>
+          <div class="study-tip"><strong>💡 Study Tip</strong>When you don't know a word, cover it, read the whole sentence, then make a guess based on the surrounding words before checking a dictionary.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#3498db">4</div>
+          <span class="reviewer-title">Reading Comprehension</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#1a6fab">Key Reading Skills</h4>
+          <ul>
+            <li><strong>Main idea:</strong> The most important point the author is making</li>
+            <li><strong>Supporting details:</strong> Facts and examples that support the main idea</li>
+            <li><strong>Cause and effect:</strong> Why something happened (cause) and what happened (effect)</li>
+            <li><strong>Compare and contrast:</strong> Finding similarities and differences</li>
+            <li><strong>Inference:</strong> Reading between the lines — using clues to figure out unstated meaning</li>
+            <li><strong>Sequencing:</strong> Putting events in the order they happened</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div><!-- /eng -->
+
+  <!-- MAKABANSA -->
+  <div id="page-maka" class="subj-page" style="display:none">
+    <div class="subj-hero" data-emoji="🇵🇭" style="background: linear-gradient(135deg, #f39c12, #b8730d);">
+      <div class="subj-hero-icon">🇵🇭</div>
+      <div class="subj-hero-text">
+        <h2>Makabansa</h2>
+        <p>Araling Panlipunan — Kasaysayan at Kultura ng Pilipinas</p>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#f39c12">1</div>
+          <span class="reviewer-title">Kasaysayan ng Pilipinas</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#b8730d">Mahahalagang Pangyayari</h4>
+          <ul>
+            <li><strong>Pre-colonial period:</strong> Mga baranggay at sultanato bago dumating ang mga Español</li>
+            <li><strong>1521:</strong> Pagdating ni Ferdinand Magellan sa Pilipinas</li>
+            <li><strong>1565:</strong> Simula ng kolonyalismo ng España sa ilalim ni Miguel López de Legazpi</li>
+            <li><strong>1872:</strong> Paghihimagsik sa Cavite at pagbibigay-inspirasyon sa mga bayani</li>
+            <li><strong>1896:</strong> Rebolusyong Pilipino laban sa España sa pamumuno ni Andres Bonifacio</li>
+            <li><strong>1898:</strong> Deklarasyon ng Kalayaan sa Kawit, Cavite ni Emilio Aguinaldo (Hunyo 12)</li>
+          </ul>
+          <div class="highlight-box" style="background:#fef9ec; color:#b8730d; border-left:4px solid #f39c12; margin-top:1rem;">
+            <strong>Araw ng Kalayaan:</strong> Hunyo 12 — Ipinagdiriwang ang kalayaan ng Pilipinas mula sa kolonyalismong Español.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#f39c12">2</div>
+          <span class="reviewer-title">Mga Bayaning Pilipino</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#b8730d">Pambansang Bayani at mga Dakila</h4>
+          <ul>
+            <li><strong>Dr. Jose Rizal:</strong> Pambansang bayani, manunulat ng Noli Me Tangere at El Filibusterismo</li>
+            <li><strong>Andres Bonifacio:</strong> Ama ng Rebolusyon, nagtatag ng Katipunan</li>
+            <li><strong>Emilio Aguinaldo:</strong> Unang Pangulo ng Pilipinas</li>
+            <li><strong>Gabriela Silang:</strong> Babaeng lider ng himagsikan sa Ilocos</li>
+            <li><strong>Lapu-Lapu:</strong> Unang Pilipinong lumaban sa mga mananakop</li>
+            <li><strong>Apolinario Mabini:</strong> "Utak ng Rebolusyon," tagapayo ni Aguinaldo</li>
+          </ul>
+        </div>
+        <div class="quiz-box" style="background:#fef9ec;">
+          <div class="q-label" style="color:#b8730d">⚡ Mabilis na Pagsubok</div>
+          <div class="q-text">Sino ang nagtatag ng Katipunan?</div>
+          <div class="quiz-choices">
+            <button class="quiz-choice" onclick="checkAnswer(this, false)">A. Jose Rizal</button>
+            <button class="quiz-choice" onclick="checkAnswer(this, true)">B. Andres Bonifacio</button>
+            <button class="quiz-choice" onclick="checkAnswer(this, false)">C. Emilio Aguinaldo</button>
+          </div>
+          <div class="quiz-result"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#f39c12">3</div>
+          <span class="reviewer-title">Kultura at Tradisyon</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#b8730d">Kulturang Pilipino</h4>
+          <ul>
+            <li><strong>Pamilya:</strong> Sentro ng lipunang Pilipino; malakas ang ugnayan ng pamilya</li>
+            <li><strong>Bayanihan:</strong> Pagtutulungan ng komunidad para sa kapwa</li>
+            <li><strong>Pagmamano:</strong> Pagbibigay-galang sa matatanda sa pamamagitan ng pagmamano</li>
+            <li><strong>Pista opisyal:</strong> Iba't ibang selebrasyon tulad ng Sinulog, Ati-Atihan, at Pahiyas</li>
+            <li><strong>Wika:</strong> Filipino ang pambansang wika; may 180+ wikang rehiyonal</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#f39c12">4</div>
+          <span class="reviewer-title">Pamahalaan ng Pilipinas</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#b8730d">Tatlong Sangay ng Pamahalaan</h4>
+          <div class="formula-grid">
+            <div class="formula-card" style="background:#fef9ec; color:#b8730d">
+              <div class="f-name">Ehekutibo</div><div class="f-val">Pangulo</div>
+            </div>
+            <div class="formula-card" style="background:#fef9ec; color:#b8730d">
+              <div class="f-name">Lehislatibo</div><div class="f-val">Kongreso</div>
+            </div>
+            <div class="formula-card" style="background:#fef9ec; color:#b8730d">
+              <div class="f-name">Hudikatura</div><div class="f-val">Korte Suprema</div>
+            </div>
+          </div>
+          <div class="study-tip" style="margin-top:1rem"><strong>💡 Tandaan</strong>Ang Konstitusyon ng Pilipinas (1987) ang pinakamataas na batas ng bansa. Ito ang nagbibigay ng karapatan sa bawat Pilipino.</div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /maka -->
+
+  <!-- GRMC -->
+  <div id="page-grmc" class="subj-page" style="display:none">
+    <div class="subj-hero" data-emoji="✝️" style="background: linear-gradient(135deg, #9b59b6, #6c3483);">
+      <div class="subj-hero-icon">✝️</div>
+      <div class="subj-hero-text">
+        <h2>GRMC</h2>
+        <p>Good Manners, Right Conduct & Values Education</p>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#9b59b6">1</div>
+          <span class="reviewer-title">Core Values & Character</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#6c3483">Filipino Core Values</h4>
+          <ul>
+            <li><strong>Pagmamahal sa Diyos (Love of God):</strong> Putting God above everything; living a faithful life</li>
+            <li><strong>Pagmamahal sa Pamilya (Love of Family):</strong> Caring and respecting one's family</li>
+            <li><strong>Pagmamahal sa Kapwa (Love of Neighbor):</strong> Treating others with kindness and empathy</li>
+            <li><strong>Pagmamahal sa Bansa (Love of Country):</strong> Patriotism and pride in the Philippines</li>
+            <li><strong>Katapatan (Honesty/Loyalty):</strong> Being truthful and dependable in all things</li>
+            <li><strong>Paggalang (Respect):</strong> Showing consideration for others, especially elders</li>
+          </ul>
+        </div>
+        <div class="study-tip"><strong>💡 Study Tip</strong>Good values are not just memorized — they are practiced daily. Think about one value you showed today!</div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#9b59b6">2</div>
+          <span class="reviewer-title">Good Manners in Daily Life</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#6c3483">Practicing Good Manners</h4>
+          <ul>
+            <li><strong>At home:</strong> Help with chores, obey parents, speak politely</li>
+            <li><strong>In school:</strong> Listen to teachers, respect classmates, avoid cheating</li>
+            <li><strong>In public:</strong> Queue properly, don't litter, give way to the elderly</li>
+            <li><strong>Online:</strong> Be respectful in messages, don't share others' private info, avoid cyberbullying</li>
+            <li><strong>Magic words:</strong> "Please," "Thank you," "I'm sorry," "Excuse me," "You're welcome"</li>
+          </ul>
+        </div>
+        <div class="quiz-box" style="background:#f6effe;">
+          <div class="q-label" style="color:#6c3483">⚡ Quick Check</div>
+          <div class="q-text">You accidentally bump into someone. What should you say?</div>
+          <div class="quiz-choices">
+            <button class="quiz-choice" onclick="checkAnswer(this, false)">A. Nothing, just walk away</button>
+            <button class="quiz-choice" onclick="checkAnswer(this, true)">B. "I'm sorry, excuse me"</button>
+            <button class="quiz-choice" onclick="checkAnswer(this, false)">C. "Thank you"</button>
+          </div>
+          <div class="quiz-result"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#9b59b6">3</div>
+          <span class="reviewer-title">Rights & Responsibilities</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#6c3483">Children's Rights (UNCRC)</h4>
+          <ul>
+            <li>Right to <strong>life, survival, and development</strong></li>
+            <li>Right to a <strong>name and nationality</strong></li>
+            <li>Right to <strong>education</strong></li>
+            <li>Right to <strong>health and medical care</strong></li>
+            <li>Right to <strong>play and leisure</strong></li>
+            <li>Right to be <strong>protected from abuse</strong> and exploitation</li>
+          </ul>
+          <div class="highlight-box" style="background:#f6effe; color:#6c3483; border-left:4px solid #9b59b6; margin-top:1rem;">
+            With rights come <strong>responsibilities</strong>: study hard, respect others, help at home, obey rules, protect the environment.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#9b59b6">4</div>
+          <span class="reviewer-title">Citizenship & Community</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#6c3483">Being a Good Citizen</h4>
+          <ul>
+            <li><strong>Obey laws and rules</strong> of the school, home, and community</li>
+            <li><strong>Respect authority figures</strong> — teachers, parents, government officials</li>
+            <li><strong>Participate</strong> in community activities and help others</li>
+            <li><strong>Care for the environment</strong> — don't litter, conserve water, plant trees</li>
+            <li><strong>Be responsible</strong> with your words and actions, especially online</li>
+            <li><strong>Practice honesty</strong> in everything you do</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div><!-- /grmc -->
+
+  <!-- FILIPINO -->
+  <div id="page-fil" class="subj-page" style="display:none">
+    <div class="subj-hero" data-emoji="🌺" style="background: linear-gradient(135deg, #e74c3c, #a93226);">
+      <div class="subj-hero-icon">🌺</div>
+      <div class="subj-hero-text">
+        <h2>Filipino</h2>
+        <p>Gramatika, pagbabasa, pagsulat at bokabularyo</p>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#e74c3c">1</div>
+          <span class="reviewer-title">Bahagi ng Pananalita</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#a93226">Mga Uri ng Salita</h4>
+          <ul>
+            <li><strong>Pangngalan:</strong> Pangalan ng tao, lugar, bagay, o ideya (hal.: guro, paaralan, aklat)</li>
+            <li><strong>Panghalip:</strong> Pumapalit sa pangngalan (hal.: ako, ikaw, siya, sila)</li>
+            <li><strong>Pandiwa:</strong> Nagpapahayag ng kilos o kalagayan (hal.: kumain, tumatakbo, mahal)</li>
+            <li><strong>Pang-uri:</strong> Naglalarawan sa pangngalan (hal.: malaki, maganda, mabait)</li>
+            <li><strong>Pang-abay:</strong> Naglalarawan sa pandiwa (hal.: mabilis, dahan-dahan, palagi)</li>
+            <li><strong>Pangatnig:</strong> Nag-uugnay ng mga salita o pangungusap (hal.: at, pero, kaya)</li>
+            <li><strong>Pantukoy:</strong> Ginagamit bago ang pangngalan (hal.: ang, mga, si, sina)</li>
+          </ul>
+        </div>
+        <div class="quiz-box" style="background:#fdf0ef;">
+          <div class="q-label" style="color:#a93226">⚡ Mabilis na Pagsubok</div>
+          <div class="q-text">Sa pangungusap na "Mabilis na tumakbo ang bata," ano ang pang-abay?</div>
+          <div class="quiz-choices">
+            <button class="quiz-choice" onclick="checkAnswer(this, false)">A. bata</button>
+            <button class="quiz-choice" onclick="checkAnswer(this, true)">B. mabilis</button>
+            <button class="quiz-choice" onclick="checkAnswer(this, false)">C. tumakbo</button>
+          </div>
+          <div class="quiz-result"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#e74c3c">2</div>
+          <span class="reviewer-title">Uri ng Pangungusap</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#a93226">Apat na Uri ng Pangungusap</h4>
+          <ul>
+            <li><strong>Pasalaysay:</strong> Nagbibigay ng impormasyon. Nagtatapos sa tuldok (.)<br><em>Hal.: Masaya ang mga bata sa paaralan.</em></li>
+            <li><strong>Patanong:</strong> Nagtatanong. Nagtatapos sa tandang pananong (?)<br><em>Hal.: Nasaan ang aking lapis?</em></li>
+            <li><strong>Pautos:</strong> Nagbibigay ng utos o pakiusap. Nagtatapos sa tuldok o padamdam (.!)<br><em>Hal.: Buksan ang inyong mga aklat.</em></li>
+            <li><strong>Padamdam:</strong> Nagpapahayag ng damdamin. Nagtatapos sa tandang padamdam (!)<br><em>Hal.: Ang ganda ng panahon ngayon!</em></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#e74c3c">3</div>
+          <span class="reviewer-title">Bokabularyo at Salitang-Ugat</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#a93226">Pagbubuo ng Salita</h4>
+          <ul>
+            <li><strong>Salitang-ugat:</strong> Pinakasimpleng anyo ng salita (hal.: aral, sulat, laro)</li>
+            <li><strong>Unlapi:</strong> Idinaragdag sa simula (hal.: mag- → magaral; um- → umali)</li>
+            <li><strong>Gitlapi:</strong> Idinaragdag sa gitna (hal.: -in- → sumulat; -um- → kumain)</li>
+            <li><strong>Hulapi:</strong> Idinaragdag sa dulo (hal.: -an → sulatan; -in → basahin)</li>
+          </ul>
+          <div class="highlight-box" style="background:#fdf0ef; color:#a93226; border-left:4px solid #e74c3c; margin-top:1rem;">
+            <strong>Kambal-katinig:</strong> Dalawang katinig na magkasamang tumutunog sa simula ng pantig (hal.: tr, gr, pr, bl, cl).
+          </div>
+        </div>
+        <div class="study-tip"><strong>💡 Paalala</strong>Ang pagsasanay ng pagbabasa araw-araw ay malaking tulong upang mapaunlad ang bokabularyo at pag-unawa.</div>
+      </div>
+    </div>
+
+    <div class="reviewer-section">
+      <div class="reviewer-header" onclick="toggleSection(this)">
+        <div class="reviewer-header-left">
+          <div class="reviewer-num" style="background:#e74c3c">4</div>
+          <span class="reviewer-title">Pagbabasa at Pag-unawa</span>
+        </div>
+        <span class="reviewer-toggle">▶</span>
+      </div>
+      <div class="reviewer-body">
+        <div class="content-block">
+          <h4 style="color:#a93226">Estratehiya sa Pagbabasa</h4>
+          <ul>
+            <li><strong>Pangunahing Ideya:</strong> Ang pinakamahalagang mensahe ng teksto</li>
+            <li><strong>Suportang Detalye:</strong> Mga katibayan na nagpapatunay sa pangunahing ideya</li>
+            <li><strong>Pagkakasunod-sunod ng Pangyayari:</strong> Una, pangalawa, pangatlo, panghuli</li>
+            <li><strong>Sanhi at Bunga:</strong> Ang dahilan (sanhi) at ang resulta (bunga) ng isang pangyayari</li>
+            <li><strong>Paghahambing:</strong> Paghahanap ng pagkakatulad at pagkakaiba</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div><!-- /fil -->
+
+</div><!-- /subject-view -->
+</main>
+
+<script>
+  // ── NAVIGATION ──────────────────────────────────────
+  let currentSubject = null;
+
+  function openSubject(id) {
+    document.getElementById('home-view').style.display = 'none';
+    const sv = document.getElementById('subject-view');
+    sv.style.display = 'block';
+
+    // Hide all subject pages
+    document.querySelectorAll('.subj-page').forEach(p => p.style.display = 'none');
+    document.getElementById('page-' + id).style.display = 'block';
+
+    document.getElementById('back-btn').style.display = 'flex';
+    document.getElementById('progress-badge').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    currentSubject = id;
+  }
+
+  function showHome() {
+    document.getElementById('home-view').style.display = 'block';
+    document.getElementById('subject-view').style.display = 'none';
+    document.getElementById('back-btn').style.display = 'none';
+    document.getElementById('progress-badge').style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    currentSubject = null;
+    // Re-trigger progress bars
+    setTimeout(animateBars, 200);
+  }
+
+  // ── ACCORDION ───────────────────────────────────────
+  function toggleSection(header) {
+    const body = header.nextElementSibling;
+    const arrow = header.querySelector('.reviewer-toggle');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    arrow.classList.toggle('open', !isOpen);
+  }
+
+  // ── QUIZ ─────────────────────────────────────────────
+  function checkAnswer(btn, isCorrect) {
+    const choices = btn.closest('.quiz-choices');
+    if (choices.dataset.answered) return;
+    choices.dataset.answered = 'true';
+
+    const resultEl = btn.closest('.quiz-box').querySelector('.quiz-result');
+
+    if (isCorrect) {
+      btn.classList.add('correct');
+      resultEl.style.display = 'block';
+      resultEl.style.color = '#1a9e55';
+      resultEl.textContent = '✅ Correct! Well done!';
+    } else {
+      btn.classList.add('wrong');
+      // Highlight correct
+      const allBtns = choices.querySelectorAll('.quiz-choice');
+      allBtns.forEach(b => {
+        if (b.onclick && b.onclick.toString().includes('true')) b.classList.add('correct');
+      });
+      resultEl.style.display = 'block';
+      resultEl.style.color = '#c0392b';
+      resultEl.textContent = '❌ Not quite — review the topic above!';
+    }
+  }
+
+  // ── PROGRESS BARS ───────────────────────────────────
+  function animateBars() {
+    document.querySelectorAll('.progress-fill').forEach(bar => {
+      bar.style.width = bar.dataset.w + '%';
+    });
+  }
+
+  // ── SCROLL REVEAL ────────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('vis'), i * 90);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Init
+  setTimeout(animateBars, 400);
+</script>
+</body>
+</html>
