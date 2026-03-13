@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Science Reviewer: Light & Sound</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFF8F0;
+    --white: #FFFFFF;
+    --light-yellow: #FFF3C4;
+    --light-green: #D4F5DC;
+    --light-blue: #D4EEFF;
+    --light-pink: #FFD6E0;
+    --light-purple: #EDE0FF;
+    --light-orange: #FFE8CC;
+    --yellow: #FFB800;
+    --green: #2DC653;
+    --blue: #0088FF;
+    --pink: #FF4D8D;
+    --purple: #7C3AED;
+    --orange: #FF7A00;
+    --red: #FF3B3B;
+    --text: #2D2D2D;
+    --text2: #555;
+    --muted: #999;
+    --border: #E8DDD0;
+    --shadow: 0 4px 16px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Nunito', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(circle, #FFB80022 2px, transparent 2px),
+      radial-gradient(circle, #0088FF18 2px, transparent 2px);
+    background-size: 40px 40px, 60px 60px;
+    background-position: 0 0, 20px 20px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* HEADER */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--white);
+    border-bottom: 3px solid var(--border);
+    padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .logo { font-family: 'Fredoka One', cursive; font-size: 22px; color: var(--orange); }
+  .logo-sub { font-size: 12px; color: var(--muted); font-weight: 700; }
+  .header-center { text-align: center; }
+  .header-title { font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--text); }
+  .float-emoji { font-size: 20px; animation: floatAnim 3s ease-in-out infinite; display: inline-block; }
+  @keyframes floatAnim { 0%,100%{transform:translateY(0) rotate(-5deg)} 50%{transform:translateY(-6px) rotate(5deg)} }
+
+  /* NAV */
+  .nav-tabs {
+    display: flex; gap: 8px; padding: 14px 24px;
+    background: var(--white); border-bottom: 2px solid var(--border);
+    overflow-x: auto; position: sticky; top: 67px; z-index: 99;
+  }
+  .tab-btn {
+    font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800;
+    padding: 9px 18px; border: 2.5px solid var(--border);
+    background: var(--white); color: var(--text2); border-radius: 50px;
+    cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .tab-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .tab-btn.t-light  { border-color: var(--yellow); background: var(--light-yellow); color: #8B6000; }
+  .tab-btn.t-sound  { border-color: var(--green);  background: var(--light-green);  color: #1a6b2e; }
+  .tab-btn.t-flash  { border-color: var(--blue);   background: var(--light-blue);   color: #004d99; }
+  .tab-btn.t-compare{ border-color: var(--purple); background: var(--light-purple); color: #4c1d95; }
+  .tab-btn.t-quiz   { border-color: var(--pink);   background: var(--light-pink);   color: #99003a; }
+
+  /* MAIN */
+  main { padding: 26px 22px; max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+  .section { display: none; animation: popIn 0.35s cubic-bezier(0.34,1.56,0.64,1); }
+  .section.active { display: block; }
+  @keyframes popIn { from{opacity:0;transform:scale(0.95) translateY(10px)} to{opacity:1;transform:scale(1) translateY(0)} }
+
+  /* SECTION HEADER */
+  .section-header {
+    text-align: center; margin-bottom: 24px; padding: 28px 20px;
+    border-radius: 24px; border: 3px solid;
+  }
+  .sh-light  { background: linear-gradient(135deg,#FFF3C4,#FFE08A); border-color: #FFD040; }
+  .sh-sound  { background: linear-gradient(135deg,#D4F5DC,#A8EBB8); border-color: #5DD678; }
+  .sh-blue   { background: linear-gradient(135deg,#D4EEFF,#A8D8FF); border-color: #60B8FF; }
+  .sh-purple { background: linear-gradient(135deg,#EDE0FF,#D4B8FF); border-color: #A07AEE; }
+  .sh-pink   { background: linear-gradient(135deg,#FFD6E0,#FFB3C6); border-color: #FF80A8; }
+  .section-emoji { font-size: 52px; line-height: 1; margin-bottom: 10px; display: block; animation: wobble 2s ease-in-out infinite; }
+  @keyframes wobble { 0%,100%{transform:rotate(-4deg)} 50%{transform:rotate(4deg)} }
+  .section-title { font-family:'Fredoka One',cursive; font-size: 30px; color: var(--text); margin-bottom: 4px; }
+  .section-sub { font-size: 14px; color: var(--text2); font-weight: 700; }
+
+  /* CARDS */
+  .card {
+    background: var(--white); border-radius: 20px; padding: 20px;
+    margin-bottom: 14px; box-shadow: var(--shadow); border: 2.5px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .card.yellow{ border-color: #FFD040; }
+  .card.green { border-color: #5DD678; }
+  .card.blue  { border-color: #60B8FF; }
+  .card.pink  { border-color: #FF80A8; }
+  .card.purple{ border-color: #A07AEE; }
+  .card.orange{ border-color: #FF9A3C; }
+  .card-title {
+    font-family: 'Fredoka One', cursive; font-size: 20px;
+    margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .ct-yellow{color:var(--yellow)} .ct-green{color:var(--green)} .ct-blue{color:var(--blue)}
+  .ct-pink{color:var(--pink)} .ct-purple{color:var(--purple)}
+  .card-body { font-size: 15px; color: var(--text2); line-height: 1.7; font-weight: 600; }
+  .card-body strong { color: var(--text); }
+
+  /* CONCEPT GRID */
+  .concept-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(230px,1fr)); gap: 14px; margin-bottom: 18px; }
+
+  /* PILLS */
+  .pill { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 800; margin: 2px; }
+  .pill-yellow{ background:var(--light-yellow); color:#8B6000; }
+  .pill-green { background:var(--light-green);  color:#1a6b2e; }
+  .pill-blue  { background:var(--light-blue);   color:#004d99; }
+  .pill-pink  { background:var(--light-pink);   color:#99003a; }
+  .pill-purple{ background:var(--light-purple); color:#4c1d95; }
+  .pill-orange{ background:var(--light-orange); color:#7a3800; }
+
+  /* INFO ROWS */
+  .info-row { display:flex; align-items:flex-start; gap:10px; padding:11px 0; border-bottom:2px dashed #EEE6DC; font-size:15px; }
+  .info-row:last-child { border-bottom:none; }
+  .info-icon { font-size:20px; flex-shrink:0; margin-top:2px; }
+  .info-label { font-weight:800; min-width:105px; color:var(--text); }
+  .info-value { color:var(--text2); font-weight:600; line-height:1.5; }
+
+  /* RAINBOW */
+  .rainbow-row { display:flex; gap:5px; flex-wrap:wrap; margin-top:8px; }
+  .rb { padding:7px 12px; border-radius:10px; font-size:13px; font-weight:800; }
+
+  /* LOUDNESS */
+  .loud-row { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .loud-label { font-size:12px; font-weight:800; min-width:68px; color:var(--text2); }
+  .loud-bar-wrap { flex:1; height:14px; background:#F0E8DC; border-radius:10px; overflow:hidden; }
+  .loud-bar { height:100%; border-radius:10px; }
+  .loud-desc { font-size:13px; font-weight:700; min-width:86px; }
+
+  /* COMPARE */
+  .compare-wrap { overflow-x:auto; border-radius:16px; }
+  .compare-table { width:100%; border-collapse:collapse; font-size:14px; }
+  .compare-table th { padding:13px 14px; text-align:left; font-family:'Fredoka One',cursive; font-size:16px; border-bottom:3px solid var(--border); }
+  .compare-table th:nth-child(2){ color:#8B6000; background:var(--light-yellow); }
+  .compare-table th:nth-child(3){ color:#1a6b2e; background:var(--light-green); }
+  .compare-table td { padding:12px 14px; border-bottom:2px dashed #EEE6DC; font-weight:600; color:var(--text2); vertical-align:top; }
+  .compare-table td:first-child { font-weight:800; color:var(--text); font-size:13px; }
+  .compare-table tr:last-child td { border-bottom:none; }
+  .compare-table tr:nth-child(even) td { background:#FAFAF7; }
+
+  /* FLASHCARD */
+  .fc-area { perspective:1200px; cursor:pointer; margin-bottom:14px; }
+  .flashcard { width:100%; min-height:210px; position:relative; transform-style:preserve-3d; transition:transform 0.5s cubic-bezier(0.34,1.2,0.64,1); }
+  .flashcard.flipped { transform:rotateY(180deg); }
+  .fc-front, .fc-back {
+    position:absolute; inset:0; border-radius:22px; padding:28px;
+    backface-visibility:hidden; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center;
+    box-shadow:var(--shadow-lg); border:3px solid;
+  }
+  .fc-front { background:linear-gradient(135deg,#FFF8E0,#FFF0C0); border-color:#FFD040; }
+  .fc-back  { transform:rotateY(180deg); background:linear-gradient(135deg,#E0F5FF,#C0E8FF); border-color:#60B8FF; }
+  .fc-hint  { font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:10px; }
+  .fc-emoji { font-size:40px; margin-bottom:8px; }
+  .fc-term  { font-family:'Fredoka One',cursive; font-size:24px; color:var(--text); line-height:1.3; }
+  .fc-def   { font-size:14px; color:var(--text2); line-height:1.7; font-weight:600; }
+  .fc-nav   { display:flex; gap:12px; align-items:center; justify-content:center; margin-top:6px; }
+  .fc-btn {
+    font-family:'Nunito',sans-serif; font-size:13px; font-weight:800;
+    padding:9px 22px; border:2.5px solid var(--border); background:var(--white);
+    color:var(--text); border-radius:50px; cursor:pointer; transition:all 0.2s;
+    box-shadow:0 3px 0 #DDD0C0;
+  }
+  .fc-btn:hover { transform:translateY(-2px); box-shadow:0 5px 0 #DDD0C0; }
+  .fc-counter { font-size:14px; font-weight:800; color:var(--muted); min-width:55px; text-align:center; }
+
+  /* QUIZ */
+  .quiz-progress-row { display:flex; align-items:center; gap:12px; margin-bottom:18px; }
+  .progress-bar-wrap { flex:1; height:12px; background:#F0E8DC; border-radius:6px; overflow:hidden; border:2px solid var(--border); }
+  .progress-bar { height:100%; background:linear-gradient(90deg,var(--pink),var(--purple)); border-radius:6px; transition:width 0.5s cubic-bezier(0.34,1.2,0.64,1); }
+  .q-counter-lbl { font-size:13px; font-weight:800; color:var(--text2); white-space:nowrap; }
+  .score-lbl { font-size:13px; font-weight:800; color:var(--pink); white-space:nowrap; }
+
+  .quiz-card { background:var(--white); border-radius:22px; padding:26px; box-shadow:var(--shadow-lg); border:3px solid #FFCCE0; }
+  .q-tag { font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; color:var(--pink); margin-bottom:8px; }
+  .q-text { font-family:'Fredoka One',cursive; font-size:21px; line-height:1.4; color:var(--text); margin-bottom:20px; }
+
+  .options-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  @media(max-width:540px){ .options-grid{grid-template-columns:1fr} }
+
+  .option-btn {
+    background:var(--bg); border:2.5px solid var(--border); border-radius:14px;
+    padding:13px 14px; text-align:left; color:var(--text);
+    font-family:'Nunito',sans-serif; font-size:14px; font-weight:700;
+    cursor:pointer; transition:all 0.2s; display:flex; align-items:center; gap:9px;
+    box-shadow:0 3px 0 #DDD0C0;
+  }
+  .option-btn:hover:not(:disabled) { border-color:var(--pink); background:var(--light-pink); transform:translateY(-2px); box-shadow:0 5px 0 #DDD0C0; }
+  .option-btn:active:not(:disabled) { transform:translateY(1px); box-shadow:0 2px 0 #DDD0C0; }
+  .option-btn.correct { border-color:#2DC653; background:var(--light-green); color:#1a6b2e; box-shadow:0 3px 0 #90D8A0; }
+  .option-btn.wrong   { border-color:#FF3B3B; background:var(--light-pink);  color:#99003a; box-shadow:0 3px 0 #FFAAAA; }
+  .opt-letter {
+    font-family:'Fredoka One',cursive; font-size:14px; width:26px; height:26px;
+    border-radius:7px; background:var(--border); display:flex; align-items:center;
+    justify-content:center; flex-shrink:0; color:var(--text2);
+  }
+  .option-btn.correct .opt-letter { background:#2DC653; color:#fff; }
+  .option-btn.wrong   .opt-letter { background:#FF3B3B; color:#fff; }
+
+  .feedback-msg {
+    margin-top:14px; padding:13px 16px; border-radius:13px;
+    font-size:14px; font-weight:700; display:none; line-height:1.6; border:2.5px solid;
+  }
+  .feedback-msg.show { display:block; animation:popIn 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+  .feedback-msg.correct-fb { background:var(--light-green); border-color:#5DD678; color:#1a6b2e; }
+  .feedback-msg.wrong-fb   { background:var(--light-pink);  border-color:#FF80A8; color:#99003a; }
+
+  .quiz-actions { margin-top:16px; display:flex; gap:12px; align-items:center; }
+  .btn-next {
+    font-family:'Nunito',sans-serif; font-size:14px; font-weight:800;
+    padding:11px 26px; border-radius:50px; background:var(--pink);
+    color:#fff; border:none; cursor:pointer; box-shadow:0 4px 0 #CC2060; transition:all 0.2s; display:none;
+  }
+  .btn-next:hover { transform:translateY(-2px); box-shadow:0 6px 0 #CC2060; }
+  .btn-restart {
+    font-family:'Nunito',sans-serif; font-size:13px; font-weight:800;
+    padding:9px 20px; border-radius:50px; background:var(--white);
+    color:var(--text2); border:2.5px solid var(--border); cursor:pointer; transition:all 0.2s;
+  }
+  .btn-restart:hover { border-color:#CCC; color:var(--text); }
+
+  /* RESULTS */
+  .results-card { background:var(--white); border-radius:26px; padding:44px 28px; text-align:center; box-shadow:var(--shadow-lg); border:3px solid #FFCCE0; }
+  .trophy { font-size:68px; animation:bounce 1s ease infinite; display:block; margin-bottom:10px; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  .results-score { font-family:'Fredoka One',cursive; font-size:68px; line-height:1; margin-bottom:6px; }
+  .results-pct { font-size:15px; font-weight:700; color:var(--muted); margin-bottom:12px; }
+  .results-msg { font-family:'Fredoka One',cursive; font-size:22px; margin-bottom:26px; }
+  .btn-retry {
+    font-family:'Nunito',sans-serif; font-size:15px; font-weight:800;
+    padding:13px 34px; border-radius:50px; background:var(--pink);
+    color:#fff; border:none; cursor:pointer; box-shadow:0 5px 0 #CC2060; transition:all 0.2s;
+  }
+  .btn-retry:hover { transform:translateY(-2px); box-shadow:0 7px 0 #CC2060; }
+
+  /* TIP LIST */
+  .tip-list { list-style:none; }
+  .tip-list li { display:flex; gap:10px; align-items:flex-start; padding:11px 0; border-bottom:2px dashed #EEE6DC; font-size:15px; font-weight:600; color:var(--text2); line-height:1.5; }
+  .tip-list li:last-child { border-bottom:none; }
+  .tip-num { background:var(--light-pink); color:var(--pink); font-family:'Fredoka One',cursive; font-size:14px; width:26px; height:26px; border-radius:7px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .tip-num.green { background:var(--light-green); color:var(--green); }
+
+  .divider { height:2px; background:#EEE6DC; border-radius:2px; margin:20px 0; }
+  .spacer { height:60px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🔬 Science!</div>
+  <div class="header-center">
+    <div class="header-title">Light &amp; Sound</div>
+    <div class="logo-sub">Grade Science Reviewer</div>
+  </div>
+  <div>
+    <span class="float-emoji" style="animation-delay:0s">⭐</span>
+    <span class="float-emoji" style="animation-delay:0.4s">🌟</span>
+    <span class="float-emoji" style="animation-delay:0.8s">✨</span>
+  </div>
+</header>
+
+<nav class="nav-tabs">
+  <button class="tab-btn t-light"   onclick="showSection('light',this)">💡 Light</button>
+  <button class="tab-btn t-sound"   onclick="showSection('sound',this)">🔊 Sound</button>
+  <button class="tab-btn t-flash"   onclick="showSection('flashcards',this)">🃏 Flashcards</button>
+  <button class="tab-btn t-compare" onclick="showSection('compare',this)">⚖️ Compare</button>
+  <button class="tab-btn t-quiz"    onclick="showSection('quiz',this)">✏️ Quiz</button>
+</nav>
+
+<main>
+
+<!-- ===== LIGHT ===== -->
+<div id="light" class="section active">
+  <div class="section-header sh-light">
+    <span class="section-emoji">💡</span>
+    <div class="section-title">Properties of Light</div>
+    <div class="section-sub">Reflection, refraction, dispersion &amp; more!</div>
+  </div>
+
+  <div class="card yellow">
+    <div class="card-title"><span class="ct-yellow">✨</span> What is Light?</div>
+    <div class="card-body">
+      <div class="info-row"><span class="info-icon">📖</span><div><span class="info-label">Definition: </span><span class="info-value">A <strong>form of energy</strong> that allows us to see objects!</span></div></div>
+      <div class="info-row"><span class="info-icon">📏</span><div><span class="info-label">Travel: </span><span class="info-value">Moves in a <strong>straight line</strong> and can travel through empty space (vacuum)</span></div></div>
+      <div class="info-row"><span class="info-icon">🚀</span><div><span class="info-label">Speed: </span><span class="info-value"><span class="pill pill-yellow">300,000 km per second!</span> That's super fast!</span></div></div>
+    </div>
+  </div>
+
+  <div class="concept-grid">
+    <div class="card yellow" style="margin-bottom:0">
+      <div class="card-title"><span style="font-size:24px">🪞</span> <span class="ct-yellow">1. Reflection</span></div>
+      <div class="card-body">
+        The <strong>bouncing of light off a surface</strong>.<br><br>
+        🔑 Angle of reflection = angle of incidence
+        <div style="margin-top:10px">
+          <span class="pill pill-yellow">Mirrors</span>
+          <span class="pill pill-yellow">Shiny metal</span>
+          <span class="pill pill-yellow">Water</span>
+        </div>
+      </div>
+    </div>
+    <div class="card blue" style="margin-bottom:0">
+      <div class="card-title"><span style="font-size:24px">🌊</span> <span class="ct-blue">2. Refraction</span></div>
+      <div class="card-body">
+        The <strong>bending of light</strong> when it moves from one medium to another. Light changes <strong>speed!</strong>
+        <div style="margin-top:10px">
+          <span class="pill pill-blue">Air → Water</span>
+          <span class="pill pill-blue">Coin looks closer in water</span>
+        </div>
+      </div>
+    </div>
+    <div class="card pink" style="margin-bottom:0">
+      <div class="card-title"><span style="font-size:24px">🌈</span> <span class="ct-pink">3. Dispersion</span></div>
+      <div class="card-body">
+        White light <strong>separates into colors</strong> like a rainbow!<br><br>
+        <strong>ROYGBIV:</strong>
+        <div class="rainbow-row">
+          <span class="rb" style="background:#FF4444;color:#fff">R</span>
+          <span class="rb" style="background:#FF8C00;color:#fff">O</span>
+          <span class="rb" style="background:#FFD700;color:#000">Y</span>
+          <span class="rb" style="background:#3CB371;color:#fff">G</span>
+          <span class="rb" style="background:#1E90FF;color:#fff">B</span>
+          <span class="rb" style="background:#4B0082;color:#fff">I</span>
+          <span class="rb" style="background:#8B00FF;color:#fff">V</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card green">
+    <div class="card-title"><span class="ct-green">🔍</span> Materials &amp; Light</div>
+    <div class="card-body">
+      <div class="info-row"><span class="info-icon">🪟</span><div><span class="info-label">Transparent </span><span class="info-value">Lets <strong>ALL</strong> light pass — clear glass, clean water</span></div></div>
+      <div class="info-row"><span class="info-icon">🧊</span><div><span class="info-label">Translucent </span><span class="info-value">Lets <strong>SOME</strong> light pass — wax paper, frosted glass</span></div></div>
+      <div class="info-row"><span class="info-icon">🧱</span><div><span class="info-label">Opaque </span><span class="info-value"><strong>BLOCKS</strong> all light — wood, metal, walls</span></div></div>
+    </div>
+  </div>
+
+  <div class="card purple">
+    <div class="card-title"><span class="ct-purple">🎨</span> Colors of Light</div>
+    <div class="card-body">
+      <div class="info-row"><span class="info-icon">🔴🟢🔵</span><div><span class="info-label">Primary: </span><span class="info-value"><strong style="color:#FF4444">Red</strong> + <strong style="color:#2DC653">Green</strong> + <strong style="color:#0088FF">Blue</strong></span></div></div>
+      <div class="info-row"><span class="info-icon">⚪</span><div><span class="info-label">Combined: </span><span class="info-value">All three together = <strong>White Light!</strong></span></div></div>
+    </div>
+  </div>
+
+  <div class="card orange">
+    <div class="card-title"><span style="font-size:22px">😎</span> Protecting Your Eyes</div>
+    <div class="card-body">
+      <ul class="tip-list">
+        <li><span class="tip-num">1</span> Do not look directly at the sun</li>
+        <li><span class="tip-num">2</span> Wear sunglasses in bright sunlight</li>
+        <li><span class="tip-num">3</span> Keep distance from TV and phone screens</li>
+        <li><span class="tip-num">4</span> Take breaks when using computers</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SOUND ===== -->
+<div id="sound" class="section">
+  <div class="section-header sh-sound">
+    <span class="section-emoji">🔊</span>
+    <div class="section-title">Properties of Sound</div>
+    <div class="section-sub">Vibration, pitch, frequency, and loudness!</div>
+  </div>
+
+  <div class="card green">
+    <div class="card-title"><span class="ct-green">🎵</span> What is Sound?</div>
+    <div class="card-body">
+      <div class="info-row"><span class="info-icon">📖</span><div><span class="info-label">Definition: </span><span class="info-value">Energy produced by <strong>vibrating objects!</strong></span></div></div>
+      <div class="info-row"><span class="info-icon">〰️</span><div><span class="info-label">Vibration: </span><span class="info-value">Back-and-forth movement of an object</span></div></div>
+      <div class="info-row"><span class="info-icon">🌍</span><div><span class="info-label">Travels through: </span><span class="info-value"><span class="pill pill-green">Solid</span><span class="pill pill-blue">Liquid</span><span class="pill pill-orange">Gas (air)</span></span></div></div>
+    </div>
+  </div>
+
+  <div class="card blue">
+    <div class="card-title"><span class="ct-blue">⚡</span> Speed of Sound</div>
+    <div class="card-body">
+      <div class="info-row"><span class="info-icon">🥇</span><div><span class="info-label">Fastest: </span><span class="info-value"><strong>Solid</strong> — like metal rails!</span></div></div>
+      <div class="info-row"><span class="info-icon">🥈</span><div><span class="info-label">Medium: </span><span class="info-value"><strong>Liquid</strong> — like water</span></div></div>
+      <div class="info-row"><span class="info-icon">🥉</span><div><span class="info-label">Slowest: </span><span class="info-value"><strong>Gas</strong> — like air</span></div></div>
+    </div>
+  </div>
+
+  <div class="concept-grid">
+    <div class="card yellow" style="margin-bottom:0">
+      <div class="card-title"><span style="font-size:22px">🎶</span> <span class="ct-yellow">Pitch</span></div>
+      <div class="card-body">
+        How <strong>high or low</strong> a sound is. Depends on <strong>frequency!</strong><br><br>
+        📈 High frequency → <strong>High pitch</strong><br>
+        📉 Low frequency → <strong>Low pitch</strong>
+      </div>
+    </div>
+    <div class="card pink" style="margin-bottom:0">
+      <div class="card-title"><span style="font-size:22px">〰️</span> <span class="ct-pink">Frequency</span></div>
+      <div class="card-body">
+        Number of sound waves per second.<br>
+        Measured in <strong>Hertz (Hz)!</strong><br><br>
+        <span class="pill pill-blue">Infrasonic: 0–20 Hz</span><br>
+        <span class="pill pill-green">Sonic: 20–20,000 Hz</span><br>
+        <span class="pill pill-purple">Ultrasonic: &gt;20,000 Hz</span>
+      </div>
+    </div>
+    <div class="card purple" style="margin-bottom:0">
+      <div class="card-title"><span style="font-size:22px">📢</span> <span class="ct-purple">Loudness</span></div>
+      <div class="card-body">
+        How <strong>strong or soft</strong> a sound is.<br>
+        Depends on <strong>amplitude.</strong><br>
+        Measured in <strong>decibels (dB)!</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card yellow">
+    <div class="card-title"><span class="ct-yellow">👂</span> Types of Sound by Frequency</div>
+    <div class="card-body">
+      <div class="info-row"><span class="info-icon">🐋</span><div><span class="info-label">Infrasonic </span><span class="info-value"><strong>0–20 Hz</strong> — Too low for humans. Example: whale sounds</span></div></div>
+      <div class="info-row"><span class="info-icon">🗣️</span><div><span class="info-label">Sonic </span><span class="info-value"><strong>20–20,000 Hz</strong> — Normal human hearing. Example: talking!</span></div></div>
+      <div class="info-row"><span class="info-icon">🐕</span><div><span class="info-label">Ultrasonic </span><span class="info-value"><strong>Above 20,000 Hz</strong> — Too high for humans. Example: dog whistles!</span></div></div>
+    </div>
+  </div>
+
+  <div class="card orange">
+    <div class="card-title"><span style="font-size:22px">📊</span> Loudness Scale (dB)</div>
+    <div class="card-body" style="padding-top:8px">
+      <div class="loud-row"><span class="loud-label">0–30 dB</span><div class="loud-bar-wrap"><div class="loud-bar" style="width:15%;background:#60B8FF"></div></div><span class="loud-desc" style="color:#004d99">🤫 Very quiet</span></div>
+      <div class="loud-row"><span class="loud-label">31–50 dB</span><div class="loud-bar-wrap"><div class="loud-bar" style="width:30%;background:#5DD678"></div></div><span class="loud-desc" style="color:#1a6b2e">🌿 Quiet</span></div>
+      <div class="loud-row"><span class="loud-label">51–70 dB</span><div class="loud-bar-wrap"><div class="loud-bar" style="width:50%;background:#FFB800"></div></div><span class="loud-desc" style="color:#8B6000">💬 Normal</span></div>
+      <div class="loud-row"><span class="loud-label">71–90 dB</span><div class="loud-bar-wrap"><div class="loud-bar" style="width:70%;background:#FF7A00"></div></div><span class="loud-desc" style="color:#7a3800">📣 Loud</span></div>
+      <div class="loud-row"><span class="loud-label">91–110 dB</span><div class="loud-bar-wrap"><div class="loud-bar" style="width:85%;background:#FF4D8D"></div></div><span class="loud-desc" style="color:#99003a">😬 Very loud</span></div>
+      <div class="loud-row"><span class="loud-label">111+ dB</span><div class="loud-bar-wrap"><div class="loud-bar" style="width:100%;background:#FF3B3B"></div></div><span class="loud-desc" style="color:#FF3B3B">💥 Painful!</span></div>
+    </div>
+  </div>
+
+  <div class="card pink">
+    <div class="card-title"><span style="font-size:22px">🛡️</span> Protecting Your Hearing</div>
+    <div class="card-body">
+      <ul class="tip-list">
+        <li><span class="tip-num green">1</span> Cover your ears during very loud noise</li>
+        <li><span class="tip-num green">2</span> Avoid listening to headphones at full volume</li>
+        <li><span class="tip-num green">3</span> Use ear muffs or ear protection</li>
+        <li><span class="tip-num green">4</span> Stay away from very noisy places</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FLASHCARDS ===== -->
+<div id="flashcards" class="section">
+  <div class="section-header sh-blue">
+    <span class="section-emoji">🃏</span>
+    <div class="section-title">Flashcards</div>
+    <div class="section-sub">Click the card to flip it and see the answer!</div>
+  </div>
+
+  <div class="fc-area" onclick="flipCard()">
+    <div class="flashcard" id="flashcard">
+      <div class="fc-front">
+        <div class="fc-hint">👆 Tap to flip!</div>
+        <div class="fc-emoji" id="fc-emoji">❓</div>
+        <div class="fc-term" id="fc-term">Loading...</div>
+      </div>
+      <div class="fc-back">
+        <div class="fc-hint">💡 Answer</div>
+        <div class="fc-def" id="fc-def">Loading...</div>
+      </div>
+    </div>
+  </div>
+  <div style="height:215px"></div>
+
+  <div class="fc-nav">
+    <button class="fc-btn" onclick="prevCard()">← Back</button>
+    <span class="fc-counter" id="fc-counter">1 / 15</span>
+    <button class="fc-btn" onclick="nextCard()">Next →</button>
+  </div>
+</div>
+
+<!-- ===== COMPARE ===== -->
+<div id="compare" class="section">
+  <div class="section-header sh-purple">
+    <span class="section-emoji">⚖️</span>
+    <div class="section-title">Light vs Sound</div>
+    <div class="section-sub">How are they different?</div>
+  </div>
+
+  <div class="card" style="padding:0;overflow:hidden;border-color:#A07AEE">
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="background:#F5F0FF;color:var(--text)">Feature</th>
+            <th>💡 Light</th>
+            <th>🔊 Sound</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Travel path</td><td>Straight lines</td><td>As waves</td></tr>
+          <tr><td>Needs a medium?</td><td>❌ No!</td><td>✅ Yes!</td></tr>
+          <tr><td>In vacuum?</td><td>✅ Can travel!</td><td>❌ Cannot travel!</td></tr>
+          <tr><td>Speed</td><td>300,000 km/s 🚀</td><td>~343 m/s (slower)</td></tr>
+          <tr><td>Properties</td><td>Reflection, Refraction, Dispersion</td><td>Pitch, Loudness, Frequency</td></tr>
+          <tr><td>Measured by</td><td>Wavelength / nm</td><td>Hz &amp; dB</td></tr>
+          <tr><td>Protection</td><td>Sunglasses 😎</td><td>Ear muffs 🎧</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div id="quiz" class="section">
+  <div class="section-header sh-pink">
+    <span class="section-emoji">✏️</span>
+    <div class="section-title">Quiz Time!</div>
+    <div class="section-sub">FA #3 review — Parts I &amp; II! 🌟</div>
+  </div>
+
+  <div class="quiz-progress-row">
+    <span class="q-counter-lbl" id="q-counter">Q 1 / 15</span>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
+    <span class="score-lbl" id="score-label">⭐ 0</span>
+  </div>
+
+  <div id="quiz-area">
+    <div class="quiz-card">
+      <div class="q-tag" id="q-tag">Question 1 of 15</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="options-grid" id="options-grid"></div>
+      <div class="feedback-msg" id="feedback-msg"></div>
+    </div>
+    <div class="quiz-actions">
+      <button class="btn-next" id="btn-next" onclick="nextQuestion()">Next Question →</button>
+      <button class="btn-restart" onclick="restartQuiz()">↺ Start Over</button>
+    </div>
+  </div>
+
+  <div id="results-area" style="display:none">
+    <div class="results-card">
+      <span class="trophy" id="trophy-emoji">🏆</span>
+      <div class="results-score" id="final-score">0/15</div>
+      <div class="results-pct" id="results-pct"></div>
+      <div class="results-msg" id="results-msg"></div>
+      <button class="btn-retry" onclick="restartQuiz()">🔄 Try Again!</button>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+</main>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (id === 'quiz' && !quizStarted) startQuiz();
+}
+
+// FLASHCARDS
+const cards = [
+  { term:"What is Light?", emoji:"💡", def:"A form of energy that allows us to see objects. Travels in a straight line and can travel through empty space (vacuum)." },
+  { term:"Reflection", emoji:"🪞", def:"The bouncing of light off a surface. The angle of reflection equals the angle of incidence. Example: mirrors!" },
+  { term:"Refraction", emoji:"🌊", def:"The bending of light when it passes from one medium to another. Light changes speed when entering a different material." },
+  { term:"Dispersion", emoji:"🌈", def:"When white light separates into different colors. Example: a rainbow — ROYGBIV!" },
+  { term:"Transparent", emoji:"🪟", def:"Allows ALL light to pass completely through. Examples: clear glass, clean water." },
+  { term:"Translucent", emoji:"🧊", def:"Allows SOME light to pass through. Examples: wax paper, frosted glass." },
+  { term:"Opaque", emoji:"🧱", def:"BLOCKS light completely. Examples: wood, metal, walls." },
+  { term:"Primary Colors of Light", emoji:"🎨", def:"Red, Green, and Blue (RGB). When all three are combined, they produce white light!" },
+  { term:"What is Sound?", emoji:"🔊", def:"A form of energy produced by vibrating objects. It travels through media: solid, liquid, and gas." },
+  { term:"Pitch", emoji:"🎵", def:"How high or low a sound is. It depends on frequency. High frequency = high pitch, low frequency = low pitch." },
+  { term:"Frequency", emoji:"〰️", def:"The number of sound waves per second. Measured in Hertz (Hz)." },
+  { term:"Loudness", emoji:"📢", def:"How strong or soft a sound is. Depends on amplitude. Measured in decibels (dB)." },
+  { term:"Infrasonic", emoji:"🐋", def:"Sound with frequency 0–20 Hz. Too low for humans to hear. Example: whale sounds." },
+  { term:"Sonic", emoji:"🗣️", def:"Sound with frequency 20–20,000 Hz. Normal range humans can hear. Example: talking!" },
+  { term:"Ultrasonic", emoji:"🐕", def:"Sound with frequency above 20,000 Hz. Too high for humans to hear. Example: dog whistles!" },
+];
+let fcIndex = 0;
+function renderCard() {
+  const c = cards[fcIndex];
+  document.getElementById('fc-term').textContent = c.term;
+  document.getElementById('fc-def').textContent = c.def;
+  document.getElementById('fc-emoji').textContent = c.emoji;
+  document.getElementById('fc-counter').textContent = `${fcIndex+1} / ${cards.length}`;
+  document.getElementById('flashcard').classList.remove('flipped');
+}
+function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
+function nextCard() { fcIndex = (fcIndex+1) % cards.length; renderCard(); }
+function prevCard() { fcIndex = (fcIndex-1+cards.length) % cards.length; renderCard(); }
+renderCard();
+
+// QUIZ — based on FA #3 Light and Sound (PAREF Northfield Science 4)
+// Part I: Identification (word bank: Pitch, decibel, Reflection, Volume, Dispersion, Sonic, Refraction, Transparent, Translucent, Opaque, Sound, infrasonic)
+// Part II: Enumeration (ways to protect from light & sound)
+const questions = [
+  // --- Part I: Identification as multiple choice ---
+  {
+    q: "1. It is the bending of light, which happens when light travels from one medium to another.",
+    opts: ["Reflection","Refraction","Dispersion","Translucent"],
+    ans: 1,
+    exp: "✅ REFRACTION! It is the bending of light when it travels from one medium to another — like light going from air into water."
+  },
+  {
+    q: "2. This refers to the loudness and softness of sound.",
+    opts: ["Pitch","Decibel","Volume","Sonic"],
+    ans: 2,
+    exp: "✅ VOLUME! Volume refers to how loud or soft a sound is."
+  },
+  {
+    q: "3. It is a material that does NOT allow light to pass through.",
+    opts: ["Transparent","Translucent","Opaque","Reflective"],
+    ans: 2,
+    exp: "✅ OPAQUE! Opaque materials block all light completely — like wood, metal, and walls."
+  },
+  {
+    q: "4. It is a material that allows SOME light to pass through.",
+    opts: ["Transparent","Translucent","Opaque","Reflective"],
+    ans: 1,
+    exp: "✅ TRANSLUCENT! Translucent materials let some light pass through — like wax paper or frosted glass."
+  },
+  {
+    q: "5. It is when light strikes a smooth surface and bounces off that surface.",
+    opts: ["Refraction","Dispersion","Reflection","Absorption"],
+    ans: 2,
+    exp: "✅ REFLECTION! Reflection is when light bounces off a smooth surface. The angle of reflection equals the angle of incidence!"
+  },
+  {
+    q: "6. It is the rate at which the vibrations of a sound move.",
+    opts: ["Volume","Decibel","Pitch","Sonic"],
+    ans: 2,
+    exp: "✅ PITCH! Pitch is determined by the rate (frequency) at which vibrations move — higher frequency means higher pitch!"
+  },
+  {
+    q: "7. It is a very low sound that is almost not heard, but can be felt by vibration.",
+    opts: ["Sonic","Ultrasonic","Infrasonic","Decibel"],
+    ans: 2,
+    exp: "✅ INFRASONIC! Infrasonic sounds have very low frequency (0–20 Hz) — too low for humans to hear, but you can feel the vibration! Example: whale sounds."
+  },
+  {
+    q: "8. It is the unit used to measure sound.",
+    opts: ["Hertz","Pitch","Decibel","Volume"],
+    ans: 2,
+    exp: "✅ DECIBEL (dB)! The decibel is the unit used to measure the loudness of sound."
+  },
+  {
+    q: "9. It is produced by vibrating objects.",
+    opts: ["Light","Pitch","Dispersion","Sound"],
+    ans: 3,
+    exp: "✅ SOUND! Sound is a form of energy produced by vibrating objects. The back-and-forth movement creates sound waves!"
+  },
+  {
+    q: "10. It is the normal sound we hear.",
+    opts: ["Infrasonic","Ultrasonic","Sonic","Decibel"],
+    ans: 2,
+    exp: "✅ SONIC! Sonic sounds are in the range of 20–20,000 Hz — the normal range that humans can hear. Example: talking!"
+  },
+  {
+    q: "11. It is a material that allows light to pass through easily.",
+    opts: ["Opaque","Translucent","Transparent","Reflective"],
+    ans: 2,
+    exp: "✅ TRANSPARENT! Transparent materials allow all light to pass through easily — like clear glass and clean water."
+  },
+  {
+    q: "12. It is the result when light is reflected in varying angles.",
+    opts: ["Refraction","Reflection","Dispersion","Sonic"],
+    ans: 2,
+    exp: "✅ DISPERSION! Dispersion happens when light is reflected at varying angles, separating white light into different colors — like a rainbow (ROYGBIV)!"
+  },
+  // --- Part II: Enumeration as multiple choice ---
+  {
+    q: "13–16. Which of the following is a way to protect yourself from too much exposure to LIGHT?",
+    opts: [
+      "Cover your ears when it is noisy",
+      "Avoid looking directly at the sun",
+      "Listen to music at full volume",
+      "Stay near very bright machines"
+    ],
+    ans: 1,
+    exp: "✅ Avoid looking directly at the sun! Other ways: wear sunglasses, keep distance from screens, and take breaks from computers."
+  },
+  {
+    q: "17–20. Which of the following is a way to protect yourself from LOUD SOUNDS?",
+    opts: [
+      "Stand next to a speaker at a concert",
+      "Listen to headphones at full volume",
+      "Use ear muffs or ear protection",
+      "Spend more time in noisy places"
+    ],
+    ans: 2,
+    exp: "✅ Use ear muffs or ear protection! Other ways: cover ears during loud noise, avoid headphones at full volume, and stay away from very noisy places."
+  },
+];
+
+let quizStarted=false, qIndex=0, score=0, answered=false;
+
+function startQuiz() {
+  quizStarted=true; qIndex=0; score=0; answered=false;
+  for(let i=questions.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[questions[i],questions[j]]=[questions[j],questions[i]];}
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[qIndex];
+  document.getElementById('quiz-area').style.display='block';
+  document.getElementById('results-area').style.display='none';
+  document.getElementById('q-tag').textContent=`Question ${qIndex+1} of ${questions.length}`;
+  document.getElementById('q-text').textContent=q.q;
+  document.getElementById('q-counter').textContent=`Q ${qIndex+1} / ${questions.length}`;
+  document.getElementById('progress-bar').style.width=`${(qIndex/questions.length)*100}%`;
+  document.getElementById('score-label').textContent=`⭐ ${score}`;
+  const fb=document.getElementById('feedback-msg');
+  fb.className='feedback-msg'; fb.style.display='none';
+  document.getElementById('btn-next').style.display='none';
+  answered=false;
+  const grid=document.getElementById('options-grid');
+  grid.innerHTML='';
+  ['A','B','C','D'].forEach((letter,i)=>{
+    const btn=document.createElement('button');
+    btn.className='option-btn';
+    btn.innerHTML=`<span class="opt-letter">${letter}</span>${q.opts[i]}`;
+    btn.onclick=()=>selectAnswer(i,q.ans,q.exp);
+    grid.appendChild(btn);
+  });
+}
+
+function selectAnswer(chosen,correct,exp){
+  if(answered)return; answered=true;
+  document.querySelectorAll('.option-btn').forEach((btn,i)=>{
+    btn.disabled=true;
+    if(i===correct) btn.classList.add('correct');
+    else if(i===chosen) btn.classList.add('wrong');
+  });
+  if(chosen===correct) score++;
+  const fb=document.getElementById('feedback-msg');
+  fb.className=`feedback-msg ${chosen===correct?'correct-fb':'wrong-fb'} show`;
+  fb.style.display='block';
+  fb.innerHTML=chosen===correct
+    ?`🎉 <strong>Great job!</strong> ${exp}`
+    :`😅 <strong>Not quite!</strong> ${exp}`;
+  document.getElementById('score-label').textContent=`⭐ ${score}`;
+  document.getElementById('btn-next').style.display='inline-block';
+}
+
+function nextQuestion(){
+  qIndex++;
+  if(qIndex<questions.length) renderQuestion();
+  else showResults();
+}
+
+function showResults(){
+  document.getElementById('quiz-area').style.display='none';
+  document.getElementById('results-area').style.display='block';
+  const pct=Math.round((score/questions.length)*100);
+  document.getElementById('final-score').textContent=`${score}/${questions.length}`;
+  document.getElementById('results-pct').textContent=`${pct}% correct!`;
+  document.getElementById('progress-bar').style.width='100%';
+  let emoji,msg,color;
+  if(pct===100){emoji='🏆';msg="Perfect! You're a superstar! 🌟";color='#FFB800';}
+  else if(pct>=80){emoji='🥇';msg='Excellent work! Almost there!';color='#2DC653';}
+  else if(pct>=60){emoji='🥈';msg='Good job! Keep reviewing!';color='#0088FF';}
+  else{emoji='📚';msg='Keep studying! You can do it!';color='#FF4D8D';}
+  document.getElementById('trophy-emoji').textContent=emoji;
+  const m=document.getElementById('results-msg');
+  m.textContent=msg; m.style.color=color;
+}
+
+function restartQuiz(){ quizStarted=false; startQuiz(); }
+</script>
+</body>
+</html>
