@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hong Kong Family Trip 2026</title>
+
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  background: #f5f7fb;
+  color: #222;
+}
+
+header {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  overflow-x: auto;
+  background: white;
+  border-bottom: 1px solid #ddd;
+}
+
+nav button {
+  flex: none;
+  padding: 12px 16px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+nav button.active {
+  border-bottom: 3px solid #4facfe;
+  font-weight: bold;
+}
+
+.container {
+  padding: 16px;
+}
+
+.day {
+  display: none;
+}
+
+.day.active {
+  display: block;
+}
+
+.card {
+  background: white;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.time {
+  font-weight: bold;
+  color: #4facfe;
+}
+
+.tip {
+  background: #fff7d6;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🇭🇰 Hong Kong Family Trip</h1>
+  <p>6D5N Itinerary (Family with Kids)</p>
+</header>
+
+<nav id="tabs"></nav>
+
+<div class="container" id="content"></div>
+
+<script>
+
+const itinerary = [
+
+{
+title: "Day 1 – Arrival",
+items: [
+"12:30 PM – Arrive at airport",
+"Buy Octopus Card + food/snacks",
+"1:30–2:00 PM – Taxi to Disney Explorers Lodge",
+"3:00 PM – Check-in & rest",
+"4:30–6:30 PM – Explore hotel (garden, playground)",
+"5:00 PM – Dinner",
+"Early sleep"
+]
+},
+
+{
+title: "Day 2 – Disneyland",
+items: [
+"8:30 AM – Breakfast",
+"9:30 AM – Shuttle to park",
+"10:30 AM – Park opens",
+"Morning: Frozen + Mystic Manor",
+"Afternoon: Shows + rest",
+"Night: Momentous show",
+"Back to hotel"
+]
+},
+
+{
+title: "Day 3 – Disneyland + Transfer",
+items: [
+"Morning: Disneyland",
+"4:00 PM – Exit park",
+"5:00 PM – Taxi to BP International",
+"6:00 PM – Check-in",
+"Evening: Walk around Jordan + dinner"
+]
+},
+
+{
+title: "Day 4 – Peak + Harbour",
+items: [
+"8:15 AM – Leave hotel",
+"9:00 AM – Peak Tram",
+"9:30–11:00 AM – Victoria Peak",
+"11:30 AM – Lunch (Yat Lok)",
+"12:30 PM – Star Ferry",
+"1:30–5:30 PM – K11 (REST)",
+"6:45 PM – Harbour sunset",
+"8:00 PM – Symphony of Lights"
+]
+},
+
+{
+title: "Day 5 – Ngong Ping + Tai O",
+items: [
+"8:40 AM – MTR to Tung Chung",
+"10:00 AM – Cable car",
+"10:30 – Visit Big Buddha FIRST",
+"Po Lin Monastery rest",
+"Village snack break",
+"12:30 PM – Bus to Tai O",
+"Explore village",
+"Dinner at Citygate Outlets"
+]
+},
+
+{
+title: "Day 6 – Museum + Night Market",
+items: [
+"Morning: Science Museum",
+"Lunch: Dim Sum",
+"Mira Place shopping",
+"Rest",
+"Evening: Temple Street Night Market"
+]
+},
+
+{
+title: "Day 7 – Departure",
+items: [
+"Breakfast: Australian Dairy Company",
+"10:00 AM – Leave hotel",
+"1:40 PM – Flight"
+]
+}
+
+];
+
+const tabs = document.getElementById("tabs");
+const content = document.getElementById("content");
+
+function renderTabs() {
+  itinerary.forEach((day, i) => {
+    const btn = document.createElement("button");
+    btn.innerText = "Day " + (i+1);
+    btn.onclick = () => showDay(i);
+    if(i===0) btn.classList.add("active");
+    tabs.appendChild(btn);
+  });
+}
+
+function showDay(index) {
+  document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+  tabs.children[index].classList.add("active");
+
+  content.innerHTML = "";
+
+  const day = itinerary[index];
+
+  const title = document.createElement("h2");
+  title.innerText = day.title;
+  content.appendChild(title);
+
+  day.items.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerText = item;
+    content.appendChild(card);
+  });
+}
+
+renderTabs();
+showDay(0);
+
+</script>
+
+</body>
+</html>
