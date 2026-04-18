@@ -365,7 +365,134 @@
   .ess-card .ess-title { font-size: 0.88rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
   .ess-card .ess-text { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
 
-  /* Mobile tweaks */
+  /* TRANSPORT */
+  .transport-journey {
+    background: white;
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .journey-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .journey-header:hover { opacity: 0.9; }
+  .journey-day-badge {
+    background: rgba(255,255,255,0.25);
+    border-radius: 10px;
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .journey-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: white;
+    flex: 1;
+    line-height: 1.3;
+  }
+  .journey-toggle {
+    color: white;
+    font-size: 1rem;
+    opacity: 0.8;
+    transition: transform 0.25s;
+  }
+  .journey-toggle.open { transform: rotate(180deg); }
+  .journey-body {
+    display: none;
+    padding: 0 20px 18px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .journey-body.open { display: block; }
+
+  .step-list {
+    list-style: none;
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .step-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .step-num {
+    background: var(--navy);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-top: 1px;
+  }
+  .step-text {
+    font-size: 0.88rem;
+    color: #333;
+    line-height: 1.6;
+  }
+  .step-text strong { color: var(--navy); }
+  .step-text .fare {
+    display: inline-block;
+    background: #ECFDF5;
+    color: #065F46;
+    border-radius: 8px;
+    padding: 1px 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-left: 6px;
+  }
+  .step-text .duration {
+    display: inline-block;
+    background: #EFF6FF;
+    color: #1E40AF;
+    border-radius: 8px;
+    padding: 1px 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-left: 6px;
+  }
+  .step-text .warn {
+    display: inline-block;
+    background: #FEF3C7;
+    color: #92400E;
+    border-radius: 8px;
+    padding: 1px 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-left: 6px;
+  }
+  .transport-intro {
+    background: linear-gradient(135deg, #0D1B3E, #1a3a7a);
+    border-radius: 18px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 20px;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+  .transport-intro strong { color: var(--gold); }
+  .transport-section-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 24px 0 10px;
+  }
   @media (max-width: 600px) {
     .hero { padding: 40px 16px 60px; }
     .content { padding: 20px 12px 60px; }
@@ -399,6 +526,7 @@
     <div class="tab" onclick="showDay('day5')">Day 5</div>
     <div class="tab" onclick="showDay('day6')">Day 6</div>
     <div class="tab" onclick="showDay('day7')">Day 7</div>
+    <div class="tab" onclick="showDay('transport')">🚌 Transport</div>
     <div class="tab" onclick="showDay('essentials')">📌 Essentials</div>
   </div>
 </div>
@@ -1175,6 +1303,316 @@
     </div>
   </div>
 
+  <!-- TRANSPORT -->
+  <div class="day-section" id="transport">
+    <div class="day-header" style="background: linear-gradient(135deg, #0D3B6E, #1565C0);" data-emoji="🚌">
+      <div class="day-label">Step-by-Step Directions</div>
+      <h2>Transport Guide 🚌</h2>
+    </div>
+
+    <div class="transport-intro">
+      Every journey in your trip, from start to finish. Tap any route to expand the directions. <strong>Get an Octopus Card</strong> on Day 1 at the airport — it works on all MTR, buses, and the Star Ferry throughout the trip.
+    </div>
+
+    <div class="transport-section-label">Day 1 · Arrival</div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #1a3a7a, #2980b9);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 1</span>
+        <span class="journey-title">✈️ Airport → Disney Explorer's Lodge</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">Exit Arrivals Hall at <strong>Hong Kong International Airport</strong> (HKIA). Head to the <strong>Taxi Stand</strong> outside the terminal.</span></li>
+          <li><span class="step-num">2</span><span class="step-text">Join the taxi queue. Look for a <strong>red urban taxi</strong> or a <strong>green Lantau taxi</strong> — both can take you to Disneyland.</span></li>
+          <li><span class="step-num">3</span><span class="step-text">Tell the driver: <strong>"Disney Explorer's Lodge"</strong> or show: <em>迪士尼探索家度假酒店</em></span></li>
+          <li><span class="step-num">4</span><span class="step-text">The taxi will take the North Lantau Highway directly to the hotel. <span class="duration">~15–20 min</span> <span class="fare">~HKD 120–150</span></span></li>
+          <li><span class="step-num">5</span><span class="step-text">Pay by cash (HKD) or Octopus Card. <span class="warn">⚠️ Buy Octopus Card at the airport before leaving!</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-section-label">Day 2 & 3 · Disneyland</div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #4B2C8C, #8E44AD);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 2 & 3</span>
+        <span class="journey-title">🏰 Disney Explorer's Lodge → Disneyland Park</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">Walk from Disney Explorer's Lodge to the <strong>Disney Resort Shuttle Bus stop</strong> outside the hotel lobby.</span></li>
+          <li><span class="step-num">2</span><span class="step-text">Board the <strong>free Disney Resort shuttle</strong> to Hong Kong Disneyland main entrance. <span class="duration">~5–8 min</span> <span class="fare">Free</span></span></li>
+          <li><span class="step-num">3</span><span class="step-text">Alternatively, walk the scenic path from the resort to the park entrance. <span class="duration">~15 min walk</span></span></li>
+          <li><span class="step-num">4</span><span class="step-text">Show your tickets at the main gate. Download the <strong>HK Disneyland app</strong> for ride wait times and show schedules.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #4B2C8C, #8E44AD);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 3</span>
+        <span class="journey-title">🧳 Disney Explorer's Lodge → BP International (Jordan)</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">Collect luggage from the hotel front desk (stored since morning). Go to the taxi stand outside the hotel.</span></li>
+          <li><span class="step-num">2</span><span class="step-text">Take a <strong>red urban taxi</strong>. Show the driver: <strong>"BP International Hotel, Jordan"</strong> or <em>佐敦柏麗酒店</em></span></li>
+          <li><span class="step-num">3</span><span class="step-text">Route goes via <strong>Lantau Link / Tsing Ma Bridge</strong> through the tunnel into Kowloon. <span class="duration">~25–30 min</span> <span class="fare">~HKD 250–300</span></span></li>
+          <li><span class="step-num">4</span><span class="step-text"><span class="warn">⚠️ Note: Tunnel toll is extra (~HKD 45) — driver will add it to the fare.</span></span></li>
+          <li><span class="step-num">5</span><span class="step-text">Drop off at BP International, <strong>8 Austin Road, Jordan</strong>. Check in at the front desk.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-section-label">Day 4 · The Peak, Ferry & Harbour</div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #C0392B, #E74C3C);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 4</span>
+        <span class="journey-title">🏨 BP International → Peak Tram Station</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text"><strong>Option A — Taxi (Easiest):</strong> Hail a red taxi outside the hotel. Tell driver: <strong>"Peak Tram Lower Terminus, Garden Road"</strong> or <em>山頂纜車總站，花園道</em>. <span class="duration">~20–25 min</span> <span class="fare">~HKD 80–100</span></span></li>
+          <li><span class="step-num">2</span><span class="step-text"><strong>Option B — MTR + Walk:</strong> Walk to <strong>Jordan MTR Station</strong> (3 min). Take <strong>Tsuen Wan Line</strong> (red line) to <strong>Central Station</strong>. <span class="duration">~15 min</span> <span class="fare">~HKD 10</span></span></li>
+          <li><span class="step-num">3</span><span class="step-text">At Central, exit via <strong>Exit J2</strong>. Walk up Garden Road toward the Peak Tram terminal (~10 min uphill walk), or take <strong>Bus 15C</strong> from Edinburgh Place. <span class="fare">~HKD 5</span></span></li>
+          <li><span class="step-num">4</span><span class="step-text">At the <strong>Peak Tram Lower Terminus</strong>: queue up, buy tickets (or use pre-booked tickets). <span class="warn">⚠️ Book online in advance to avoid long queues!</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #C0392B, #E74C3C);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 4</span>
+        <span class="journey-title">🚋 Peak Tram Up & Down Victoria Peak</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text"><strong>Going UP:</strong> Board the Peak Tram at the Lower Terminus (Garden Road). The tram runs every 10–15 min. <span class="duration">~8 min ride</span> <span class="fare">~HKD 52–68 return</span></span></li>
+          <li><span class="step-num">2</span><span class="step-text">Alight at <strong>Peak Tower (Upper Terminus)</strong>. Head to the Sky Terrace 428 or walk Lugard Road for free views.</span></li>
+          <li><span class="step-num">3</span><span class="step-text"><strong>Going DOWN:</strong> Best to take a <strong>taxi</strong> from the Peak down to Central/Sheung Wan. Faster and easier with kids. <span class="duration">~15 min</span> <span class="fare">~HKD 60–80</span></span></li>
+          <li><span class="step-num">4</span><span class="step-text">Alternative down: <strong>Bus 15</strong> from the Peak to Central (Exchange Square Bus Terminus). <span class="duration">~30 min</span> <span class="fare">~HKD 11</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #C0392B, #E74C3C);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 4</span>
+        <span class="journey-title">⛴️ Central → Tsim Sha Tsui via Star Ferry</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">After lunch at Yat Lok, walk west along Des Voeux Road toward <strong>Central Ferry Piers</strong>. Follow signs for <strong>Pier 7 (Star Ferry)</strong>. <span class="duration">~10–15 min walk</span></span></li>
+          <li><span class="step-num">2</span><span class="step-text">At the ferry pier, tap your <strong>Octopus Card</strong> at the turnstile to board. Ferries depart every 6–12 min. <span class="fare">~HKD 3.4 (lower deck)</span></span></li>
+          <li><span class="step-num">3</span><span class="step-text">Enjoy the 10-min harbour crossing! <strong>Stay on the upper deck</strong> if possible — best views of both skylines. <span class="duration">~10 min</span></span></li>
+          <li><span class="step-num">4</span><span class="step-text">Alight at <strong>Tsim Sha Tsui Star Ferry Pier</strong>. The <strong>Clock Tower</strong> is right there at the exit — great photo spot!</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #C0392B, #E74C3C);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 4</span>
+        <span class="journey-title">🛍️ Clock Tower → K11 Musea</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">From the Clock Tower, walk east along <strong>Salisbury Road</strong> toward K11 Musea. <span class="duration">~8–10 min walk</span></span></li>
+          <li><span class="step-num">2</span><span class="step-text">K11 Musea is at <strong>18 Salisbury Road, Tsim Sha Tsui</strong> — a distinctive waterfront building. Look for the large "K11 MUSEA" signage.</span></li>
+          <li><span class="step-num">3</span><span class="step-text">Alternative if tired: grab a taxi right outside the ferry pier. <span class="duration">~3 min</span> <span class="fare">~HKD 25</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #C0392B, #E74C3C);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 4</span>
+        <span class="journey-title">🚖 Avenue of Stars → BP International</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">After Symphony of Lights (~8:10 PM), walk back toward the main road on <strong>Salisbury Road</strong>.</span></li>
+          <li><span class="step-num">2</span><span class="step-text"><strong>Option A — Taxi:</strong> Hail a red taxi on Salisbury Road. Tell driver: <strong>"BP International Hotel, Austin Road, Jordan"</strong>. <span class="duration">~10 min</span> <span class="fare">~HKD 30–40</span></span></li>
+          <li><span class="step-num">3</span><span class="step-text"><strong>Option B — MTR:</strong> Walk to <strong>Tsim Sha Tsui MTR Station</strong> (~5 min). Take <strong>Tsuen Wan Line</strong> (red) one stop to <strong>Jordan Station</strong>. Exit <strong>Exit A</strong>, walk 3 min to hotel. <span class="fare">~HKD 4</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-section-label">Day 5 · Ngong Ping & Tai O</div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #1E8449, #27AE60);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 5</span>
+        <span class="journey-title">🚇 BP International → Tung Chung (for Cable Car)</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">Walk 3 min from hotel to <strong>Jordan MTR Station</strong>. Enter using Octopus Card.</span></li>
+          <li><span class="step-num">2</span><span class="step-text">Take the <strong>Tsuen Wan Line (Red)</strong> toward Tsuen Wan. Ride 2 stops to <strong>Lai King Station</strong>.</span></li>
+          <li><span class="step-num">3</span><span class="step-text">At Lai King, transfer to the <strong>Tung Chung Line (Orange)</strong>. Take it to the terminus: <strong>Tung Chung Station</strong>. <span class="duration">~50 min total</span> <span class="fare">~HKD 20</span></span></li>
+          <li><span class="step-num">4</span><span class="step-text">At Tung Chung, exit the station and follow signs to <strong>Ngong Ping 360 Cable Car terminal</strong> (~5 min walk).</span></li>
+          <li><span class="step-num">5</span><span class="step-text">Show pre-booked tickets or buy at the counter. <span class="warn">⚠️ Book cable car tickets online in advance — queues can be very long!</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #1E8449, #27AE60);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 5</span>
+        <span class="journey-title">🚠 Ngong Ping Cable Car Ride</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">Board the cable car at <strong>Tung Chung Terminal</strong>. Standard gondolas fit 8 people; Crystal Cabins have a glass floor (great for kids!). <span class="duration">~25 min ride</span></span></li>
+          <li><span class="step-num">2</span><span class="step-text">Arrive at <strong>Ngong Ping Village Terminal</strong>. Walk 5 min to Po Lin Monastery and the Big Buddha.</span></li>
+          <li><span class="step-num">3</span><span class="step-text"><strong>Return ride</strong> at end of day — keep your return ticket. Last cable car is around 6:00 PM.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #1E8449, #27AE60);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 5</span>
+        <span class="journey-title">🚌 Ngong Ping → Tai O Fishing Village</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">From Ngong Ping Village, walk to the <strong>Ngong Ping Bus Terminus</strong> (2 min from the cable car terminal).</span></li>
+          <li><span class="step-num">2</span><span class="step-text">Board <strong>Bus 21</strong> (Ngong Ping → Tai O). Runs every 20–30 min. Pay with Octopus Card. <span class="duration">~20–25 min</span> <span class="fare">~HKD 5</span></span></li>
+          <li><span class="step-num">3</span><span class="step-text">Alight at <strong>Tai O Bus Terminus</strong> — the village is right there. Explore the stilt houses and waterway lanes.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #1E8449, #27AE60);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 5</span>
+        <span class="journey-title">🚌 Tai O → Tung Chung (for Dinner + MTR)</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">From Tai O Bus Terminus, board <strong>Bus 11</strong> (Tai O → Tung Chung). Runs every 20–30 min. <span class="duration">~35–40 min</span> <span class="fare">~HKD 7</span></span></li>
+          <li><span class="step-num">2</span><span class="step-text">Alight at <strong>Tung Chung Bus Terminus</strong>. Walk 5 min to <strong>Citygate Outlets</strong> for dinner.</span></li>
+          <li><span class="step-num">3</span><span class="step-text">After dinner, walk to <strong>Tung Chung MTR Station</strong>. Take the <strong>Tung Chung Line (Orange)</strong> all the way back, transfer at <strong>Lai King</strong> to <strong>Tsuen Wan Line (Red)</strong>, ride to <strong>Jordan Station</strong>. <span class="duration">~50 min</span> <span class="fare">~HKD 20</span></span></li>
+          <li><span class="step-num">4</span><span class="step-text">At Jordan Station, take <strong>Exit A</strong> and walk 3 min to BP International.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-section-label">Day 6 · Museum, Shopping & Night Market</div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #D35400, #E67E22);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 6</span>
+        <span class="journey-title">🔬 BP International → Hong Kong Science Museum</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">Walk from hotel to <strong>Jordan MTR Station</strong> (~3 min). Take <strong>Tsuen Wan Line (Red)</strong> to <strong>Tsim Sha Tsui Station</strong> (1 stop). <span class="fare">~HKD 4</span></span></li>
+          <li><span class="step-num">2</span><span class="step-text">Exit via <strong>Exit P1 or P2</strong>. Walk along Chatham Road South toward <strong>Science Museum Road</strong>. <span class="duration">~10 min walk</span></span></li>
+          <li><span class="step-num">3</span><span class="step-text">HK Science Museum is at <strong>2 Science Museum Road, Tsim Sha Tsui East</strong>. Open 10 AM–7 PM (closed Thu).</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #D35400, #E67E22);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 6</span>
+        <span class="journey-title">🛍️ Science Museum → Mira Place (shopping)</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">Walk north from the museum toward <strong>Granville Road</strong>. Mira Place is at <strong>132 Nathan Road, Tsim Sha Tsui</strong>. <span class="duration">~12 min walk</span></span></li>
+          <li><span class="step-num">2</span><span class="step-text">Alternatively, take a short taxi from the museum. <span class="duration">~5 min</span> <span class="fare">~HKD 25</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #D35400, #E67E22);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 6</span>
+        <span class="journey-title">👟 Mira Place → Fa Yuen St (Sneaker Street) — Optional</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">Walk north on Nathan Road from Mira Place. Turn right into <strong>Fa Yuen Street</strong> (near Mong Kok area). <span class="duration">~15–20 min walk</span></span></li>
+          <li><span class="step-num">2</span><span class="step-text">Or take the <strong>MTR from Tsim Sha Tsui to Mong Kok Station</strong> (Tsuen Wan Line, 2 stops). Exit <strong>Exit D3</strong>. <span class="fare">~HKD 5</span> <span class="duration">~5 min</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #D35400, #E67E22);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 6</span>
+        <span class="journey-title">🌙 Hotel → Temple Street Night Market</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">Temple Street Night Market is very close to BP International — it's in the same Jordan neighbourhood!</span></li>
+          <li><span class="step-num">2</span><span class="step-text">Walk north from the hotel on <strong>Temple Street</strong> (~5 min walk). The market starts from <strong>Tin Hau Temple</strong> and stretches north toward Jordan Road.</span></li>
+          <li><span class="step-num">3</span><span class="step-text">Best time to visit: after 7:00 PM when all stalls are fully set up and buzzing!</span></li>
+          <li><span class="step-num">4</span><span class="step-text">To return: simply walk back south on Temple Street to the hotel. <span class="duration">~5 min walk</span> <span class="fare">Free</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-section-label">Day 7 · Departure</div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #2C3E50, #4A5568);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 7</span>
+        <span class="journey-title">🍳 Hotel → Australian Dairy Company (Breakfast)</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text">Australian Dairy Company is at <strong>47–49 Parkes Street, Jordan</strong> — a 5-min walk from BP International.</span></li>
+          <li><span class="step-num">2</span><span class="step-text">Walk north on Austin Road, turn left on Parkes Street. Look for the queue outside — it's always busy! <span class="warn">⚠️ Arrive early, queues form fast</span></span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="transport-journey">
+      <div class="journey-header" style="background: linear-gradient(135deg, #2C3E50, #4A5568);" onclick="toggleJourney(this)">
+        <span class="journey-day-badge">Day 7</span>
+        <span class="journey-title">✈️ BP International → Hong Kong Airport (Departure)</span>
+        <span class="journey-toggle">▼</span>
+      </div>
+      <div class="journey-body">
+        <ul class="step-list">
+          <li><span class="step-num">1</span><span class="step-text"><strong>Option A — Taxi (Easiest with luggage):</strong> Hail a red taxi outside the hotel. Tell driver: <strong>"Hong Kong International Airport"</strong> or <em>香港國際機場</em>. <span class="duration">~35–45 min</span> <span class="fare">~HKD 280–330</span> <span class="warn">+tunnel toll ~HKD 45</span></span></li>
+          <li><span class="step-num">2</span><span class="step-text"><strong>Option B — Airport Express (Recommended):</strong> Walk or taxi (~10 min) to <strong>Kowloon Station</strong> on Austin Road. Board the <strong>Airport Express (AEL)</strong> direct to HKIA. <span class="duration">~24 min</span> <span class="fare">~HKD 105/adult</span></span></li>
+          <li><span class="step-num">3</span><span class="step-text"><span class="warn">💡 Pro tip: Use the <strong>In-Town Check-in</strong> service at Kowloon Station — check your bags in and get your boarding pass before boarding the train!</span></span></li>
+          <li><span class="step-num">4</span><span class="step-text">For a <strong>1:40 PM flight</strong>, leave the hotel no later than <strong>9:45–10:00 AM</strong> to allow time for check-in, immigration, and security.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip-box" style="margin-top: 20px;">
+      <span class="tip-icon">🪙</span>
+      <div><strong>Octopus Card reminder:</strong> Works on all MTR trains, buses, Star Ferry, minibuses, trams, and even convenience stores. Top it up at any MTR station Customer Service Centre or Add Value Machine.</div>
+    </div>
+
+  </div>
+
   <!-- ESSENTIALS -->
   <div class="day-section" id="essentials">
     <div class="day-header" style="background: linear-gradient(135deg, #0D1B3E, #1a3a7a);" data-emoji="📌">
@@ -1254,12 +1692,20 @@
 </div>
 
 <script>
+  function toggleJourney(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.journey-toggle');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    toggle.classList.toggle('open', !isOpen);
+  }
+
   function showDay(id) {
     document.querySelectorAll('.day-section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     const tabs = document.querySelectorAll('.tab');
-    const dayMap = { overview:0, day1:1, day2:2, day3:3, day4:4, day5:5, day6:6, day7:7, essentials:8 };
+    const dayMap = { overview:0, day1:1, day2:2, day3:3, day4:4, day5:5, day6:6, day7:7, transport:8, essentials:9 };
     tabs[dayMap[id]].classList.add('active');
     tabs[dayMap[id]].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     window.scrollTo({ top: 0, behavior: 'smooth' });
