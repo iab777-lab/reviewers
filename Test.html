@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hong Kong Family Trip 2026</title>
+<title>HK Family Trip 2026</title>
+
+<link rel="manifest" href="manifest.json">
 
 <style>
 body {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   margin: 0;
-  background: #f5f7fb;
-  color: #222;
+  font-family: -apple-system, sans-serif;
+  background: #f2f4f8;
 }
 
 header {
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
   padding: 20px;
   text-align: center;
@@ -24,19 +25,17 @@ nav {
   display: flex;
   overflow-x: auto;
   background: white;
-  border-bottom: 1px solid #ddd;
 }
 
 nav button {
   flex: none;
-  padding: 12px 16px;
+  padding: 12px;
   border: none;
   background: none;
-  cursor: pointer;
 }
 
 nav button.active {
-  border-bottom: 3px solid #4facfe;
+  border-bottom: 3px solid #667eea;
   font-weight: bold;
 }
 
@@ -44,144 +43,197 @@ nav button.active {
   padding: 16px;
 }
 
-.day {
-  display: none;
-}
-
-.day.active {
-  display: block;
-}
-
 .card {
   background: white;
+  border-radius: 14px;
   padding: 14px;
-  border-radius: 12px;
   margin-bottom: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
 }
 
 .time {
   font-weight: bold;
-  color: #4facfe;
+  color: #667eea;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #667eea;
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
 }
 
 .tip {
-  background: #fff7d6;
+  background: #fff4cc;
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-top: 8px;
 }
 
+.budget {
+  background: #e6fffa;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>🇭🇰 Hong Kong Family Trip</h1>
-  <p>6D5N Itinerary (Family with Kids)</p>
+  <h2>🇭🇰 Hong Kong Family Trip</h2>
+  <p>Smart Travel Planner</p>
 </header>
 
 <nav id="tabs"></nav>
-
 <div class="container" id="content"></div>
 
 <script>
 
-const itinerary = [
+const days = [
 
 {
 title: "Day 1 – Arrival",
 items: [
-"12:30 PM – Arrive at airport",
-"Buy Octopus Card + food/snacks",
-"1:30–2:00 PM – Taxi to Disney Explorers Lodge",
-"3:00 PM – Check-in & rest",
-"4:30–6:30 PM – Explore hotel (garden, playground)",
-"5:00 PM – Dinner",
-"Early sleep"
+{
+text: "Arrive at Hong Kong International Airport",
+map: "https://maps.google.com/?q=Hong+Kong+International+Airport"
+},
+{
+text: "Taxi to Disney Explorers Lodge",
+map: "https://maps.google.com/?q=Disney+Explorers+Lodge"
+},
+{
+text: "Explore hotel + dinner",
+tip: "Buy snacks at airport to save money"
+}
 ]
 },
 
 {
 title: "Day 2 – Disneyland",
 items: [
-"8:30 AM – Breakfast",
-"9:30 AM – Shuttle to park",
-"10:30 AM – Park opens",
-"Morning: Frozen + Mystic Manor",
-"Afternoon: Shows + rest",
-"Night: Momentous show",
-"Back to hotel"
+{
+text: "Morning: Frozen + Mystic Manor",
+tip: "Do Frozen FIRST (longest lines)"
+},
+{
+text: "Afternoon: shows + rest"
+},
+{
+text: "Night: Momentous show"
+}
 ]
 },
 
 {
-title: "Day 3 – Disneyland + Transfer",
+title: "Day 3 – Disney + Transfer",
 items: [
-"Morning: Disneyland",
-"4:00 PM – Exit park",
-"5:00 PM – Taxi to BP International",
-"6:00 PM – Check-in",
-"Evening: Walk around Jordan + dinner"
+{
+text: "Morning rides + photos"
+},
+{
+text: "4:00 PM – Leave park"
+},
+{
+text: "Taxi to BP International",
+map: "https://maps.google.com/?q=BP+International+Hotel+Hong+Kong"
+}
 ]
 },
 
 {
 title: "Day 4 – Peak + Harbour",
 items: [
-"8:15 AM – Leave hotel",
-"9:00 AM – Peak Tram",
-"9:30–11:00 AM – Victoria Peak",
-"11:30 AM – Lunch (Yat Lok)",
-"12:30 PM – Star Ferry",
-"1:30–5:30 PM – K11 (REST)",
-"6:45 PM – Harbour sunset",
-"8:00 PM – Symphony of Lights"
+{
+text: "Victoria Peak",
+map: "https://maps.google.com/?q=Victoria+Peak+Hong+Kong"
+},
+{
+text: "Lunch: Yat Lok Roast Goose",
+map: "https://maps.google.com/?q=Yat+Lok+Roast+Goose"
+},
+{
+text: "Star Ferry",
+map: "https://maps.google.com/?q=Star+Ferry+Hong+Kong"
+},
+{
+text: "K11 Musea (REST)",
+map: "https://maps.google.com/?q=K11+Musea"
+},
+{
+text: "Symphony of Lights",
+map: "https://maps.google.com/?q=Avenue+of+Stars+Hong+Kong"
+}
 ]
 },
 
 {
 title: "Day 5 – Ngong Ping + Tai O",
 items: [
-"8:40 AM – MTR to Tung Chung",
-"10:00 AM – Cable car",
-"10:30 – Visit Big Buddha FIRST",
-"Po Lin Monastery rest",
-"Village snack break",
-"12:30 PM – Bus to Tai O",
-"Explore village",
-"Dinner at Citygate Outlets"
+{
+text: "Go straight to Big Buddha (no stopping!)",
+map: "https://maps.google.com/?q=Tian+Tan+Buddha"
+},
+{
+text: "Climb in stages (rest every 100 steps)",
+tip: "Say: 'next stop!' instead of 'top' for kids 😄"
+},
+{
+text: "Po Lin Monastery rest",
+map: "https://maps.google.com/?q=Po+Lin+Monastery"
+},
+{
+text: "Ice cream + snacks at village"
+},
+{
+text: "Bus to Tai O",
+map: "https://maps.google.com/?q=Tai+O+Fishing+Village"
+}
 ]
 },
 
 {
-title: "Day 6 – Museum + Night Market",
+title: "Day 6 – Food + Night Market",
 items: [
-"Morning: Science Museum",
-"Lunch: Dim Sum",
-"Mira Place shopping",
-"Rest",
-"Evening: Temple Street Night Market"
+{
+text: "Science Museum",
+map: "https://maps.google.com/?q=Hong+Kong+Science+Museum"
+},
+{
+text: "Dim sum lunch",
+tip: "Try Tim Ho Wan or DimDimSum"
+},
+{
+text: "Temple Street Night Market",
+map: "https://maps.google.com/?q=Temple+Street+Night+Market"
+}
 ]
 },
 
 {
 title: "Day 7 – Departure",
 items: [
-"Breakfast: Australian Dairy Company",
-"10:00 AM – Leave hotel",
-"1:40 PM – Flight"
+{
+text: "Breakfast: Australian Dairy Company",
+map: "https://maps.google.com/?q=Australian+Dairy+Company"
+},
+{
+text: "Go to airport"
+}
 ]
 }
 
 ];
 
-const tabs = document.getElementById("tabs");
-const content = document.getElementById("content");
-
 function renderTabs() {
-  itinerary.forEach((day, i) => {
+  const tabs = document.getElementById("tabs");
+  days.forEach((d, i) => {
     const btn = document.createElement("button");
     btn.innerText = "Day " + (i+1);
     btn.onclick = () => showDay(i);
@@ -192,21 +244,39 @@ function renderTabs() {
 
 function showDay(index) {
   document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-  tabs.children[index].classList.add("active");
+  document.querySelectorAll("nav button")[index].classList.add("active");
 
-  content.innerHTML = "";
+  const container = document.getElementById("content");
+  container.innerHTML = "";
 
-  const day = itinerary[index];
+  const budget = document.createElement("div");
+  budget.className = "budget";
+  budget.innerText = "💰 Daily Budget Est: HKD 1,500–2,500 (family)";
+  container.appendChild(budget);
 
-  const title = document.createElement("h2");
-  title.innerText = day.title;
-  content.appendChild(title);
-
-  day.items.forEach(item => {
+  days[index].items.forEach(item => {
     const card = document.createElement("div");
     card.className = "card";
-    card.innerText = item;
-    content.appendChild(card);
+
+    card.innerHTML = item.text;
+
+    if(item.map){
+      const link = document.createElement("a");
+      link.href = item.map;
+      link.target = "_blank";
+      link.className = "btn";
+      link.innerText = "Open Map";
+      card.appendChild(link);
+    }
+
+    if(item.tip){
+      const tip = document.createElement("div");
+      tip.className = "tip";
+      tip.innerText = item.tip;
+      card.appendChild(tip);
+    }
+
+    container.appendChild(card);
   });
 }
 
