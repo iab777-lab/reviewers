@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filipino Culture Reviewer – Lesson 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sun: #FFD166;
+    --coral: #EF476F;
+    --teal: #06D6A0;
+    --blue: #118AB2;
+    --navy: #073B4C;
+    --soft: #FFF9F0;
+    --card: #FFFFFF;
+    --accent: #FF6B35;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--soft);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+/* ── HERO ── */
+.hero {
+background: linear-gradient(135deg, #EF476F 0%, #FF6B35 50%, #FFD166 100%);
+padding: 36px 20px 28px;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+.hero::before {
+content: “🌺🌴🌺🌴🌺🌴🌺🌴🌺”;
+position: absolute; top: 6px; left: 0; right: 0;
+font-size: 18px; opacity: 0.35; letter-spacing: 6px;
+}
+.hero h1 {
+font-family: ‘Fredoka One’, cursive;
+font-size: 2.2rem;
+color: #fff;
+text-shadow: 2px 3px 0 rgba(0,0,0,0.2);
+line-height: 1.1;
+}
+.hero p {
+color: #fff;
+font-weight: 700;
+font-size: 1rem;
+margin-top: 6px;
+opacity: 0.92;
+}
+.badge {
+display: inline-block;
+background: #fff;
+color: var(–coral);
+font-family: ‘Fredoka One’, cursive;
+font-size: 0.85rem;
+padding: 4px 14px;
+border-radius: 99px;
+margin-top: 10px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+/* ── TABS ── */
+.tabs {
+display: flex;
+justify-content: center;
+gap: 8px;
+padding: 18px 16px 0;
+flex-wrap: wrap;
+}
+.tab-btn {
+font-family: ‘Fredoka One’, cursive;
+font-size: 1rem;
+padding: 10px 22px;
+border: none;
+border-radius: 99px;
+cursor: pointer;
+transition: all 0.2s;
+background: #e0e0e0;
+color: #777;
+}
+.tab-btn.active {
+background: var(–coral);
+color: #fff;
+box-shadow: 0 4px 12px rgba(239,71,111,0.35);
+transform: translateY(-2px);
+}
+
+/* ── CONTENT ── */
+.content { display: none; padding: 20px 16px 60px; max-width: 860px; margin: 0 auto; }
+.content.active { display: block; animation: fadeUp 0.35s ease; }
+@keyframes fadeUp {
+from { opacity: 0; transform: translateY(16px); }
+to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTION CARD ── */
+.section-card {
+background: var(–card);
+border-radius: 20px;
+padding: 22px 20px;
+margin-bottom: 18px;
+box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+border-left: 6px solid var(–teal);
+}
+.section-card.coral  { border-left-color: var(–coral); }
+.section-card.blue   { border-left-color: var(–blue); }
+.section-card.sun    { border-left-color: var(–sun); }
+.section-card.accent { border-left-color: var(–accent); }
+.section-title {
+font-family: ‘Fredoka One’, cursive;
+font-size: 1.25rem;
+display: flex; align-items: center; gap: 8px;
+margin-bottom: 10px;
+}
+.section-card p, .section-card li { font-size: 0.95rem; line-height: 1.65; margin-bottom: 6px; }
+.section-card ul { padding-left: 20px; }
+.section-card ul li { margin-bottom: 4px; }
+
+/* ── GROUPS GRID ── */
+.groups-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+gap: 14px;
+margin-top: 10px;
+}
+.group-card {
+background: linear-gradient(135deg, #fff9f0, #fff);
+border: 2px solid #ffe0b2;
+border-radius: 16px;
+padding: 14px 16px;
+transition: transform 0.2s;
+}
+.group-card:hover { transform: translateY(-3px); }
+.group-card h4 {
+font-family: ‘Fredoka One’, cursive;
+font-size: 1rem;
+color: var(–coral);
+margin-bottom: 4px;
+}
+.group-card .loc {
+font-size: 0.8rem;
+color: var(–blue);
+font-weight: 700;
+margin-bottom: 6px;
+}
+.group-card p { font-size: 0.82rem; color: #555; line-height: 1.5; }
+
+/* ── TRAITS ── */
+.traits-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+margin-top: 10px;
+}
+.trait-pill {
+border-radius: 14px;
+padding: 12px 14px;
+font-size: 0.88rem;
+font-weight: 700;
+display: flex; align-items: flex-start; gap: 8px;
+}
+.trait-pill.positive { background: #e8fdf5; color: #046e50; }
+.trait-pill.negative { background: #fff0f3; color: #9b1a35; }
+.trait-pill .emoji { font-size: 1.3rem; line-height: 1; }
+
+/* ── TABLE ── */
+.styled-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 10px; }
+.styled-table th {
+background: var(–coral);
+color: #fff;
+font-family: ‘Fredoka One’, cursive;
+font-size: 0.95rem;
+padding: 10px 12px;
+text-align: left;
+}
+.styled-table td { padding: 8px 12px; border-bottom: 1px solid #f0e0d0; }
+.styled-table tr:nth-child(even) td { background: #fff9f4; }
+
+/* ── HERITAGE ── */
+.heritage-card {
+background: linear-gradient(135deg, #073B4C, #118AB2);
+color: #fff;
+border-radius: 18px;
+padding: 18px 20px;
+margin-bottom: 12px;
+}
+.heritage-card h4 { font-family: ‘Fredoka One’, cursive; font-size: 1.05rem; margin-bottom: 6px; color: var(–sun); }
+.heritage-card p { font-size: 0.87rem; opacity: 0.92; line-height: 1.6; }
+
+/* ── KEY TERMS ── */
+.term-box {
+background: #fffbe6;
+border: 2px dashed var(–sun);
+border-radius: 14px;
+padding: 12px 16px;
+margin-bottom: 10px;
+}
+.term-box strong { color: var(–accent); font-size: 0.95rem; }
+.term-box p { font-size: 0.87rem; color: #555; margin-top: 2px; }
+
+/* ── QUIZ ── */
+.quiz-header {
+text-align: center;
+margin-bottom: 24px;
+}
+.quiz-header h2 { font-family: ‘Fredoka One’, cursive; font-size: 1.7rem; color: var(–blue); }
+.quiz-header p { font-size: 0.9rem; color: #666; margin-top: 4px; }
+
+.q-card {
+background: var(–card);
+border-radius: 18px;
+padding: 20px 20px 16px;
+margin-bottom: 16px;
+box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+border-top: 4px solid var(–blue);
+transition: box-shadow 0.2s;
+}
+.q-card.correct-card { border-top-color: var(–teal); background: #f0fdf9; }
+.q-card.wrong-card   { border-top-color: var(–coral); background: #fff5f7; }
+
+.q-num {
+font-family: ‘Fredoka One’, cursive;
+font-size: 0.8rem;
+color: var(–blue);
+margin-bottom: 6px;
+}
+.q-text { font-weight: 800; font-size: 0.97rem; margin-bottom: 14px; line-height: 1.5; }
+
+.options { display: flex; flex-direction: column; gap: 8px; }
+.opt-btn {
+background: #f5f5f5;
+border: 2px solid #e0e0e0;
+border-radius: 12px;
+padding: 10px 14px;
+font-family: ‘Nunito’, sans-serif;
+font-size: 0.9rem;
+font-weight: 700;
+text-align: left;
+cursor: pointer;
+transition: all 0.18s;
+}
+.opt-btn:hover:not(:disabled) { background: #e8f4ff; border-color: var(–blue); }
+.opt-btn.correct { background: #d4fce8; border-color: var(–teal); color: #046e50; }
+.opt-btn.wrong   { background: #ffe0e6; border-color: var(–coral); color: #9b1a35; }
+.opt-btn:disabled { cursor: default; }
+
+.fb-box {
+margin-top: 10px;
+padding: 10px 14px;
+border-radius: 12px;
+font-size: 0.87rem;
+font-weight: 700;
+display: none;
+}
+.fb-box.show { display: block; animation: fadeUp 0.3s ease; }
+.fb-box.correct { background: #d4fce8; color: #046e50; }
+.fb-box.wrong   { background: #ffe0e6; color: #9b1a35; }
+
+/* score */
+.score-bar {
+background: var(–card);
+border-radius: 18px;
+padding: 20px;
+text-align: center;
+margin-bottom: 20px;
+box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+display: none;
+}
+.score-bar.show { display: block; animation: fadeUp 0.4s ease; }
+.score-big { font-family: ‘Fredoka One’, cursive; font-size: 3rem; color: var(–coral); }
+.score-label { font-size: 1rem; color: #555; margin-top: 2px; }
+.score-msg { font-size: 1.1rem; font-weight: 800; margin-top: 8px; }
+
+.btn-submit, .btn-retry {
+display: block;
+width: 100%;
+max-width: 340px;
+margin: 20px auto 0;
+font-family: ‘Fredoka One’, cursive;
+font-size: 1.15rem;
+padding: 14px;
+border: none;
+border-radius: 99px;
+cursor: pointer;
+transition: all 0.2s;
+}
+.btn-submit {
+background: linear-gradient(135deg, var(–blue), var(–teal));
+color: #fff;
+box-shadow: 0 4px 16px rgba(6,214,160,0.35);
+}
+.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(6,214,160,0.45); }
+.btn-retry {
+background: linear-gradient(135deg, var(–coral), var(–accent));
+color: #fff;
+box-shadow: 0 4px 16px rgba(239,71,111,0.3);
+}
+.btn-retry:hover { transform: translateY(-2px); }
+
+/* progress */
+.progress-wrap { margin-bottom: 16px; }
+.progress-track {
+height: 10px;
+background: #e8e8e8;
+border-radius: 99px;
+overflow: hidden;
+}
+.progress-fill {
+height: 100%;
+background: linear-gradient(90deg, var(–teal), var(–blue));
+border-radius: 99px;
+transition: width 0.4s ease;
+width: 0%;
+}
+.progress-text { font-size: 0.8rem; color: #888; text-align: right; margin-top: 3px; }
+
+/* callout */
+.callout {
+background: linear-gradient(135deg, #fff3cd, #ffe8a1);
+border-left: 5px solid var(–sun);
+border-radius: 12px;
+padding: 12px 16px;
+font-size: 0.88rem;
+margin: 10px 0;
+color: #5a3e00;
+}
+
+@media (max-width: 520px) {
+.hero h1 { font-size: 1.7rem; }
+.traits-grid { grid-template-columns: 1fr; }
+.groups-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+</head>
+<body>
+
+<div class="hero">
+  <h1>🇵🇭 The Filipino Culture</h1>
+  <p>Araling Panlipunan · Lesson 1</p>
+  <span class="badge">📚 Reviewer + 🧠 Quiz</span>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('reviewer')">📖 Reviewer</button>
+  <button class="tab-btn" onclick="showTab('quiz')">🧠 Quiz</button>
+</div>
+
+<!-- ═══════════════ REVIEWER ═══════════════ -->
+
+<div id="reviewer" class="content active">
+
+  <!-- INTRO -->
+
+  <div class="section-card coral">
+    <div class="section-title">👥 Who Are the Filipino People?</div>
+    <p>Filipinos are unique. Some are products of <strong>interracial marriages</strong> called <em>mestizos</em>. Their physical features reflect their mixed ancestry.</p>
+    <p>The majority of Filipinos consist of: <strong>Tagalog, Visayan, Ilocano, Bicolano, Pampangueño, Panggasinense, Ibanag (Cagayano),</strong> and <strong>Zambal</strong>.</p>
+    <p>There are also many other <strong>ethnic/indigenous groups</strong> found across the country.</p>
+  </div>
+
+  <!-- LUZON GROUPS -->
+
+  <div class="section-card">
+    <div class="section-title">🏔️ Indigenous Groups of Luzon</div>
+    <div class="groups-grid">
+      <div class="group-card">
+        <h4>Ifugao & Kalinga</h4>
+        <div class="loc">📍 Mountain Province</div>
+        <p>Led by <em>chieftains</em>. Practice marriage feasts & burial rites. Use the <em>gangsa</em> instrument. Wear colorful traditional clothing.</p>
+      </div>
+      <div class="group-card">
+        <h4>Isnegs</h4>
+        <div class="loc">📍 Apayao River</div>
+        <p>Use <em>kaingin</em> method of farming. Led by <em>Kamenglan</em> (the brave). Society allows polygamy.</p>
+      </div>
+      <div class="group-card">
+        <h4>Tinguians</h4>
+        <div class="loc">📍 Abra</div>
+        <p>Plant rice in lowlands and mountain terraces. Women wear beads and tattoos on their arms.</p>
+      </div>
+      <div class="group-card">
+        <h4>Hanunuo Mangyan</h4>
+        <div class="loc">📍 Oriental Mindoro</div>
+        <p>Write in the <em>Buhid</em> script. Preserved culture by isolating from lowland influences.</p>
+      </div>
+    </div>
+    <p style="margin-top:14px; font-size:0.85rem; font-weight:700;">Other Luzon Groups:</p>
+    <table class="styled-table" style="margin-top:6px;">
+      <tr><th>Group</th><th>Location</th></tr>
+      <tr><td>Kankanaey</td><td>Mountain Province & Benguet</td></tr>
+      <tr><td>Bontoc</td><td>Mountain Province</td></tr>
+      <tr><td>Ibaloi/Nabaloi</td><td>Benguet</td></tr>
+      <tr><td>Iwak</td><td>Cordillera</td></tr>
+      <tr><td>Applai</td><td>Mountain Province</td></tr>
+      <tr><td>Ibanag / Gaddang</td><td>Cagayan & Nueva Vizcaya</td></tr>
+      <tr><td>Ilonggot & Isinay</td><td>Nueva Vizcaya</td></tr>
+      <tr><td>Itawis / Bugkalot</td><td>Cagayan / Nueva Vizcaya, Quirino, Aurora</td></tr>
+      <tr><td>Ivatan</td><td>Batanes</td></tr>
+    </table>
+  </div>
+
+  <!-- VISAYAS GROUPS -->
+
+  <div class="section-card blue">
+    <div class="section-title">🌊 Indigenous Groups of Visayas</div>
+    <div class="groups-grid">
+      <div class="group-card">
+        <h4>Negritos (Atis)</h4>
+        <div class="loc">📍 Visayas</div>
+        <p>Known for <strong>Ati-Atihan</strong> festival – a thanksgiving for bountiful harvest. Live by hunting and fishing. Called <em>Mamanua</em> (Leyte/Samar), <em>Magahat</em> (Negros), <em>Corolanos/Bukidnon</em> (Panay).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MINDANAO GROUPS -->
+
+  <div class="section-card accent">
+    <div class="section-title">🌿 Indigenous Groups of Mindanao</div>
+    <div class="groups-grid">
+      <div class="group-card">
+        <h4>Badjaos & Tausugs</h4>
+        <div class="loc">📍 Mindanao & Sulu</div>
+        <p>Muslim Filipinos. Good swimmers & divers. Earn by diving for pearls. Called <strong>"sea gypsies."</strong></p>
+      </div>
+      <div class="group-card">
+        <h4>Samals</h4>
+        <div class="loc">📍 Sulu–Zamboanga</div>
+        <p>Live by fishing, farming, and trading.</p>
+      </div>
+      <div class="group-card">
+        <h4>Yakans</h4>
+        <div class="loc">📍 Basilan</div>
+        <p>Very good horse riders who travel mostly on horseback.</p>
+      </div>
+      <div class="group-card">
+        <h4>Maranaos</h4>
+        <div class="loc">📍 Lanao</div>
+        <p>Known for beautiful <strong>brass works</strong> and the <em>Sarimanok</em>. Wear colorful sarong, <em>malong</em>, and <em>kupia</em>.</p>
+      </div>
+    </div>
+    <p style="margin-top:14px; font-size:0.85rem; font-weight:700;">Other Mindanao Groups:</p>
+    <table class="styled-table" style="margin-top:6px;">
+      <tr><th>Group</th><th>Location</th></tr>
+      <tr><td>Dibabawon</td><td>Davao del Norte</td></tr>
+      <tr><td>Tausug / Samal</td><td>Sulu</td></tr>
+      <tr><td>Mandaya</td><td>Davao Oriental</td></tr>
+      <tr><td>Kalagan / Iranum</td><td>Davao del Sur</td></tr>
+      <tr><td>Maguindanaoan</td><td>Maguindanao</td></tr>
+      <tr><td>Molbog</td><td>Balabak</td></tr>
+      <tr><td>Sanguil</td><td>Sarangani</td></tr>
+      <tr><td>Subanon</td><td>Zamboanga</td></tr>
+      <tr><td>Manobo</td><td>Bukidnon</td></tr>
+      <tr><td>T'boli</td><td>South Cotabato & Sultan Kudarat</td></tr>
+      <tr><td>Tirurau</td><td>Cotabato, Maguindanao, Sultan Kudarat</td></tr>
+      <tr><td>Tagakaulo</td><td>Davao del Norte & Mt. Apo</td></tr>
+      <tr><td>Tasaday</td><td>South Cotabato</td></tr>
+    </table>
+  </div>
+
+  <!-- RELIGION & LANGUAGE -->
+
+  <div class="section-card sun">
+    <div class="section-title">🙏 Religion & 🗣️ Language</div>
+    <p><strong>Religion:</strong> The Philippines is the only predominantly Catholic nation in Asia. About <strong>90%</strong> are Roman Catholics. The rest are non-Catholics: Muslims, Iglesia ni Cristo, Aglipayan, Evangelists, and other Christian faiths.</p>
+    <p style="margin-top:8px;"><strong>Language:</strong> Official languages: <strong>Filipino</strong> and <strong>English</strong>. Most widely spoken native language: <strong>Cebuano</strong>, followed by Tagalog. Other major languages: Ilocano, Hiligaynon, Bicol, Waray, Pampango, Pangasinense.</p>
+  </div>
+
+  <!-- HERITAGE SITES -->
+
+  <div class="section-card blue">
+    <div class="section-title">🏛️ Heritage Sites & Events</div>
+    <p style="margin-bottom:12px;">Heritage sites must meet the criteria set by <strong>World Heritage Convention</strong> members to be included in the World Heritage list.</p>
+    <div class="heritage-card">
+      <h4>🏘️ Historic City of Vigan (Calle Crisologo)</h4>
+      <p>The Mestizo Section, house of Father Burgos and Leona Florentino — declared the <strong>National Cultural Treasure of the Philippines</strong>.</p>
+    </div>
+    <div class="heritage-card">
+      <h4>⛪ Baroque Churches</h4>
+      <p>San Agustin (Manila), Sta. Maria (Ilocos Sur), <strong>Paoay</strong> (Ilocos Norte), Miagao (Iloilo) — all considered <strong>Cultural Treasures of the Philippines</strong>.</p>
+    </div>
+  </div>
+
+  <!-- TRAITS -->
+
+  <div class="section-card coral">
+    <div class="section-title">💛 Filipino Traits & Values</div>
+    <p style="margin-bottom:10px;"><strong>Positive Traits:</strong></p>
+    <div class="traits-grid">
+      <div class="trait-pill positive"><span class="emoji">👨‍👩‍👧‍👦</span><div><strong>Close Family Ties</strong><br><span style="font-weight:400;font-size:0.8rem;">Extended family structures; clan gatherings</span></div></div>
+      <div class="trait-pill positive"><span class="emoji">🤝</span><div><strong>Cooperative (Bayanihan)</strong><br><span style="font-weight:400;font-size:0.8rem;">Helping others without expecting anything back</span></div></div>
+      <div class="trait-pill positive"><span class="emoji">🏠</span><div><strong>Hospitable</strong><br><span style="font-weight:400;font-size:0.8rem;">Welcome friends with warmth and friendship</span></div></div>
+      <div class="trait-pill positive"><span class="emoji">💪</span><div><strong>Resilient & Adaptable</strong><br><span style="font-weight:400;font-size:0.8rem;">Proven in times of calamities</span></div></div>
+      <div class="trait-pill positive"><span class="emoji">🙏</span><div><strong>God-fearing & Prayerful</strong><br><span style="font-weight:400;font-size:0.8rem;">Observe religious practices</span></div></div>
+      <div class="trait-pill positive"><span class="emoji">🫡</span><div><strong>Respectful</strong><br><span style="font-weight:400;font-size:0.8rem;">Use "po," "opo," pagmamano, kuya, ate, manang</span></div></div>
+      <div class="trait-pill positive"><span class="emoji">✅</span><div><strong>Honest</strong><br><span style="font-weight:400;font-size:0.8rem;">Ancient Chinese traders lost nothing trading with Filipinos</span></div></div>
+    </div>
+    <p style="margin: 14px 0 8px;"><strong>Negative Habits to Avoid:</strong></p>
+    <div class="traits-grid">
+      <div class="trait-pill negative"><span class="emoji">😴</span><div><strong>Laziness</strong><br><span style="font-weight:400;font-size:0.8rem;">Depending on others to do one's job</span></div></div>
+      <div class="trait-pill negative"><span class="emoji">⏰</span><div><strong>Tardiness</strong><br><span style="font-weight:400;font-size:0.8rem;">Being late even at important events</span></div></div>
+      <div class="trait-pill negative"><span class="emoji">🌿</span><div><strong>Ningas-Kugon</strong><br><span style="font-weight:400;font-size:0.8rem;">Starting strong but fading before finishing</span></div></div>
+      <div class="trait-pill negative"><span class="emoji">😅</span><div><strong>Mañana Habit</strong><br><span style="font-weight:400;font-size:0.8rem;">Procrastination — "Bahala na"</span></div></div>
+      <div class="trait-pill negative"><span class="emoji">🛍️</span><div><strong>Colonial Mentality</strong><br><span style="font-weight:400;font-size:0.8rem;">Preferring imported over local products</span></div></div>
+      <div class="trait-pill negative"><span class="emoji">🤦</span><div><strong>Padrino System</strong><br><span style="font-weight:400;font-size:0.8rem;">Hiring relatives regardless of qualifications</span></div></div>
+      <div class="trait-pill negative"><span class="emoji">💸</span><div><strong>Extravagance</strong><br><span style="font-weight:400;font-size:0.8rem;">Costly fiestas/events that waste money</span></div></div>
+    </div>
+  </div>
+
+  <!-- KEY TERMS -->
+
+  <div class="section-card">
+    <div class="section-title">📌 Key Terms to Remember</div>
+    <div class="term-box"><strong>Bayanihan</strong><p>Filipino spirit of communal unity and cooperation (damayan) — helping others without expecting anything in return.</p></div>
+    <div class="term-box"><strong>Gangsa</strong><p>A musical instrument used by the Ifugao and Kalinga during special celebrations.</p></div>
+    <div class="term-box"><strong>Kaingin</strong><p>A method of farming practiced by the Isnegs.</p></div>
+    <div class="term-box"><strong>Buhid</strong><p>The ancient Filipino alphabet still used by the Hanunuo Mangyans.</p></div>
+    <div class="term-box"><strong>Ati-Atihan</strong><p>A colorful Negrito festival celebrated as a thanksgiving for a bountiful harvest.</p></div>
+    <div class="term-box"><strong>Sarimanok</strong><p>A famous symbol/art form of the Maranao people of Lanao.</p></div>
+    <div class="term-box"><strong>Ningas-Kugon</strong><p>Starting a task with enthusiasm but losing energy and not finishing well.</p></div>
+    <div class="term-box"><strong>Pagmamano</strong><p>A Filipino gesture of respect, pressing the back of an elder's hand to one's forehead.</p></div>
+  </div>
+
+  <div class="callout">
+    💡 <strong>Remember:</strong> The different indigenous groups have their own customs and traditions, but all Filipinos share a common heritage!
+  </div>
+
+</div><!-- end reviewer -->
+
+<!-- ═══════════════ QUIZ ═══════════════ -->
+
+<div id="quiz" class="content">
+  <div class="quiz-header">
+    <h2>🧠 Quiz Time!</h2>
+    <p>Test what you learned about Filipino Culture</p>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-text" id="progressText">0 / 25 answered</div>
+  </div>
+
+  <div id="scoreBar" class="score-bar">
+    <div class="score-big" id="scoreNum"></div>
+    <div class="score-label">out of 25 questions</div>
+    <div class="score-msg" id="scoreMsg"></div>
+    <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
+  </div>
+
+  <div id="quizContainer"></div>
+
+<button class="btn-submit" id="submitBtn" onclick="submitQuiz()">✅ Submit Answers</button>
+
+</div>
+
+<script>
+const questions = [
+  { q: "What term is used to describe Filipinos who are products of interracial marriages?", opts: ["Ilocanos","Mestizos","Visayans","Taguianos"], ans: 1 },
+  { q: "Which indigenous group uses the gangsa instrument during celebrations?", opts: ["Isnegs","Tinguians","Ifugao & Kalinga","Hanunuo Mangyan"], ans: 2 },
+  { q: "The Isnegs are found along the banks of which river?", opts: ["Cagayan River","Pasig River","Apayao River","Mindanao River"], ans: 2 },
+  { q: "What farming method do the Isnegs use?", opts: ["Organic farming","Kaingin method","Terrace farming","Aquaculture"], ans: 1 },
+  { q: "The leader of an Isneg settlement is called:", opts: ["Datu","Chieftain","Kamenglan","Barangay Captain"], ans: 2 },
+  { q: "What ancient Filipino alphabet is still used by the Hanunuo Mangyans?", opts: ["Alibata","Baybayin","Buhid","Tagalog script"], ans: 2 },
+  { q: "Where do the Hanunuo Mangyans live?", opts: ["Palawan","Oriental Mindoro","Batanes","Samar"], ans: 1 },
+  { q: "The Tinguians are found in which province?", opts: ["Benguet","Mountain Province","Abra","Cordillera"], ans: 2 },
+  { q: "The colorful thanksgiving festival of the Negritos is called:", opts: ["Sinulog","Pahiyas","Ati-Atihan","Kadayawan"], ans: 2 },
+  { q: "Why are the Badjaos called 'sea gypsies'?", opts: ["They live near volcanoes","They earn by diving for pearls","They travel by horseback","They live in mountain caves"], ans: 1 },
+  { q: "The Maranaos are known for which famous cultural symbol?", opts: ["Gangsa","Sarimanok","Buhid","Kupia"], ans: 1 },
+  { q: "The Maranaos are found in which area?", opts: ["Sulu","Basilan","Lanao","Zamboanga"], ans: 2 },
+  { q: "Which indigenous group of Basilan is known for being excellent horse riders?", opts: ["Samals","Badjaos","Yakans","Tausugs"], ans: 2 },
+  { q: "Approximately what percentage of Filipinos are Roman Catholics?", opts: ["70%","80%","90%","95%"], ans: 2 },
+  { q: "Which native language is spoken by the majority of Filipinos?", opts: ["Tagalog","Cebuano","Ilocano","Waray"], ans: 1 },
+  { q: "What are the two official languages of the Philippines?", opts: ["Tagalog and Cebuano","Filipino and English","Ilocano and Tagalog","English and Spanish"], ans: 1 },
+  { q: "Which heritage site is the Mestizo Section (house of Father Burgos and Leona Florentino) part of?", opts: ["Paoay Church","Historic City of Vigan","Rizal Park","Intramuros"], ans: 1 },
+  { q: "Paoay Church is located in which province?", opts: ["Ilocos Sur","Iloilo","Ilocos Norte","Mountain Province"], ans: 2 },
+  { q: "What is Bayanihan?", opts: ["A Filipino dance","The Filipino spirit of communal unity and cooperation","A type of musical instrument","A Filipino festival"], ans: 1 },
+  { q: "Which of the following is a POSITIVE Filipino trait?", opts: ["Ningas-kugon","Colonial Mentality","Padrino System","Bayanihan"], ans: 3 },
+  { q: "Ningas-kugon refers to:", opts: ["Starting a task with enthusiasm but not finishing well","Being very hospitable","Respecting elders","Praying regularly"], ans: 0 },
+  { q: "The Padrino System means:", opts: ["Helping neighbors during disasters","Employing relatives in government regardless of skills","Practicing religious traditions","Celebrating costly fiestas"], ans: 1 },
+  { q: "Which gesture of respect involves pressing an elder's hand to the forehead?", opts: ["Mano po / Pagmamano","Ati-Atihan","Bayanihan","Damayan"], ans: 0 },
+  { q: "Colonial Mentality is best described as:", opts: ["Loving local products","Preferring imported products believing local ones are inferior","Being proud of Filipino heritage","Celebrating local traditions"], ans: 1 },
+  { q: "The T'boli people are found in:", opts: ["Basilan","Bukidnon","South Cotabato & Sultan Kudarat","Davao del Norte"], ans: 2 },
+];
+
+let answered = new Array(questions.length).fill(null);
+let submitted = false;
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  questions.forEach((item, i) => {
+    const card = document.createElement('div');
+    card.className = 'q-card';
+    card.id = 'qcard-' + i;
+    card.innerHTML = `
+      <div class="q-num">Question ${i+1} of ${questions.length}</div>
+      <div class="q-text">${item.q}</div>
+      <div class="options" id="opts-${i}">
+        ${item.opts.map((o, j) => `
+          <button class="opt-btn" id="opt-${i}-${j}" onclick="selectOpt(${i},${j})">
+            ${['A','B','C','D'][j]}. ${o}
+          </button>`).join('')}
+      </div>
+      <div class="fb-box" id="fb-${i}"></div>
+    `;
+    container.appendChild(card);
+  });
+  updateProgress();
+}
+
+function selectOpt(qi, oi) {
+  if (submitted) return;
+  answered[qi] = oi;
+  // highlight selected
+  for(let j=0; j<4; j++){
+    const b = document.getElementById(`opt-${qi}-${j}`);
+    if(b) b.style.background = j===oi ? '#d0eaff' : '#f5f5f5';
+    if(b) b.style.borderColor = j===oi ? 'var(--blue)' : '#e0e0e0';
+  }
+  updateProgress();
+}
+
+function updateProgress() {
+  const done = answered.filter(a => a !== null).length;
+  const pct = (done / questions.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${done} / ${questions.length} answered`;
+}
+
+function submitQuiz() {
+  if (submitted) return;
+  const unanswered = answered.filter(a => a === null).length;
+  if (unanswered > 0) {
+    if (!confirm(`You have ${unanswered} unanswered question(s). Submit anyway?`)) return;
+  }
+  submitted = true;
+  let score = 0;
+  questions.forEach((item, i) => {
+    const card = document.getElementById('qcard-' + i);
+    const fb = document.getElementById('fb-' + i);
+    const sel = answered[i];
+    for(let j=0; j<4; j++){
+      const b = document.getElementById(`opt-${i}-${j}`);
+      if(!b) continue;
+      b.disabled = true;
+      b.style.background = '';
+      b.style.borderColor = '';
+      if(j === item.ans) b.classList.add('correct');
+      else if(j === sel && sel !== item.ans) b.classList.add('wrong');
+    }
+    if(sel === item.ans) {
+      score++;
+      card.classList.add('correct-card');
+      fb.className = 'fb-box correct show';
+      fb.textContent = '✅ Correct!';
+    } else {
+      card.classList.add('wrong-card');
+      fb.className = 'fb-box wrong show';
+      fb.textContent = `❌ The correct answer is: ${item.opts[item.ans]}`;
+    }
+  });
+  // show score
+  const bar = document.getElementById('scoreBar');
+  bar.classList.add('show');
+  document.getElementById('scoreNum').textContent = `${score} / ${questions.length}`;
+  const pct = Math.round((score/questions.length)*100);
+  let msg = pct >= 90 ? '🏆 Outstanding! Ikaw na ang Bayani ng Kultura!' :
+            pct >= 75 ? '🌟 Great job! Keep it up!' :
+            pct >= 60 ? '👍 Good effort! Review the missed items.' :
+            '📖 Keep studying – you\'ll get better!';
+  document.getElementById('scoreMsg').textContent = msg;
+  document.getElementById('submitBtn').style.display = 'none';
+  bar.scrollIntoView({behavior:'smooth'});
+}
+
+function retryQuiz() {
+  answered = new Array(questions.length).fill(null);
+  submitted = false;
+  document.getElementById('scoreBar').classList.remove('show');
+  document.getElementById('submitBtn').style.display = 'block';
+  buildQuiz();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function showTab(id) {
+  document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+buildQuiz();
+</script>
+
+</body>
+</html>
