@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -25,318 +24,541 @@
     min-height: 100vh;
   }
 
-/* ── HERO ── */
-.hero {
-background: linear-gradient(135deg, #EF476F 0%, #FF6B35 50%, #FFD166 100%);
-padding: 36px 20px 28px;
-text-align: center;
-position: relative;
-overflow: hidden;
-}
-.hero::before {
-content: “🌺🌴🌺🌴🌺🌴🌺🌴🌺”;
-position: absolute; top: 6px; left: 0; right: 0;
-font-size: 18px; opacity: 0.35; letter-spacing: 6px;
-}
-.hero h1 {
-font-family: ‘Fredoka One’, cursive;
-font-size: 2.2rem;
-color: #fff;
-text-shadow: 2px 3px 0 rgba(0,0,0,0.2);
-line-height: 1.1;
-}
-.hero p {
-color: #fff;
-font-weight: 700;
-font-size: 1rem;
-margin-top: 6px;
-opacity: 0.92;
-}
-.badge {
-display: inline-block;
-background: #fff;
-color: var(–coral);
-font-family: ‘Fredoka One’, cursive;
-font-size: 0.85rem;
-padding: 4px 14px;
-border-radius: 99px;
-margin-top: 10px;
-box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-}
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #EF476F 0%, #FF6B35 50%, #FFD166 100%);
+    padding: 36px 20px 28px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "🌺🌴🌺🌴🌺🌴🌺🌴🌺";
+    position: absolute; top: 6px; left: 0; right: 0;
+    font-size: 18px; opacity: 0.35; letter-spacing: 6px;
+  }
+  .hero h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.2rem;
+    color: #fff;
+    text-shadow: 2px 3px 0 rgba(0,0,0,0.2);
+    line-height: 1.1;
+  }
+  .hero p {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-top: 6px;
+    opacity: 0.92;
+  }
+  .badge {
+    display: inline-block;
+    background: #fff;
+    color: var(--coral);
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.85rem;
+    padding: 4px 14px;
+    border-radius: 99px;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  }
 
-/* ── TABS ── */
-.tabs {
-display: flex;
-justify-content: center;
-gap: 8px;
-padding: 18px 16px 0;
-flex-wrap: wrap;
-}
-.tab-btn {
-font-family: ‘Fredoka One’, cursive;
-font-size: 1rem;
-padding: 10px 22px;
-border: none;
-border-radius: 99px;
-cursor: pointer;
-transition: all 0.2s;
-background: #e0e0e0;
-color: #777;
-}
-.tab-btn.active {
-background: var(–coral);
-color: #fff;
-box-shadow: 0 4px 12px rgba(239,71,111,0.35);
-transform: translateY(-2px);
-}
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 18px 16px 0;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #e0e0e0;
+    color: #777;
+  }
+  .tab-btn.active {
+    background: var(--coral);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(239,71,111,0.35);
+    transform: translateY(-2px);
+  }
 
-/* ── CONTENT ── */
-.content { display: none; padding: 20px 16px 60px; max-width: 860px; margin: 0 auto; }
-.content.active { display: block; animation: fadeUp 0.35s ease; }
-@keyframes fadeUp {
-from { opacity: 0; transform: translateY(16px); }
-to   { opacity: 1; transform: translateY(0); }
-}
+  /* ── CONTENT ── */
+  .content { display: none; padding: 20px 16px 60px; max-width: 860px; margin: 0 auto; }
+  .content.active { display: block; animation: fadeUp 0.35s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 
-/* ── SECTION CARD ── */
-.section-card {
-background: var(–card);
-border-radius: 20px;
-padding: 22px 20px;
-margin-bottom: 18px;
-box-shadow: 0 4px 16px rgba(0,0,0,0.07);
-border-left: 6px solid var(–teal);
-}
-.section-card.coral  { border-left-color: var(–coral); }
-.section-card.blue   { border-left-color: var(–blue); }
-.section-card.sun    { border-left-color: var(–sun); }
-.section-card.accent { border-left-color: var(–accent); }
-.section-title {
-font-family: ‘Fredoka One’, cursive;
-font-size: 1.25rem;
-display: flex; align-items: center; gap: 8px;
-margin-bottom: 10px;
-}
-.section-card p, .section-card li { font-size: 0.95rem; line-height: 1.65; margin-bottom: 6px; }
-.section-card ul { padding-left: 20px; }
-.section-card ul li { margin-bottom: 4px; }
+  /* ── SECTION CARD ── */
+  .section-card {
+    background: var(--card);
+    border-radius: 20px;
+    padding: 22px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    border-left: 6px solid var(--teal);
+  }
+  .section-card.coral  { border-left-color: var(--coral); }
+  .section-card.blue   { border-left-color: var(--blue); }
+  .section-card.sun    { border-left-color: var(--sun); }
+  .section-card.accent { border-left-color: var(--accent); }
+  .section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.25rem;
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 10px;
+  }
+  .section-card p, .section-card li { font-size: 0.95rem; line-height: 1.65; margin-bottom: 6px; }
+  .section-card ul { padding-left: 20px; }
+  .section-card ul li { margin-bottom: 4px; }
 
-/* ── GROUPS GRID ── */
-.groups-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-gap: 14px;
-margin-top: 10px;
-}
-.group-card {
-background: linear-gradient(135deg, #fff9f0, #fff);
-border: 2px solid #ffe0b2;
-border-radius: 16px;
-padding: 14px 16px;
-transition: transform 0.2s;
-}
-.group-card:hover { transform: translateY(-3px); }
-.group-card h4 {
-font-family: ‘Fredoka One’, cursive;
-font-size: 1rem;
-color: var(–coral);
-margin-bottom: 4px;
-}
-.group-card .loc {
-font-size: 0.8rem;
-color: var(–blue);
-font-weight: 700;
-margin-bottom: 6px;
-}
-.group-card p { font-size: 0.82rem; color: #555; line-height: 1.5; }
+  /* ── GROUPS GRID ── */
+  .groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 14px;
+    margin-top: 10px;
+  }
+  .group-card {
+    background: linear-gradient(135deg, #fff9f0, #fff);
+    border: 2px solid #ffe0b2;
+    border-radius: 16px;
+    padding: 14px 16px;
+    transition: transform 0.2s;
+  }
+  .group-card:hover { transform: translateY(-3px); }
+  .group-card h4 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    color: var(--coral);
+    margin-bottom: 4px;
+  }
+  .group-card .loc {
+    font-size: 0.8rem;
+    color: var(--blue);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .group-card p { font-size: 0.82rem; color: #555; line-height: 1.5; }
 
-/* ── TRAITS ── */
-.traits-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 12px;
-margin-top: 10px;
-}
-.trait-pill {
-border-radius: 14px;
-padding: 12px 14px;
-font-size: 0.88rem;
-font-weight: 700;
-display: flex; align-items: flex-start; gap: 8px;
-}
-.trait-pill.positive { background: #e8fdf5; color: #046e50; }
-.trait-pill.negative { background: #fff0f3; color: #9b1a35; }
-.trait-pill .emoji { font-size: 1.3rem; line-height: 1; }
+  /* ── TRAITS ── */
+  .traits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  .trait-pill {
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .trait-pill.positive { background: #e8fdf5; color: #046e50; }
+  .trait-pill.negative { background: #fff0f3; color: #9b1a35; }
+  .trait-pill .emoji { font-size: 1.3rem; line-height: 1; }
 
-/* ── TABLE ── */
-.styled-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 10px; }
-.styled-table th {
-background: var(–coral);
-color: #fff;
-font-family: ‘Fredoka One’, cursive;
-font-size: 0.95rem;
-padding: 10px 12px;
-text-align: left;
-}
-.styled-table td { padding: 8px 12px; border-bottom: 1px solid #f0e0d0; }
-.styled-table tr:nth-child(even) td { background: #fff9f4; }
+  /* ── TABLE ── */
+  .styled-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin-top: 10px; }
+  .styled-table th {
+    background: var(--coral);
+    color: #fff;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    text-align: left;
+  }
+  .styled-table td { padding: 8px 12px; border-bottom: 1px solid #f0e0d0; }
+  .styled-table tr:nth-child(even) td { background: #fff9f4; }
 
-/* ── HERITAGE ── */
-.heritage-card {
-background: linear-gradient(135deg, #073B4C, #118AB2);
-color: #fff;
-border-radius: 18px;
-padding: 18px 20px;
-margin-bottom: 12px;
-}
-.heritage-card h4 { font-family: ‘Fredoka One’, cursive; font-size: 1.05rem; margin-bottom: 6px; color: var(–sun); }
-.heritage-card p { font-size: 0.87rem; opacity: 0.92; line-height: 1.6; }
+  /* ── HERITAGE ── */
+  .heritage-card {
+    background: linear-gradient(135deg, #073B4C, #118AB2);
+    color: #fff;
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .heritage-card h4 { font-family: 'Fredoka One', cursive; font-size: 1.05rem; margin-bottom: 6px; color: var(--sun); }
+  .heritage-card p { font-size: 0.87rem; opacity: 0.92; line-height: 1.6; }
 
-/* ── KEY TERMS ── */
-.term-box {
-background: #fffbe6;
-border: 2px dashed var(–sun);
-border-radius: 14px;
-padding: 12px 16px;
-margin-bottom: 10px;
-}
-.term-box strong { color: var(–accent); font-size: 0.95rem; }
-.term-box p { font-size: 0.87rem; color: #555; margin-top: 2px; }
+  /* ── KEY TERMS ── */
+  .term-box {
+    background: #fffbe6;
+    border: 2px dashed var(--sun);
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+  }
+  .term-box strong { color: var(--accent); font-size: 0.95rem; }
+  .term-box p { font-size: 0.87rem; color: #555; margin-top: 2px; }
 
-/* ── QUIZ ── */
-.quiz-header {
-text-align: center;
-margin-bottom: 24px;
-}
-.quiz-header h2 { font-family: ‘Fredoka One’, cursive; font-size: 1.7rem; color: var(–blue); }
-.quiz-header p { font-size: 0.9rem; color: #666; margin-top: 4px; }
+  /* ── QUIZ ── */
+  .quiz-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .quiz-header h2 { font-family: 'Fredoka One', cursive; font-size: 1.7rem; color: var(--blue); }
+  .quiz-header p { font-size: 0.9rem; color: #666; margin-top: 4px; }
 
-.q-card {
-background: var(–card);
-border-radius: 18px;
-padding: 20px 20px 16px;
-margin-bottom: 16px;
-box-shadow: 0 3px 14px rgba(0,0,0,0.08);
-border-top: 4px solid var(–blue);
-transition: box-shadow 0.2s;
-}
-.q-card.correct-card { border-top-color: var(–teal); background: #f0fdf9; }
-.q-card.wrong-card   { border-top-color: var(–coral); background: #fff5f7; }
+  .q-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 20px 20px 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+    border-top: 4px solid var(--blue);
+    transition: box-shadow 0.2s;
+  }
+  .q-card.correct-card { border-top-color: var(--teal); background: #f0fdf9; }
+  .q-card.wrong-card   { border-top-color: var(--coral); background: #fff5f7; }
 
-.q-num {
-font-family: ‘Fredoka One’, cursive;
-font-size: 0.8rem;
-color: var(–blue);
-margin-bottom: 6px;
-}
-.q-text { font-weight: 800; font-size: 0.97rem; margin-bottom: 14px; line-height: 1.5; }
+  .q-num {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.8rem;
+    color: var(--blue);
+    margin-bottom: 6px;
+  }
+  .q-text { font-weight: 800; font-size: 0.97rem; margin-bottom: 14px; line-height: 1.5; }
 
-.options { display: flex; flex-direction: column; gap: 8px; }
-.opt-btn {
-background: #f5f5f5;
-border: 2px solid #e0e0e0;
-border-radius: 12px;
-padding: 10px 14px;
-font-family: ‘Nunito’, sans-serif;
-font-size: 0.9rem;
-font-weight: 700;
-text-align: left;
-cursor: pointer;
-transition: all 0.18s;
-}
-.opt-btn:hover:not(:disabled) { background: #e8f4ff; border-color: var(–blue); }
-.opt-btn.correct { background: #d4fce8; border-color: var(–teal); color: #046e50; }
-.opt-btn.wrong   { background: #ffe0e6; border-color: var(–coral); color: #9b1a35; }
-.opt-btn:disabled { cursor: default; }
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .opt-btn {
+    background: #f5f5f5;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .opt-btn:hover:not(:disabled) { background: #e8f4ff; border-color: var(--blue); }
+  .opt-btn.correct { background: #d4fce8; border-color: var(--teal); color: #046e50; }
+  .opt-btn.wrong   { background: #ffe0e6; border-color: var(--coral); color: #9b1a35; }
+  .opt-btn:disabled { cursor: default; }
 
-.fb-box {
-margin-top: 10px;
-padding: 10px 14px;
-border-radius: 12px;
-font-size: 0.87rem;
-font-weight: 700;
-display: none;
-}
-.fb-box.show { display: block; animation: fadeUp 0.3s ease; }
-.fb-box.correct { background: #d4fce8; color: #046e50; }
-.fb-box.wrong   { background: #ffe0e6; color: #9b1a35; }
+  .fb-box {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.87rem;
+    font-weight: 700;
+    display: none;
+  }
+  .fb-box.show { display: block; animation: fadeUp 0.3s ease; }
+  .fb-box.correct { background: #d4fce8; color: #046e50; }
+  .fb-box.wrong   { background: #ffe0e6; color: #9b1a35; }
 
-/* score */
-.score-bar {
-background: var(–card);
-border-radius: 18px;
-padding: 20px;
-text-align: center;
-margin-bottom: 20px;
-box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-display: none;
-}
-.score-bar.show { display: block; animation: fadeUp 0.4s ease; }
-.score-big { font-family: ‘Fredoka One’, cursive; font-size: 3rem; color: var(–coral); }
-.score-label { font-size: 1rem; color: #555; margin-top: 2px; }
-.score-msg { font-size: 1.1rem; font-weight: 800; margin-top: 8px; }
+  /* score */
+  .score-bar {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    display: none;
+  }
+  .score-bar.show { display: block; animation: fadeUp 0.4s ease; }
+  .score-big { font-family: 'Fredoka One', cursive; font-size: 3rem; color: var(--coral); }
+  .score-label { font-size: 1rem; color: #555; margin-top: 2px; }
+  .score-msg { font-size: 1.1rem; font-weight: 800; margin-top: 8px; }
 
-.btn-submit, .btn-retry {
-display: block;
-width: 100%;
-max-width: 340px;
-margin: 20px auto 0;
-font-family: ‘Fredoka One’, cursive;
-font-size: 1.15rem;
-padding: 14px;
-border: none;
-border-radius: 99px;
-cursor: pointer;
-transition: all 0.2s;
-}
-.btn-submit {
-background: linear-gradient(135deg, var(–blue), var(–teal));
-color: #fff;
-box-shadow: 0 4px 16px rgba(6,214,160,0.35);
-}
-.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(6,214,160,0.45); }
-.btn-retry {
-background: linear-gradient(135deg, var(–coral), var(–accent));
-color: #fff;
-box-shadow: 0 4px 16px rgba(239,71,111,0.3);
-}
-.btn-retry:hover { transform: translateY(-2px); }
+  .btn-submit, .btn-retry {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    margin: 20px auto 0;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.15rem;
+    padding: 14px;
+    border: none;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-submit {
+    background: linear-gradient(135deg, var(--blue), var(--teal));
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(6,214,160,0.35);
+  }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(6,214,160,0.45); }
+  .btn-retry {
+    background: linear-gradient(135deg, var(--coral), var(--accent));
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(239,71,111,0.3);
+  }
+  .btn-retry:hover { transform: translateY(-2px); }
 
-/* progress */
-.progress-wrap { margin-bottom: 16px; }
-.progress-track {
-height: 10px;
-background: #e8e8e8;
-border-radius: 99px;
-overflow: hidden;
-}
-.progress-fill {
-height: 100%;
-background: linear-gradient(90deg, var(–teal), var(–blue));
-border-radius: 99px;
-transition: width 0.4s ease;
-width: 0%;
-}
-.progress-text { font-size: 0.8rem; color: #888; text-align: right; margin-top: 3px; }
+  /* progress */
+  .progress-wrap { margin-bottom: 16px; }
+  .progress-track {
+    height: 10px;
+    background: #e8e8e8;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--blue));
+    border-radius: 99px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-text { font-size: 0.8rem; color: #888; text-align: right; margin-top: 3px; }
 
-/* callout */
-.callout {
-background: linear-gradient(135deg, #fff3cd, #ffe8a1);
-border-left: 5px solid var(–sun);
-border-radius: 12px;
-padding: 12px 16px;
-font-size: 0.88rem;
-margin: 10px 0;
-color: #5a3e00;
-}
+  /* callout */
+  .callout {
+    background: linear-gradient(135deg, #fff3cd, #ffe8a1);
+    border-left: 5px solid var(--sun);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 0.88rem;
+    margin: 10px 0;
+    color: #5a3e00;
+  }
 
-@media (max-width: 520px) {
-.hero h1 { font-size: 1.7rem; }
-.traits-grid { grid-template-columns: 1fr; }
-.groups-grid { grid-template-columns: 1fr; }
-}
+  @media (max-width: 520px) {
+    .hero h1 { font-size: 1.7rem; }
+    .traits-grid { grid-template-columns: 1fr; }
+    .groups-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── MEMORY GUIDE STYLES ── */
+  .mg-region-header {
+    border-radius: 18px;
+    padding: 16px 20px;
+    margin: 22px 0 14px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .mg-region-header.luzon  { background: linear-gradient(135deg,#1a7a4a,#06D6A0); color:#fff; }
+  .mg-region-header.visayas{ background: linear-gradient(135deg,#0d5fa3,#118AB2); color:#fff; }
+  .mg-region-header.mindanao{background: linear-gradient(135deg,#b02040,#EF476F); color:#fff; }
+
+  .mg-region-header .rg-emoji { font-size: 2rem; }
+  .mg-region-header h2 { font-family: 'Fredoka One', cursive; font-size: 1.3rem; line-height: 1.2; }
+  .mg-region-header p  { font-size: 0.82rem; opacity: 0.9; margin-top: 2px; }
+
+  .mg-pattern {
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .mg-pattern.luzon   { background:#e8fdf5; color:#1a7a4a; border-left:4px solid #06D6A0; }
+  .mg-pattern.visayas { background:#e3f2fd; color:#0d5fa3; border-left:4px solid #118AB2; }
+  .mg-pattern.mindanao{ background:#fff0f3; color:#b02040; border-left:4px solid #EF476F; }
+
+  .mg-groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
+    gap: 14px;
+    margin-bottom: 8px;
+  }
+  .mg-card {
+    background: #fff;
+    border-radius: 18px;
+    padding: 16px 16px 14px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+    border-top: 5px solid #ccc;
+    transition: transform 0.2s;
+  }
+  .mg-card:hover { transform: translateY(-3px); }
+  .mg-card.luzon   { border-top-color: #06D6A0; }
+  .mg-card.visayas { border-top-color: #118AB2; }
+  .mg-card.mindanao{ border-top-color: #EF476F; }
+
+  .mg-card-num {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    opacity: 0.5;
+    margin-bottom: 2px;
+  }
+  .mg-card h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    color: var(--navy);
+  }
+  .mg-row {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 0.85rem; margin-bottom: 5px; line-height: 1.4;
+  }
+  .mg-row .mg-icon { font-size: 1rem; min-width: 22px; text-align: center; }
+  .mg-row .mg-label { font-weight: 700; color: #777; min-width: 64px; }
+  .mg-row .mg-val { color: var(--navy); font-weight: 600; flex: 1; }
+  .mg-star {
+    margin-top: 10px;
+    background: #fffbe6;
+    border-radius: 10px;
+    padding: 7px 10px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: #5a3e00;
+    border: 1.5px dashed #FFD166;
+  }
+
+  /* Quick Review */
+  .qr-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .qr-card {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-size: 0.87rem;
+  }
+  .qr-card .qr-q { font-weight: 700; color: var(--sun); margin-bottom: 3px; font-size: 0.85rem; }
+  .qr-card .qr-a { font-family: 'Fredoka One', cursive; font-size: 1rem; color: var(--teal); }
+
+  /* Big 3 summary */
+  .big3-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 12px; }
+  .big3-card {
+    border-radius: 16px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .big3-card.luzon   { background: #e8fdf5; border: 2px solid #06D6A0; }
+  .big3-card.visayas { background: #e3f2fd; border: 2px solid #118AB2; }
+  .big3-card.mindanao{ background: #fff0f3; border: 2px solid #EF476F; }
+  .big3-card .big3-emoji { font-size: 2rem; }
+  .big3-card h4 { font-family: 'Fredoka One', cursive; font-size: 0.95rem; margin: 6px 0 6px; }
+  .big3-card ul { list-style: none; font-size: 0.8rem; font-weight: 700; color: #444; text-align: left; padding: 0; }
+  .big3-card ul li::before { content: "→ "; color: var(--coral); }
+
+  .exam-tip {
+    background: linear-gradient(135deg, #073B4C, #118AB2);
+    color: #fff;
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin-top: 18px;
+  }
+  .exam-tip h3 { font-family: 'Fredoka One', cursive; font-size: 1.1rem; color: var(--sun); margin-bottom: 10px; }
+  .exam-tip ul { padding-left: 18px; font-size: 0.88rem; line-height: 2; opacity: 0.95; }
+
+  @media (max-width: 520px) {
+    .big3-grid { grid-template-columns: 1fr; }
+    .mg-groups-grid { grid-template-columns: 1fr; }
+  }
+  .pt-section-header {
+    background: linear-gradient(135deg, var(--blue), var(--navy));
+    color: #fff;
+    border-radius: 16px;
+    padding: 14px 20px;
+    margin: 24px 0 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pt-section-header h3 { font-family: 'Fredoka One', cursive; font-size: 1.1rem; }
+  .pt-section-header .pts { font-size: 0.8rem; opacity: 0.85; margin-left: auto; background: rgba(255,255,255,0.2); padding: 3px 10px; border-radius: 99px; }
+
+  /* TF cards */
+  .tf-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .tf-card.correct-card { background: #f0fdf9; border-left: 4px solid var(--teal); }
+  .tf-card.wrong-card   { background: #fff5f7; border-left: 4px solid var(--coral); }
+  .tf-num { font-family: 'Fredoka One', cursive; font-size: 0.85rem; color: var(--blue); min-width: 26px; }
+  .tf-text { font-size: 0.92rem; font-weight: 700; flex: 1; line-height: 1.5; }
+  .tf-btns { display: flex; gap: 6px; }
+  .tf-btn {
+    font-family: 'Fredoka One', cursive; font-size: 0.9rem;
+    padding: 6px 14px; border: 2px solid #ddd; border-radius: 99px;
+    cursor: pointer; background: #f5f5f5; transition: all 0.18s;
+  }
+  .tf-btn:hover:not(:disabled) { background: #e8f4ff; border-color: var(--blue); }
+  .tf-btn.selected { background: #d0eaff; border-color: var(--blue); }
+  .tf-btn.correct { background: #d4fce8; border-color: var(--teal); color: #046e50; }
+  .tf-btn.wrong   { background: #ffe0e6; border-color: var(--coral); color: #9b1a35; }
+  .tf-fb { font-size: 0.78rem; font-weight: 700; margin-top: 4px; display: none; }
+  .tf-fb.show { display: block; }
+
+  /* Identification */
+  .id-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+  .id-card.correct-card { background: #f0fdf9; border-left: 4px solid var(--teal); }
+  .id-card.wrong-card   { background: #fff5f7; border-left: 4px solid var(--coral); }
+  .id-label { font-size: 0.92rem; font-weight: 800; margin-bottom: 8px; }
+  .id-input {
+    width: 100%; padding: 9px 14px; border: 2px solid #ddd; border-radius: 10px;
+    font-family: 'Nunito', sans-serif; font-size: 0.92rem; font-weight: 700;
+    outline: none; transition: border-color 0.18s;
+  }
+  .id-input:focus { border-color: var(--blue); }
+  .id-input.correct { border-color: var(--teal); background: #d4fce8; color: #046e50; }
+  .id-input.wrong   { border-color: var(--coral); background: #ffe0e6; color: #9b1a35; }
+  .id-fb { font-size: 0.78rem; font-weight: 700; margin-top: 4px; display: none; }
+  .id-fb.show { display: block; }
+
+  /* Matching */
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+  .match-col-a, .match-col-b {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+  .match-col-a h4, .match-col-b h4 {
+    font-family: 'Fredoka One', cursive; font-size: 0.95rem;
+    color: var(--coral); margin-bottom: 10px;
+  }
+  .match-item {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 8px; font-size: 0.88rem; font-weight: 700;
+  }
+  .match-item span { min-width: 20px; color: var(--blue); font-family: 'Fredoka One', cursive; }
+  .match-select {
+    border: 2px solid #ddd; border-radius: 8px; padding: 5px 8px;
+    font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700;
+    background: #f9f9f9; cursor: pointer; flex: 1; max-width: 160px;
+  }
+  .match-select.correct { border-color: var(--teal); background: #d4fce8; color: #046e50; }
+  .match-select.wrong   { border-color: var(--coral); background: #ffe0e6; color: #9b1a35; }
+  .match-fb { font-size: 0.75rem; font-weight: 700; color: var(--coral); }
+
+  .pt-score-bar {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    display: none;
+  }
+  .pt-score-bar.show { display: block; animation: fadeUp 0.4s ease; }
+  .pt-score-breakdown { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 14px; }
+  .pt-score-item { background: #f5f5f5; border-radius: 12px; padding: 8px 16px; font-size: 0.85rem; font-weight: 700; }
+
+  @media (max-width: 520px) {
+    .match-grid { grid-template-columns: 1fr; }
+  }
 </style>
-
 </head>
 <body>
 
@@ -348,15 +570,15 @@ color: #5a3e00;
 
 <div class="tabs">
   <button class="tab-btn active" onclick="showTab('reviewer')">📖 Reviewer</button>
-  <button class="tab-btn" onclick="showTab('quiz')">🧠 Quiz</button>
+  <button class="tab-btn" onclick="showTab('memory')">🧠 Memory Guide</button>
+  <button class="tab-btn" onclick="showTab('quiz')">❓ Quiz 1</button>
+  <button class="tab-btn" onclick="showTab('practice')">✏️ Practice Test</button>
 </div>
 
 <!-- ═══════════════ REVIEWER ═══════════════ -->
-
 <div id="reviewer" class="content active">
 
   <!-- INTRO -->
-
   <div class="section-card coral">
     <div class="section-title">👥 Who Are the Filipino People?</div>
     <p>Filipinos are unique. Some are products of <strong>interracial marriages</strong> called <em>mestizos</em>. Their physical features reflect their mixed ancestry.</p>
@@ -365,7 +587,6 @@ color: #5a3e00;
   </div>
 
   <!-- LUZON GROUPS -->
-
   <div class="section-card">
     <div class="section-title">🏔️ Indigenous Groups of Luzon</div>
     <div class="groups-grid">
@@ -406,7 +627,6 @@ color: #5a3e00;
   </div>
 
   <!-- VISAYAS GROUPS -->
-
   <div class="section-card blue">
     <div class="section-title">🌊 Indigenous Groups of Visayas</div>
     <div class="groups-grid">
@@ -419,7 +639,6 @@ color: #5a3e00;
   </div>
 
   <!-- MINDANAO GROUPS -->
-
   <div class="section-card accent">
     <div class="section-title">🌿 Indigenous Groups of Mindanao</div>
     <div class="groups-grid">
@@ -464,7 +683,6 @@ color: #5a3e00;
   </div>
 
   <!-- RELIGION & LANGUAGE -->
-
   <div class="section-card sun">
     <div class="section-title">🙏 Religion & 🗣️ Language</div>
     <p><strong>Religion:</strong> The Philippines is the only predominantly Catholic nation in Asia. About <strong>90%</strong> are Roman Catholics. The rest are non-Catholics: Muslims, Iglesia ni Cristo, Aglipayan, Evangelists, and other Christian faiths.</p>
@@ -472,7 +690,6 @@ color: #5a3e00;
   </div>
 
   <!-- HERITAGE SITES -->
-
   <div class="section-card blue">
     <div class="section-title">🏛️ Heritage Sites & Events</div>
     <p style="margin-bottom:12px;">Heritage sites must meet the criteria set by <strong>World Heritage Convention</strong> members to be included in the World Heritage list.</p>
@@ -487,7 +704,6 @@ color: #5a3e00;
   </div>
 
   <!-- TRAITS -->
-
   <div class="section-card coral">
     <div class="section-title">💛 Filipino Traits & Values</div>
     <p style="margin-bottom:10px;"><strong>Positive Traits:</strong></p>
@@ -513,7 +729,6 @@ color: #5a3e00;
   </div>
 
   <!-- KEY TERMS -->
-
   <div class="section-card">
     <div class="section-title">📌 Key Terms to Remember</div>
     <div class="term-box"><strong>Bayanihan</strong><p>Filipino spirit of communal unity and cooperation (damayan) — helping others without expecting anything in return.</p></div>
@@ -532,8 +747,230 @@ color: #5a3e00;
 
 </div><!-- end reviewer -->
 
-<!-- ═══════════════ QUIZ ═══════════════ -->
+<!-- ═══════════════ MEMORY GUIDE ═══════════════ -->
+<div id="memory" class="content">
 
+  <div class="quiz-header">
+    <h2>🧠 Indigenous Groups Memory Guide</h2>
+    <p>Location · Lifestyle · Culture · Key Identity</p>
+  </div>
+
+  <!-- ══ LUZON ══ -->
+  <div class="mg-region-header luzon">
+    <div class="rg-emoji">⛰️</div>
+    <div>
+      <h2>🟢 LUZON — Mountain &amp; Preserved Traditions</h2>
+      <p>Live in mountains → preserve culture → strong traditions</p>
+    </div>
+  </div>
+  <div class="mg-pattern luzon">🔑 Key Pattern: Mountain people who kept their ancient customs alive through isolation and strong community leadership.</div>
+  <div class="mg-groups-grid">
+
+    <div class="mg-card luzon">
+      <div class="mg-card-num">GROUP 1</div>
+      <h3>Ifugao</h3>
+      <div class="mg-row"><span class="mg-icon">📍</span><span class="mg-label">Location</span><span class="mg-val">Cordillera, Luzon</span></div>
+      <div class="mg-row"><span class="mg-icon">🌾</span><span class="mg-label">Known for</span><span class="mg-val">Rice Terraces</span></div>
+      <div class="mg-row"><span class="mg-icon">🎎</span><span class="mg-label">Culture</span><span class="mg-val">Rituals, dances, farming</span></div>
+      <div class="mg-star">⭐ Engineering + agriculture</div>
+    </div>
+
+    <div class="mg-card luzon">
+      <div class="mg-card-num">GROUP 2</div>
+      <h3>Kalinga</h3>
+      <div class="mg-row"><span class="mg-icon">📍</span><span class="mg-label">Location</span><span class="mg-val">Mountain Province</span></div>
+      <div class="mg-row"><span class="mg-icon">🖋️</span><span class="mg-label">Known for</span><span class="mg-val">Tattoos (bravery symbol)</span></div>
+      <div class="mg-row"><span class="mg-icon">🎶</span><span class="mg-label">Culture</span><span class="mg-val">Gongs (gangsa), dances</span></div>
+      <div class="mg-star">⭐ Warriors + body art</div>
+    </div>
+
+    <div class="mg-card luzon">
+      <div class="mg-card-num">GROUP 3</div>
+      <h3>Isneg</h3>
+      <div class="mg-row"><span class="mg-icon">📍</span><span class="mg-label">Location</span><span class="mg-val">Apayao (near rivers)</span></div>
+      <div class="mg-row"><span class="mg-icon">🌱</span><span class="mg-label">Known for</span><span class="mg-val">Kaingin farming</span></div>
+      <div class="mg-row"><span class="mg-icon">👑</span><span class="mg-label">Culture</span><span class="mg-val">Leader = <em>Kamenglan</em></span></div>
+      <div class="mg-star">⭐ River farmers + leadership</div>
+    </div>
+
+    <div class="mg-card luzon">
+      <div class="mg-card-num">GROUP 4</div>
+      <h3>Tingguian</h3>
+      <div class="mg-row"><span class="mg-icon">📍</span><span class="mg-label">Location</span><span class="mg-val">Abra</span></div>
+      <div class="mg-row"><span class="mg-icon">🌾</span><span class="mg-label">Known for</span><span class="mg-val">Rice farming</span></div>
+      <div class="mg-row"><span class="mg-icon">💎</span><span class="mg-label">Culture</span><span class="mg-val">Beads &amp; tattoos on arms</span></div>
+      <div class="mg-star">⭐ Decorated traditions</div>
+    </div>
+
+    <div class="mg-card luzon">
+      <div class="mg-card-num">GROUP 5</div>
+      <h3>Mangyan (Hanunuo)</h3>
+      <div class="mg-row"><span class="mg-icon">📍</span><span class="mg-label">Location</span><span class="mg-val">Mindoro</span></div>
+      <div class="mg-row"><span class="mg-icon">✍️</span><span class="mg-label">Known for</span><span class="mg-val">Buhid writing system</span></div>
+      <div class="mg-row"><span class="mg-icon">🏞️</span><span class="mg-label">Culture</span><span class="mg-val">Isolated, preserved traditions</span></div>
+      <div class="mg-star">⭐ Ancient writing + preserved culture</div>
+    </div>
+
+  </div>
+
+  <!-- ══ VISAYAS ══ -->
+  <div class="mg-region-header visayas">
+    <div class="rg-emoji">🎉</div>
+    <div>
+      <h2>🔵 VISAYAS — Festival &amp; Early People</h2>
+      <p>Early settlers → simple living → festivals</p>
+    </div>
+  </div>
+  <div class="mg-pattern visayas">🔑 Key Pattern: Among the earliest settlers of the Philippines who live simply and celebrate their harvest with vibrant festivals.</div>
+  <div class="mg-groups-grid">
+
+    <div class="mg-card visayas">
+      <div class="mg-card-num">GROUP 6</div>
+      <h3>Negritos / Ati (Aeta)</h3>
+      <div class="mg-row"><span class="mg-icon">📍</span><span class="mg-label">Location</span><span class="mg-val">Visayas (Panay, Negros…)</span></div>
+      <div class="mg-row"><span class="mg-icon">🎭</span><span class="mg-label">Known for</span><span class="mg-val">Ati-Atihan Festival</span></div>
+      <div class="mg-row"><span class="mg-icon">🏹</span><span class="mg-label">Lifestyle</span><span class="mg-val">Hunting, fishing, gathering</span></div>
+      <div class="mg-row"><span class="mg-icon">⛰️</span><span class="mg-label">Living</span><span class="mg-val">Mountains; move place to place</span></div>
+      <div class="mg-star">⭐ First Filipinos + festival culture</div>
+    </div>
+
+  </div>
+
+  <!-- ══ MINDANAO ══ -->
+  <div class="mg-region-header mindanao">
+    <div class="rg-emoji">🌊</div>
+    <div>
+      <h2>🔴 MINDANAO — Sea + Muslim + Rich Culture</h2>
+      <p>Sea + art + Islam influence</p>
+    </div>
+  </div>
+  <div class="mg-pattern mindanao">🔑 Key Pattern: Coastal and inland groups shaped by the sea, Islamic traditions, and rich artistic expression.</div>
+  <div class="mg-groups-grid">
+
+    <div class="mg-card mindanao">
+      <div class="mg-card-num">GROUP 7</div>
+      <h3>Badjao</h3>
+      <div class="mg-row"><span class="mg-icon">📍</span><span class="mg-label">Location</span><span class="mg-val">Sulu, coastal areas</span></div>
+      <div class="mg-row"><span class="mg-icon">🌊</span><span class="mg-label">Known for</span><span class="mg-val">Sea living (boats)</span></div>
+      <div class="mg-row"><span class="mg-icon">🐚</span><span class="mg-label">Work</span><span class="mg-val">Diving for pearls</span></div>
+      <div class="mg-star">⭐ Sea gypsies</div>
+    </div>
+
+    <div class="mg-card mindanao">
+      <div class="mg-card-num">GROUP 8</div>
+      <h3>Maranao</h3>
+      <div class="mg-row"><span class="mg-icon">📍</span><span class="mg-label">Location</span><span class="mg-val">Lanao</span></div>
+      <div class="mg-row"><span class="mg-icon">🐦</span><span class="mg-label">Known for</span><span class="mg-val">Sarimanok</span></div>
+      <div class="mg-row"><span class="mg-icon">🎨</span><span class="mg-label">Culture</span><span class="mg-val">Brass crafts, colorful clothing</span></div>
+      <div class="mg-row"><span class="mg-icon">👕</span><span class="mg-label">Clothing</span><span class="mg-val">Malong, kupia</span></div>
+      <div class="mg-star">⭐ Artistic + Muslim culture</div>
+    </div>
+
+    <div class="mg-card mindanao">
+      <div class="mg-card-num">GROUP 9</div>
+      <h3>Tausug</h3>
+      <div class="mg-row"><span class="mg-icon">📍</span><span class="mg-label">Location</span><span class="mg-val">Sulu</span></div>
+      <div class="mg-row"><span class="mg-icon">⚔️</span><span class="mg-label">Known for</span><span class="mg-val">Warriors</span></div>
+      <div class="mg-row"><span class="mg-icon">🌊</span><span class="mg-label">Culture</span><span class="mg-val">Strong leadership</span></div>
+      <div class="mg-star">⭐ Brave fighters</div>
+    </div>
+
+    <div class="mg-card mindanao">
+      <div class="mg-card-num">GROUP 10</div>
+      <h3>Yakan</h3>
+      <div class="mg-row"><span class="mg-icon">📍</span><span class="mg-label">Location</span><span class="mg-val">Basilan</span></div>
+      <div class="mg-row"><span class="mg-icon">🧵</span><span class="mg-label">Known for</span><span class="mg-val">Weaving</span></div>
+      <div class="mg-row"><span class="mg-icon">🐎</span><span class="mg-label">Skill</span><span class="mg-val">Horse riding</span></div>
+      <div class="mg-star">⭐ Weavers + riders</div>
+    </div>
+
+    <div class="mg-card mindanao">
+      <div class="mg-card-num">GROUP 11</div>
+      <h3>T'boli</h3>
+      <div class="mg-row"><span class="mg-icon">📍</span><span class="mg-label">Location</span><span class="mg-val">South Cotabato</span></div>
+      <div class="mg-row"><span class="mg-icon">🧶</span><span class="mg-label">Known for</span><span class="mg-val">Dream weaving</span></div>
+      <div class="mg-row"><span class="mg-icon">🎶</span><span class="mg-label">Culture</span><span class="mg-val">Music and art</span></div>
+      <div class="mg-star">⭐ Creative weavers</div>
+    </div>
+
+    <div class="mg-card mindanao">
+      <div class="mg-card-num">GROUP 12</div>
+      <h3>Manobo</h3>
+      <div class="mg-row"><span class="mg-icon">📍</span><span class="mg-label">Location</span><span class="mg-val">Bukidnon</span></div>
+      <div class="mg-row"><span class="mg-icon">🌳</span><span class="mg-label">Lifestyle</span><span class="mg-val">Farming, forest living</span></div>
+      <div class="mg-star">⭐ Simple rural life</div>
+    </div>
+
+  </div>
+
+  <!-- BIG 3 SUMMARY -->
+  <div class="section-card" style="margin-top:24px;">
+    <div class="section-title">📌 Master Memory Summary — 3 Big Ideas</div>
+    <div class="big3-grid">
+      <div class="big3-card luzon">
+        <div class="big3-emoji">⛰️</div>
+        <h4>LUZON<br>Mountain + Traditions</h4>
+        <ul>
+          <li>Ifugao → Rice terraces</li>
+          <li>Kalinga → Tattoos</li>
+          <li>Mangyan → Writing</li>
+          <li>Isneg → Kaingin</li>
+          <li>Tingguian → Beads</li>
+        </ul>
+      </div>
+      <div class="big3-card visayas">
+        <div class="big3-emoji">🎉</div>
+        <h4>VISAYAS<br>Festival</h4>
+        <ul>
+          <li>Ati → Ati-Atihan</li>
+          <li>First Filipinos</li>
+          <li>Hunters &amp; gatherers</li>
+        </ul>
+      </div>
+      <div class="big3-card mindanao">
+        <div class="big3-emoji">🌊</div>
+        <h4>MINDANAO<br>Sea + Art</h4>
+        <ul>
+          <li>Badjao → Sea gypsies</li>
+          <li>Maranao → Sarimanok</li>
+          <li>Yakan / T'boli → Weaving</li>
+          <li>Tausug → Warriors</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK REVIEW -->
+  <div class="section-card coral" style="margin-top:16px;">
+    <div class="section-title">⚡ Super Quick Review — Exam Ready!</div>
+    <div class="qr-grid">
+      <div class="qr-card"><div class="qr-q">Rice terraces?</div><div class="qr-a">→ Ifugao</div></div>
+      <div class="qr-card"><div class="qr-q">Tattoo warriors?</div><div class="qr-a">→ Kalinga</div></div>
+      <div class="qr-card"><div class="qr-q">Own writing (Buhid)?</div><div class="qr-a">→ Mangyan</div></div>
+      <div class="qr-card"><div class="qr-q">Ati-Atihan festival?</div><div class="qr-a">→ Ati / Negrito</div></div>
+      <div class="qr-card"><div class="qr-q">Sea gypsies?</div><div class="qr-a">→ Badjao</div></div>
+      <div class="qr-card"><div class="qr-q">Sarimanok?</div><div class="qr-a">→ Maranao</div></div>
+      <div class="qr-card"><div class="qr-q">Weaving?</div><div class="qr-a">→ Yakan / T'boli</div></div>
+      <div class="qr-card"><div class="qr-q">Kaingin farming?</div><div class="qr-a">→ Isneg</div></div>
+      <div class="qr-card"><div class="qr-q">Gangsa (gong)?</div><div class="qr-a">→ Kalinga / Ifugao</div></div>
+      <div class="qr-card"><div class="qr-q">Horse riders?</div><div class="qr-a">→ Yakan</div></div>
+      <div class="qr-card"><div class="qr-q">Dream weavers?</div><div class="qr-a">→ T'boli</div></div>
+      <div class="qr-card"><div class="qr-q">Brave warriors (Sulu)?</div><div class="qr-a">→ Tausug</div></div>
+    </div>
+  </div>
+
+  <!-- EXAM TIP -->
+  <div class="exam-tip">
+    <h3>🎯 Common Exam Questions — Be Ready!</h3>
+    <ul>
+      <li>📍 <strong>Location</strong> — Which island group? (Luzon / Visayas / Mindanao)</li>
+      <li>🎨 <strong>Unique culture/practice</strong> — What is each group known for?</li>
+      <li>🏠 <strong>Lifestyle</strong> — Mountain, sea, farming, or forest?</li>
+      <li>🏛️ <strong>Contribution</strong> — How do they add to Filipino culture?</li>
+    </ul>
+  </div>
+
+</div><!-- end memory -->
 <div id="quiz" class="content">
   <div class="quiz-header">
     <h2>🧠 Quiz Time!</h2>
@@ -542,19 +979,40 @@ color: #5a3e00;
 
   <div class="progress-wrap">
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="progress-text" id="progressText">0 / 25 answered</div>
+    <div class="progress-text" id="progressText">0 / 23 answered</div>
   </div>
 
   <div id="scoreBar" class="score-bar">
     <div class="score-big" id="scoreNum"></div>
-    <div class="score-label">out of 25 questions</div>
+    <div class="score-label">out of 23 questions</div>
     <div class="score-msg" id="scoreMsg"></div>
     <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
   </div>
 
   <div id="quizContainer"></div>
 
-<button class="btn-submit" id="submitBtn" onclick="submitQuiz()">✅ Submit Answers</button>
+  <button class="btn-submit" id="submitBtn" onclick="submitQuiz()">✅ Submit Answers</button>
+</div>
+
+<!-- ═══════════════ PRACTICE TEST ═══════════════ -->
+<div id="practice" class="content">
+
+  <div class="quiz-header">
+    <h2>✏️ Practice Test</h2>
+    <p>54 items · Sections A–E · Based on your worksheet</p>
+  </div>
+
+  <div id="ptScoreBar" class="pt-score-bar">
+    <div class="score-big" id="ptScoreNum"></div>
+    <div class="score-label">out of 54 points</div>
+    <div class="score-msg" id="ptScoreMsg"></div>
+    <div class="pt-score-breakdown" id="ptScoreBreakdown"></div>
+    <button class="btn-retry" style="margin-top:16px;" onclick="retryPractice()">🔄 Try Again</button>
+  </div>
+
+  <div id="practiceContainer"></div>
+
+  <button class="btn-submit" id="ptSubmitBtn" onclick="submitPracticeTest()">✅ Submit Practice Test</button>
 
 </div>
 
@@ -576,8 +1034,6 @@ const questions = [
   { q: "Approximately what percentage of Filipinos are Roman Catholics?", opts: ["70%","80%","90%","95%"], ans: 2 },
   { q: "Which native language is spoken by the majority of Filipinos?", opts: ["Tagalog","Cebuano","Ilocano","Waray"], ans: 1 },
   { q: "What are the two official languages of the Philippines?", opts: ["Tagalog and Cebuano","Filipino and English","Ilocano and Tagalog","English and Spanish"], ans: 1 },
-  { q: "Which heritage site is the Mestizo Section (house of Father Burgos and Leona Florentino) part of?", opts: ["Paoay Church","Historic City of Vigan","Rizal Park","Intramuros"], ans: 1 },
-  { q: "Paoay Church is located in which province?", opts: ["Ilocos Sur","Iloilo","Ilocos Norte","Mountain Province"], ans: 2 },
   { q: "What is Bayanihan?", opts: ["A Filipino dance","The Filipino spirit of communal unity and cooperation","A type of musical instrument","A Filipino festival"], ans: 1 },
   { q: "Which of the following is a POSITIVE Filipino trait?", opts: ["Ningas-kugon","Colonial Mentality","Padrino System","Bayanihan"], ans: 3 },
   { q: "Ningas-kugon refers to:", opts: ["Starting a task with enthusiasm but not finishing well","Being very hospitable","Respecting elders","Praying regularly"], ans: 0 },
@@ -695,7 +1151,314 @@ function showTab(id) {
 }
 
 buildQuiz();
-</script>
 
+/* ══════════════════════════════════════
+   PRACTICE TEST DATA & LOGIC
+══════════════════════════════════════ */
+const ptMC = [
+  { q:"What is bayanihan?", opts:["Laziness","Helping one another","Being late","Being rich"], ans:1 },
+  { q:"Which is a negative Filipino trait?", opts:["Hospitality","Honesty","Tardiness","Respect"], ans:2 },
+  { q:"What are the official languages of the Philippines?", opts:["English and Spanish","Filipino and English","Tagalog only","Cebuano only"], ans:1 },
+  { q:"Which group is known as 'sea gypsies'?", opts:["Ifugao","Badjao","Maranao","Tagalog"], ans:1 },
+  { q:"Which trait shows welcoming visitors warmly?", opts:["Honesty","Hospitality","Laziness","Pride"], ans:1 },
+  { q:'What does "po" and "opo" show?', opts:["Anger","Respect","Fear","Happiness"], ans:1 },
+  { q:"Which is an example of colonial mentality?", opts:["Buying local products","Preferring imported goods","Helping neighbors","Studying hard"], ans:1 },
+  { q:"Which group is known for Sarimanok?", opts:["Maranao","Ifugao","Isneg","Ibanag"], ans:0 },
+  { q:"Which festival is celebrated by the Ati?", opts:["Sinulog","Ati-Atihan","Panagbenga","Pahiyas"], ans:1 },
+  { q:"Which trait means being strong during difficulties?", opts:["Laziness","Resilience","Pride","Fear"], ans:1 },
+  { q:"Which of the following is NOT a Filipino value?", opts:["Respect","Honesty","Tardiness","Hospitality"], ans:2 },
+  { q:'What is "mañana habit"?', opts:["Doing things early","Doing things tomorrow","Helping others","Working hard"], ans:1 },
+  { q:"Which is a major language in the Philippines?", opts:["French","German","Cebuano","Korean"], ans:2 },
+];
+
+const ptTF = [
+  { q:"Filipinos have strong family ties.", ans:true },
+  { q:"Bayanihan means working alone.", ans:false },
+  { q:"Filipinos are known for honesty.", ans:true },
+  { q:"Laziness is a positive trait.", ans:false },
+  { q:"Indigenous groups have unique cultures.", ans:true },
+  { q:"English is an official language.", ans:true },
+  { q:"Ningas-kugon means finishing tasks well.", ans:false },
+  { q:"Filipinos are mostly Christians.", ans:true },
+  { q:"Hospitality means being unfriendly.", ans:false },
+  { q:"Respect is shown through actions and words.", ans:true },
+  { q:"Maranaos are known for brass crafts.", ans:true },
+  { q:"Badjaos live in the mountains.", ans:false },
+  { q:"Mangyans preserved their writing system.", ans:true },
+  { q:"Colonial mentality supports local products.", ans:false },
+];
+
+const ptID = [
+  { clue:"Helping others without expecting return", ans:"Bayanihan" },
+  { clue:"Being late", ans:"Tardiness" },
+  { clue:"Respect gesture to elders", ans:"Pagmamano" },
+  { clue:"Starting strong but not finishing", ans:"Ningas-kugon" },
+  { clue:"Favoring relatives in jobs", ans:"Padrino system" },
+  { clue:"Festival of the Ati", ans:"Ati-Atihan" },
+  { clue:"Traditional bird symbol of Maranao", ans:"Sarimanok" },
+];
+
+const ptMatch = [
+  { num:46, label:"Ifugao",           ans:"D" },
+  { num:47, label:"Badjao",           ans:"A" },
+  { num:48, label:"Maranao",          ans:"H" },
+  { num:49, label:"Tingguian",        ans:"I" },
+  { num:50, label:"Mangyan",          ans:"F" },
+  { num:51, label:"Cebuano",          ans:"J" },
+  { num:52, label:"Bayanihan",        ans:"B" },
+  { num:53, label:"Hospitality",      ans:"G" },
+  { num:54, label:"Tardiness",        ans:"E" },
+  { num:55, label:"Colonial mentality",ans:"C" },
+];
+const matchColB = [
+  { key:"A", val:"Sea dwellers" },
+  { key:"B", val:"Helping others" },
+  { key:"C", val:"Preferring foreign goods" },
+  { key:"D", val:"Rice terraces" },
+  { key:"E", val:"Being late" },
+  { key:"F", val:"Mindoro group" },
+  { key:"G", val:"Welcoming guests" },
+  { key:"H", val:"Sarimanok" },
+  { key:"I", val:"Tattoo tradition" },
+  { key:"J", val:"Language" },
+];
+
+const ptSit = [
+  { q:"You help your neighbor carry heavy things. What value is shown?", opts:["Laziness","Bayanihan","Tardiness","Pride"], ans:1 },
+  { q:'You say "po" to your teacher. What value is shown?', opts:["Respect","Fear","Anger","Laziness"], ans:0 },
+  { q:"You finish your work on time and properly. You avoid:", opts:["Honesty","Ningas-kugon","Respect","Faith"], ans:1 },
+  { q:"You buy local products instead of imported ones. You avoid:", opts:["Colonial mentality","Hospitality","Bayanihan","Laziness"], ans:0 },
+  { q:"You welcome visitors warmly. This shows:", opts:["Tardiness","Hospitality","Pride","Fear"], ans:1 },
+  { q:"You delay doing your homework. This is:", opts:["Bayanihan","Mañana habit","Respect","Honesty"], ans:1 },
+  { q:"You return a lost wallet. This shows:", opts:["Laziness","Honesty","Pride","Fear"], ans:1 },
+  { q:"You attend church regularly. This shows:", opts:["Strength","God-fearing attitude","Laziness","Pride"], ans:1 },
+  { q:"You arrive late to school every day. This is:", opts:["Respect","Tardiness","Hospitality","Honesty"], ans:1 },
+  { q:"You invite relatives to family events. This shows:", opts:["Weak ties","Close family ties","Laziness","Fear"], ans:1 },
+];
+
+// State
+let ptMCans = new Array(15).fill(null);
+let ptTFans = new Array(15).fill(null);
+let ptIDans = new Array(7).fill('');
+let ptMatchans = {};
+let ptSitans = new Array(10).fill(null);
+let ptSubmitted = false;
+
+function buildPracticeTest() {
+  const wrap = document.getElementById('practiceContainer');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+
+  // ── A. Multiple Choice ──
+  wrap.innerHTML += `<div class="pt-section-header"><h3>✏️ A. Multiple Choice</h3><span class="pts">13 pts</span></div>`;
+  ptMC.forEach((item, i) => {
+    wrap.innerHTML += `
+      <div class="q-card" id="ptmc-${i}">
+        <div class="q-num">Question ${i+1}</div>
+        <div class="q-text">${item.q}</div>
+        <div class="options" id="ptopts-${i}">
+          ${item.opts.map((o,j)=>`<button class="opt-btn" id="ptopt-${i}-${j}" onclick="ptSelectMC(${i},${j})">${['A','B','C','D'][j]}. ${o}</button>`).join('')}
+        </div>
+        <div class="fb-box" id="ptmcfb-${i}"></div>
+      </div>`;
+  });
+
+  // ── B. True or False ──
+  wrap.innerHTML += `<div class="pt-section-header"><h3>✏️ B. True or False</h3><span class="pts">14 pts</span></div>`;
+  ptTF.forEach((item, i) => {
+    wrap.innerHTML += `
+      <div class="tf-card" id="pttf-${i}">
+        <div class="tf-num">${16+i}.</div>
+        <div style="flex:1">
+          <div class="tf-text">${item.q}</div>
+          <div class="tf-btns">
+            <button class="tf-btn" id="pttfT-${i}" onclick="ptSelectTF(${i},true)">TRUE</button>
+            <button class="tf-btn" id="pttfF-${i}" onclick="ptSelectTF(${i},false)">FALSE</button>
+          </div>
+          <div class="tf-fb" id="pttffb-${i}"></div>
+        </div>
+      </div>`;
+  });
+
+  // ── C. Identification ──
+  wrap.innerHTML += `<div class="pt-section-header"><h3>✏️ C. Identification</h3><span class="pts">7 pts</span></div>`;
+  ptID.forEach((item, i) => {
+    wrap.innerHTML += `
+      <div class="id-card" id="ptid-${i}">
+        <div class="id-label">${31+i}. ${item.clue} → </div>
+        <input class="id-input" id="ptinput-${i}" type="text" placeholder="Type your answer here..." oninput="ptIDans[${i}]=this.value" />
+        <div class="id-fb" id="ptidfb-${i}"></div>
+      </div>`;
+  });
+
+  // ── D. Matching ──
+  wrap.innerHTML += `<div class="pt-section-header"><h3>✏️ D. Matching Type</h3><span class="pts">10 pts</span></div>`;
+  const mGrid = document.createElement('div');
+  mGrid.className = 'match-grid';
+  // Col A
+  const colA = document.createElement('div');
+  colA.className = 'match-col-a';
+  colA.innerHTML = '<h4>Column A</h4>';
+  ptMatch.forEach((item) => {
+    const opts = matchColB.map(b=>`<option value="${b.key}">${b.key}. ${b.val}</option>`).join('');
+    colA.innerHTML += `
+      <div class="match-item">
+        <span>${item.num}.</span>
+        <div style="flex:1">
+          <div style="margin-bottom:4px">${item.label}</div>
+          <select class="match-select" id="ptm-${item.num}" onchange="ptMatchans['${item.num}']=this.value">
+            <option value="">-- choose --</option>${opts}
+          </select>
+          <div class="match-fb" id="ptmfb-${item.num}"></div>
+        </div>
+      </div>`;
+  });
+  // Col B
+  const colB = document.createElement('div');
+  colB.className = 'match-col-b';
+  colB.innerHTML = '<h4>Column B</h4>';
+  matchColB.forEach(b => { colB.innerHTML += `<div class="match-item"><span>${b.key}.</span><div>${b.val}</div></div>`; });
+  mGrid.appendChild(colA); mGrid.appendChild(colB);
+  wrap.appendChild(mGrid);
+
+  // ── E. Situational ──
+  wrap.innerHTML += `<div class="pt-section-header"><h3>✏️ E. Situational / Application</h3><span class="pts">10 pts</span></div>`;
+  ptSit.forEach((item, i) => {
+    wrap.innerHTML += `
+      <div class="q-card" id="ptst-${i}">
+        <div class="q-num">Question ${56+i}</div>
+        <div class="q-text">${item.q}</div>
+        <div class="options" id="ptstopts-${i}">
+          ${item.opts.map((o,j)=>`<button class="opt-btn" id="ptstopt-${i}-${j}" onclick="ptSelectSit(${i},${j})">${['A','B','C','D'][j]}. ${o}</button>`).join('')}
+        </div>
+        <div class="fb-box" id="ptstfb-${i}"></div>
+      </div>`;
+  });
+}
+
+function ptSelectMC(qi, oi) {
+  if(ptSubmitted) return;
+  ptMCans[qi] = oi;
+  for(let j=0;j<4;j++){
+    const b=document.getElementById(`ptopt-${qi}-${j}`);
+    if(b){ b.style.background=j===oi?'#d0eaff':'#f5f5f5'; b.style.borderColor=j===oi?'var(--blue)':'#e0e0e0'; }
+  }
+}
+function ptSelectTF(qi, val) {
+  if(ptSubmitted) return;
+  ptTFans[qi] = val;
+  const bT=document.getElementById(`pttfT-${qi}`), bF=document.getElementById(`pttfF-${qi}`);
+  if(bT){ bT.className='tf-btn'+(val===true?' selected':''); }
+  if(bF){ bF.className='tf-btn'+(val===false?' selected':''); }
+}
+function ptSelectSit(qi, oi) {
+  if(ptSubmitted) return;
+  ptSitans[qi] = oi;
+  for(let j=0;j<4;j++){
+    const b=document.getElementById(`ptstopt-${qi}-${j}`);
+    if(b){ b.style.background=j===oi?'#d0eaff':'#f5f5f5'; b.style.borderColor=j===oi?'var(--blue)':'#e0e0e0'; }
+  }
+}
+
+function submitPracticeTest() {
+  if(ptSubmitted) return;
+  ptSubmitted = true;
+  let scoreA=0, scoreB=0, scoreC=0, scoreD=0, scoreE=0;
+
+  // A. MC
+  ptMC.forEach((item,i)=>{
+    const sel=ptMCans[i]; const card=document.getElementById(`ptmc-${i}`);
+    const fb=document.getElementById(`ptmcfb-${i}`);
+    for(let j=0;j<4;j++){
+      const b=document.getElementById(`ptopt-${i}-${j}`);
+      if(!b) continue; b.disabled=true; b.style.background=''; b.style.borderColor='';
+      if(j===item.ans) b.classList.add('correct');
+      else if(j===sel&&sel!==item.ans) b.classList.add('wrong');
+    }
+    if(sel===item.ans){ scoreA++; card.classList.add('correct-card'); fb.className='fb-box correct show'; fb.textContent='✅ Correct!'; }
+    else{ card.classList.add('wrong-card'); fb.className='fb-box wrong show'; fb.textContent=`❌ Answer: ${item.opts[item.ans]}`; }
+  });
+
+  // B. TF
+  ptTF.forEach((item,i)=>{
+    const sel=ptTFans[i]; const card=document.getElementById(`pttf-${i}`);
+    const fb=document.getElementById(`pttffb-${i}`);
+    const bT=document.getElementById(`pttfT-${i}`), bF=document.getElementById(`pttfF-${i}`);
+    if(bT) bT.disabled=true; if(bF) bF.disabled=true;
+    bT.className='tf-btn'; bF.className='tf-btn';
+    if(item.ans===true) bT.classList.add('correct'); else bF.classList.add('correct');
+    if(sel===item.ans){ scoreB++; card.classList.add('correct-card'); fb.className='tf-fb show'; fb.style.color='#046e50'; fb.textContent='✅ Correct!'; }
+    else{ card.classList.add('wrong-card'); fb.className='tf-fb show'; fb.style.color='#9b1a35';
+      if(sel===null) fb.textContent=`❌ Answer: ${item.ans?'TRUE':'FALSE'} (not answered)`;
+      else { if(sel!==null&&sel!==item.ans){ if(item.ans===true) bT.classList.remove('correct'); else bF.classList.remove('correct'); if(item.ans===true) bT.classList.add('correct'); else bF.classList.add('correct'); if(sel===false) bF.classList.add('wrong'); else bT.classList.add('wrong'); } fb.textContent=`❌ Answer: ${item.ans?'TRUE':'FALSE'}`; }
+    }
+  });
+
+  // C. Identification
+  ptID.forEach((item,i)=>{
+    const inp=document.getElementById(`ptinput-${i}`);
+    const fb=document.getElementById(`ptidfb-${i}`);
+    const card=document.getElementById(`ptid-${i}`);
+    const userVal=(ptIDans[i]||'').trim().toLowerCase();
+    const correct=item.ans.toLowerCase();
+    inp.disabled=true;
+    if(userVal===correct||userVal.replace(/\s+/g,' ')===correct){ scoreC++; inp.classList.add('correct'); card.classList.add('correct-card'); fb.className='id-fb show'; fb.style.color='#046e50'; fb.textContent='✅ Correct!'; }
+    else{ inp.classList.add('wrong'); card.classList.add('wrong-card'); fb.className='id-fb show'; fb.style.color='#9b1a35'; fb.textContent=`❌ Answer: ${item.ans}`; }
+  });
+
+  // D. Matching
+  ptMatch.forEach((item)=>{
+    const sel=document.getElementById(`ptm-${item.num}`);
+    const fb=document.getElementById(`ptmfb-${item.num}`);
+    if(!sel) return;
+    sel.disabled=true;
+    const val=ptMatchans[item.num]||'';
+    if(val===item.ans){ scoreD++; sel.classList.add('correct'); fb.textContent='✅'; fb.style.color='#046e50'; }
+    else{ sel.classList.add('wrong'); fb.textContent=`❌ ${item.ans}`; }
+  });
+
+  // E. Situational
+  ptSit.forEach((item,i)=>{
+    const sel=ptSitans[i]; const card=document.getElementById(`ptst-${i}`);
+    const fb=document.getElementById(`ptstfb-${i}`);
+    for(let j=0;j<4;j++){
+      const b=document.getElementById(`ptstopt-${i}-${j}`);
+      if(!b) continue; b.disabled=true; b.style.background=''; b.style.borderColor='';
+      if(j===item.ans) b.classList.add('correct');
+      else if(j===sel&&sel!==item.ans) b.classList.add('wrong');
+    }
+    if(sel===item.ans){ scoreE++; card.classList.add('correct-card'); fb.className='fb-box correct show'; fb.textContent='✅ Correct!'; }
+    else{ card.classList.add('wrong-card'); fb.className='fb-box wrong show'; fb.textContent=`❌ Answer: ${item.opts[item.ans]}`; }
+  });
+
+  const total = scoreA+scoreB+scoreC+scoreD+scoreE;
+  const pct = Math.round((total/54)*100);
+  const bar=document.getElementById('ptScoreBar');
+  bar.classList.add('show');
+  document.getElementById('ptScoreNum').textContent=`${total} / 54`;
+  let msg = pct>=90?'🏆 Napakagaling! You passed with flying colors!' : pct>=75?'🌟 Great job! Almost perfect!' : pct>=60?'👍 Good try! Review the missed items.' : '📖 Keep studying — you can do it!';
+  document.getElementById('ptScoreMsg').textContent=msg;
+  document.getElementById('ptScoreBreakdown').innerHTML=`
+    <div class="pt-score-item">A. MC: ${scoreA}/13</div>
+    <div class="pt-score-item">B. T/F: ${scoreB}/14</div>
+    <div class="pt-score-item">C. ID: ${scoreC}/7</div>
+    <div class="pt-score-item">D. Match: ${scoreD}/10</div>
+    <div class="pt-score-item">E. Situation: ${scoreE}/10</div>`;
+  document.getElementById('ptSubmitBtn').style.display='none';
+  bar.scrollIntoView({behavior:'smooth'});
+}
+
+function retryPractice() {
+  ptMCans=new Array(15).fill(null); ptTFans=new Array(15).fill(null);
+  ptIDans=new Array(7).fill(''); ptMatchans={}; ptSitans=new Array(10).fill(null);
+  ptSubmitted=false;
+  document.getElementById('ptScoreBar').classList.remove('show');
+  document.getElementById('ptSubmitBtn').style.display='block';
+  buildPracticeTest();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+buildPracticeTest();
+</script>
 </body>
 </html>
