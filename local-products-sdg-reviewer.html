@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌱 Local Products & Sustainable Development Reviewer</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2ecc71;
+    --dark-green: #27ae60;
+    --teal: #1abc9c;
+    --yellow: #f9ca24;
+    --orange: #f0932b;
+    --blue: #3498db;
+    --purple: #9b59b6;
+    --red: #e74c3c;
+    --pink: #fd79a8;
+    --brown: #a29bfe;
+    --bg: #f0fff4;
+    --card: #ffffff;
+    --text: #2d3436;
+    --soft: #dfe6e9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(46,204,113,0.08) 0%, transparent 50%),
+      radial-gradient(circle at 90% 80%, rgba(26,188,156,0.08) 0%, transparent 50%);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #27ae60, #1abc9c, #2ecc71);
+    padding: 30px 20px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    clip-path: ellipse(100% 90% at 50% 10%);
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='10'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.2em;
+    color: white;
+    text-shadow: 2px 3px 0 rgba(0,0,0,0.15);
+    position: relative;
+    line-height: 1.2;
+  }
+  header p {
+    color: rgba(255,255,255,0.9);
+    font-size: 1em;
+    font-weight: 700;
+    margin-top: 8px;
+    position: relative;
+  }
+  .leaf-deco { font-size: 1.8em; animation: sway 3s ease-in-out infinite; display: inline-block; }
+  @keyframes sway { 0%,100%{transform:rotate(-8deg)} 50%{transform:rotate(8deg)} }
+
+  /* NAV TABS */
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 15px 10px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    background: white;
+    border: 3px solid var(--soft);
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95em;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #636e72;
+    box-shadow: 0 3px 0 var(--soft);
+  }
+  .tab-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 0 var(--soft); }
+  .tab-btn.active {
+    background: var(--dark-green);
+    color: white;
+    border-color: var(--dark-green);
+    box-shadow: 0 4px 0 #1e8449;
+    transform: translateY(-2px);
+  }
+
+  /* CONTENT AREA */
+  .content { max-width: 900px; margin: 0 auto; padding: 10px 15px 40px; }
+  .section { display: none; animation: fadeUp 0.4s ease; }
+  .section.active { display: block; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+  /* SECTION TITLE */
+  .sec-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.6em;
+    text-align: center;
+    margin: 20px 0 25px;
+    position: relative;
+  }
+  .sec-title span {
+    background: linear-gradient(135deg, var(--dark-green), var(--teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .sec-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--green), var(--teal));
+    border-radius: 10px;
+    margin: 8px auto 0;
+  }
+
+  /* CARDS */
+  .card {
+    background: white;
+    border-radius: 20px;
+    padding: 22px 24px;
+    margin-bottom: 18px;
+    border-left: 6px solid var(--green);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: rgba(46,204,113,0.06);
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+  .card.orange { border-color: var(--orange); }
+  .card.blue { border-color: var(--blue); }
+  .card.purple { border-color: var(--purple); }
+  .card.teal { border-color: var(--teal); }
+  .card.yellow { border-color: var(--yellow); }
+  .card.pink { border-color: var(--pink); }
+  .card.red { border-color: var(--red); }
+
+  .card-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.15em;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card p, .card li { font-size: 0.95em; line-height: 1.7; color: #555; }
+  .card ul, .card ol { padding-left: 20px; margin-top: 6px; }
+  .card li { margin-bottom: 4px; }
+
+  /* HIGHLIGHT BOXES */
+  .highlight {
+    background: linear-gradient(135deg, #d5f5e3, #d1f2eb);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-top: 10px;
+    font-weight: 700;
+    color: #1a7a4a;
+    font-size: 0.9em;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .highlight.yellow { background: linear-gradient(135deg, #ffeaa7, #fdcb6e33); color: #7d5a00; }
+  .highlight.blue { background: linear-gradient(135deg, #dfe6e9, #b2bec3); color: #2d3436; }
+  .highlight.orange { background: linear-gradient(135deg, #ffecd2, #fcb69f33); color: #7d3300; }
+
+  /* MINI CHIPS */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .chip {
+    background: #e8f8f0;
+    color: #1a7a4a;
+    border-radius: 50px;
+    padding: 5px 14px;
+    font-size: 0.85em;
+    font-weight: 700;
+    border: 2px solid #a9dfbf;
+  }
+  .chip.blue { background: #eaf4fb; color: #1a5276; border-color: #aed6f1; }
+  .chip.orange { background: #fef5e7; color: #7e5109; border-color: #f8c471; }
+  .chip.purple { background: #f5eef8; color: #6c3483; border-color: #d7bde2; }
+  .chip.pink { background: #fdf2f8; color: #7b241c; border-color: #f1948a; }
+
+  /* SDG GRID */
+  .sdg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .sdg-item {
+    border-radius: 14px;
+    padding: 12px 10px;
+    text-align: center;
+    font-size: 0.82em;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    transition: transform 0.2s;
+    cursor: default;
+  }
+  .sdg-item:hover { transform: scale(1.05); }
+  .sdg-item .sdg-num { font-family: 'Fredoka One', cursive; font-size: 1.6em; display: block; }
+
+  /* 5RS */
+  .rs-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .r-box {
+    background: linear-gradient(135deg, var(--dark-green), var(--teal));
+    color: white;
+    border-radius: 14px;
+    padding: 14px 8px;
+    text-align: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1em;
+    box-shadow: 0 4px 0 #1e8449;
+    transition: transform 0.2s;
+  }
+  .r-box:hover { transform: translateY(-4px); }
+  .r-box .r-icon { font-size: 1.6em; display: block; margin-bottom: 4px; }
+  .r-box small { font-family: 'Nunito', sans-serif; font-size: 0.65em; font-weight: 700; opacity: 0.9; }
+
+  /* QUIZ SECTION */
+  .quiz-container { max-width: 700px; margin: 0 auto; }
+  .quiz-header {
+    background: linear-gradient(135deg, var(--dark-green), var(--teal));
+    border-radius: 20px;
+    padding: 20px 24px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .quiz-header h2 { font-family: 'Fredoka One', cursive; font-size: 1.2em; }
+  .score-box {
+    background: rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-weight: 800;
+    font-size: 0.9em;
+  }
+
+  .q-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    display: none;
+  }
+  .q-card.active { display: block; animation: fadeUp 0.3s ease; }
+
+  .q-number {
+    font-family: 'Fredoka One', cursive;
+    color: var(--dark-green);
+    font-size: 0.9em;
+    margin-bottom: 8px;
+  }
+  .q-text {
+    font-size: 1.05em;
+    font-weight: 700;
+    margin-bottom: 18px;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice-btn {
+    background: #f8fffe;
+    border: 2.5px solid #c8e6c9;
+    border-radius: 14px;
+    padding: 12px 18px;
+    text-align: left;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .choice-btn:hover:not(:disabled) {
+    background: #e8f8f0;
+    border-color: var(--green);
+    transform: translateX(4px);
+  }
+  .choice-btn.correct { background: #d5f5e3; border-color: var(--green); color: #1a7a4a; }
+  .choice-btn.wrong { background: #fde8e8; border-color: var(--red); color: #922b21; }
+  .choice-btn:disabled { cursor: default; }
+  .choice-letter {
+    background: var(--soft);
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.9em;
+    flex-shrink: 0;
+    color: #636e72;
+  }
+
+  .feedback-box {
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.9em;
+    display: none;
+  }
+  .feedback-box.correct { background: #d5f5e3; color: #1a7a4a; display: block; }
+  .feedback-box.wrong { background: #fde8e8; color: #922b21; display: block; }
+
+  .next-btn {
+    margin-top: 16px;
+    background: linear-gradient(135deg, var(--dark-green), var(--teal));
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1em;
+    cursor: pointer;
+    display: none;
+    box-shadow: 0 4px 0 #1e8449;
+    transition: transform 0.2s;
+  }
+  .next-btn:hover { transform: translateY(-2px); }
+  .next-btn.show { display: inline-block; }
+
+  /* PROGRESS BAR */
+  .progress-wrap { background: #e0f0e5; border-radius: 50px; height: 10px; margin-bottom: 16px; }
+  .progress-bar {
+    background: linear-gradient(90deg, var(--green), var(--teal));
+    height: 10px;
+    border-radius: 50px;
+    transition: width 0.4s ease;
+  }
+
+  /* RESULT SCREEN */
+  #result-screen {
+    display: none;
+    text-align: center;
+    padding: 30px 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  #result-screen.show { display: block; animation: fadeUp 0.4s ease; }
+  .result-emoji { font-size: 4em; animation: bounce 0.5s ease infinite alternate; }
+  @keyframes bounce { from{transform:scale(1)} to{transform:scale(1.1)} }
+  .result-score {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3em;
+    background: linear-gradient(135deg, var(--dark-green), var(--teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 10px 0;
+  }
+  .result-msg { font-size: 1.1em; font-weight: 700; color: #555; margin-bottom: 20px; }
+  .restart-btn {
+    background: linear-gradient(135deg, var(--orange), #e67e22);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 14px 35px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1em;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #d35400;
+    transition: transform 0.2s;
+  }
+  .restart-btn:hover { transform: translateY(-2px); }
+
+  /* TABLE */
+  .compare-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 0.9em; }
+  .compare-table th {
+    background: linear-gradient(135deg, var(--dark-green), var(--teal));
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95em;
+  }
+  .compare-table th:first-child { border-radius: 12px 0 0 0; }
+  .compare-table th:last-child { border-radius: 0 12px 0 0; }
+  .compare-table td { padding: 10px 12px; border-bottom: 1px solid #ecf0f1; vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: #f0fff4; }
+  .compare-table tr:hover td { background: #d5f5e3; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 20px;
+    color: #a0a0a0;
+    font-size: 0.85em;
+    font-weight: 600;
+  }
+
+  @media(max-width:600px) {
+    header h1 { font-size: 1.6em; }
+    .sdg-grid { grid-template-columns: repeat(3, 1fr); }
+    .rs-grid { grid-template-columns: repeat(3, 1fr); }
+    .tab-btn { font-size: 0.82em; padding: 8px 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <span class="leaf-deco">🌱</span>
+    <h1>Local Products &<br>Sustainable Development</h1>
+    <p>📚 Interactive Reviewer</p>
+  </div>
+</header>
+
+<nav>
+  <button class="tab-btn active" onclick="showTab('part1')">🌾 Local Products</button>
+  <button class="tab-btn" onclick="showTab('part2')">🌍 Sustainable Dev</button>
+  <button class="tab-btn" onclick="showTab('sdgs')">🎯 SDGs</button>
+  <button class="tab-btn" onclick="showTab('summary')">📋 Summary</button>
+  <button class="tab-btn" onclick="showTab('quiz')">🧠 Quiz</button>
+</nav>
+
+<div class="content">
+
+  <!-- PART 1: LOCAL PRODUCTS -->
+  <div class="section active" id="part1">
+    <div class="sec-title"><span>🌾 Part 1: Supporting Local Products</span></div>
+
+    <div class="card">
+      <div class="card-title">🧺 What Are Local Products?</div>
+      <p>Local products are goods made in our country using <strong>local resources and workers</strong>.</p>
+      <div class="chips">
+        <span class="chip">🌾 Farm Products</span>
+        <span class="chip">🌴 Forest Products</span>
+        <span class="chip">🏠 Home Industry Products</span>
+      </div>
+      <div class="highlight">👉 These help people earn a living and strengthen the Philippine economy.</div>
+    </div>
+
+    <div class="card orange">
+      <div class="card-title">🚜 Role of Farmers & Agricultural Workers</div>
+      <ul>
+        <li>Grow crops for <strong>food and income</strong></li>
+        <li>Produce <strong>raw materials</strong></li>
+        <li>Help <strong>sustain communities</strong></li>
+      </ul>
+    </div>
+
+    <div class="card red">
+      <div class="card-title">⚠️ Problems Faced by Farmers</div>
+      <ol>
+        <li>Lack of money (capital)</li>
+        <li>Need more land and higher production</li>
+        <li>Old or poor machinery</li>
+        <li>Expensive fertilizers and pesticides</li>
+        <li>Need better seeds</li>
+        <li>Natural disasters (e.g., drought)</li>
+        <li>Low profit despite big harvests</li>
+      </ol>
+    </div>
+
+    <div class="card teal">
+      <div class="card-title">🌾 Secondary Crops</div>
+      <p>Grown <strong>in addition</strong> to main crops to provide extra income and food supply.</p>
+      <div class="chips">
+        <span class="chip blue">🧄 Garlic</span>
+        <span class="chip blue">🧅 Onions</span>
+        <span class="chip blue">🥜 Peanuts</span>
+      </div>
+      <div class="highlight yellow">✔ Extra income &nbsp;✔ More food supply &nbsp;✔ Used for other products</div>
+    </div>
+
+    <div class="card yellow">
+      <div class="card-title">🥜 Importance of Peanuts</div>
+      <p>Peanuts can be eaten or processed into many products:</p>
+      <div class="chips">
+        <span class="chip orange">🍬 Candies</span>
+        <span class="chip orange">🧴 Creams</span>
+        <span class="chip orange">🥜 Butter</span>
+      </div>
+      <p style="margin-top:10px;">The <strong>stems</strong> can be used as animal food. A source of income and industry.</p>
+    </div>
+
+    <div class="card blue">
+      <div class="card-title">🐓 Other Farm Products</div>
+      <table class="compare-table">
+        <tr><th>Product</th><th>What We Get</th></tr>
+        <tr><td>🐔 Chickens</td><td>Eggs, meat, feathers</td></tr>
+        <tr><td>🐷 Hogs (Pigs)</td><td>Food and income</td></tr>
+        <tr><td>🥬 Fruits & Vegetables</td><td>Food, sold, preserved</td></tr>
+      </table>
+    </div>
+
+    <div class="card purple">
+      <div class="card-title">🌴 Minor Forest Products</div>
+      <table class="compare-table">
+        <tr><th>Product</th><th>Uses</th></tr>
+        <tr><td>🌿 Rattan</td><td>Furniture, baskets</td></tr>
+        <tr><td>🌴 Kaong (Cabo Negro)</td><td>Sweets</td></tr>
+        <tr><td>🍃 Anahaw</td><td>Roofing, hats, fans</td></tr>
+        <tr><td>🌾 Buri Palm</td><td>Bags, mats, raffia</td></tr>
+        <tr><td>🔥 Firewood & Charcoal</td><td>Fuel</td></tr>
+        <tr><td>🪵 Resins (Almaciga)</td><td>Varnish, incense</td></tr>
+        <tr><td>🌿 Medicinal Plants</td><td>Health uses</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🧺 Home Industries</div>
+      <p>Small businesses using <strong>local materials</strong> to earn income.</p>
+      <div class="chips">
+        <span class="chip">👒 Weaving Hats & Mats</span>
+        <span class="chip">🧺 Basket Making</span>
+        <span class="chip">🏺 Pottery</span>
+        <span class="chip">🪵 Wood Carving</span>
+      </div>
+      <div class="highlight">✔ Provides income &nbsp;✔ Uses local resources &nbsp;✔ Improves living conditions</div>
+    </div>
+
+    <div class="card teal">
+      <div class="card-title">🇵🇭 Why Support Local Products?</div>
+      <div class="chips">
+        <span class="chip">👩‍🌾 Helps farmers & workers</span>
+        <span class="chip">💪 Strengthens economy</span>
+        <span class="chip">🇵🇭 Promotes Filipino products</span>
+        <span class="chip">💼 Creates jobs</span>
+        <span class="chip">📦 Reduces imports</span>
+      </div>
+    </div>
+
+    <div class="card orange">
+      <div class="card-title">💡 Ways to Support Local Products</div>
+      <ul>
+        <li>🛒 <strong>Buy local goods</strong></li>
+        <li>📢 <strong>Promote Filipino products</strong></li>
+        <li>🤝 <strong>Support small businesses</strong></li>
+        <li>♻️ <strong>Avoid wasting resources</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PART 2: SUSTAINABLE DEVELOPMENT -->
+  <div class="section" id="part2">
+    <div class="sec-title"><span>🌍 Part 2: Sustainable Development</span></div>
+
+    <div class="card">
+      <div class="card-title">🌏 What is Sustainable Development?</div>
+      <p>Development that meets the <strong>needs of the present</strong> without harming the ability of <strong>future generations</strong> to meet their own needs.</p>
+      <div class="chips">
+        <span class="chip">👥 People</span>
+        <span class="chip">🌍 Planet</span>
+        <span class="chip">💰 Prosperity</span>
+        <span class="chip">☮️ Peace</span>
+      </div>
+    </div>
+
+    <div class="card teal">
+      <div class="card-title">🌟 Why is Sustainable Development Important?</div>
+      <ul>
+        <li>✔ Protects the <strong>environment</strong></li>
+        <li>✔ Reduces <strong>poverty</strong></li>
+        <li>✔ Improves <strong>quality of life</strong></li>
+        <li>✔ Ensures <strong>future resources</strong></li>
+        <li>✔ Promotes <strong>peace and equality</strong></li>
+      </ul>
+    </div>
+
+    <div class="card orange">
+      <div class="card-title">🏡 Activities: Community & Health</div>
+      <ul>
+        <li>Keep community <strong>clean</strong></li>
+        <li>Ensure <strong>clean water and sanitation</strong></li>
+        <li>Promote <strong>healthy environments</strong></li>
+      </ul>
+    </div>
+
+    <div class="card blue">
+      <div class="card-title">⚖️ Social Responsibility</div>
+      <ul>
+        <li>Respect <strong>human rights</strong></li>
+        <li>Fight <strong>corruption</strong></li>
+        <li>Promote <strong>fairness and equality</strong></li>
+      </ul>
+    </div>
+
+    <div class="card yellow">
+      <div class="card-title">💼 Economic Actions</div>
+      <ul>
+        <li>Support <strong>SDG-aligned businesses</strong></li>
+        <li>Partner with <strong>local businesses</strong></li>
+        <li>Invest in <strong>long-term projects</strong></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🌞 Environmental Protection</div>
+      <ul>
+        <li>Use <strong>renewable energy</strong>: solar ☀️, wind 💨, biofuel 🌿</li>
+        <li>Protect <strong>nature and wildlife</strong></li>
+      </ul>
+    </div>
+
+    <div class="card purple">
+      <div class="card-title">♻️ Waste Management: The 5Rs</div>
+      <div class="rs-grid">
+        <div class="r-box"><span class="r-icon">🔄</span>Reuse<br><small>Use again!</small></div>
+        <div class="r-box"><span class="r-icon">⬇️</span>Reduce<br><small>Use less!</small></div>
+        <div class="r-box"><span class="r-icon">♻️</span>Recycle<br><small>Make new!</small></div>
+        <div class="r-box"><span class="r-icon">🔧</span>Repair<br><small>Fix it!</small></div>
+        <div class="r-box"><span class="r-icon">🌱</span>Rot<br><small>Compost!</small></div>
+      </div>
+      <div class="highlight" style="margin-top:14px;">👉 Helps reduce pollution and waste!</div>
+    </div>
+
+    <div class="card teal">
+      <div class="card-title">📚 Education Support</div>
+      <ul>
+        <li>Donate <strong>school materials</strong></li>
+        <li>Support <strong>scholarships</strong></li>
+        <li>Help others <strong>access education</strong></li>
+      </ul>
+    </div>
+
+    <div class="card orange">
+      <div class="card-title">🤝 Community Involvement</div>
+      <ul>
+        <li>Join <strong>clean-up drives</strong></li>
+        <li>Participate in <strong>feeding programs</strong></li>
+        <li>Volunteer in <strong>barangay activities</strong></li>
+      </ul>
+    </div>
+
+    <div class="card blue">
+      <div class="card-title">💡 Simple Ways to Achieve SDGs</div>
+      <div class="chips">
+        <span class="chip blue">📖 Educate Yourself</span>
+        <span class="chip blue">🤝 Volunteer</span>
+        <span class="chip blue">♻️ Practice 5Rs</span>
+        <span class="chip blue">🛒 Buy Local</span>
+        <span class="chip blue">💡 Save Electricity</span>
+        <span class="chip blue">💧 Save Water</span>
+        <span class="chip blue">🗳️ Vote Responsibly</span>
+        <span class="chip blue">📢 Share Awareness</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🇵🇭 Connection to National Development</div>
+      <p>The Philippines works with the <strong>United Nations</strong> to improve economy, protect natural resources, and support people's welfare.</p>
+      <div class="highlight">🎯 Goal: National AND global development — No one is left behind!</div>
+    </div>
+
+    <div class="card teal">
+      <div class="card-title">🔗 Local Products + SDGs Connection</div>
+      <p>Supporting local products helps achieve SDGs by:</p>
+      <div class="chips">
+        <span class="chip">💰 Reduce Poverty</span>
+        <span class="chip">💼 Provide Jobs</span>
+        <span class="chip">📈 Economic Growth</span>
+        <span class="chip">♻️ Responsible Consumption</span>
+        <span class="chip">🌿 Protect Environment</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SDGs PAGE -->
+  <div class="section" id="sdgs">
+    <div class="sec-title"><span>🎯 The 17 Sustainable Development Goals</span></div>
+    <div class="card">
+      <div class="card-title">🌐 By the United Nations</div>
+      <p>There are <strong>17 global goals</strong> set by the United Nations. Goal: <em>"No one is left behind."</em></p>
+    </div>
+    <div class="sdg-grid">
+      <div class="sdg-item" style="background:#e5243b;"><span class="sdg-num">1</span>No Poverty</div>
+      <div class="sdg-item" style="background:#DDA63A;"><span class="sdg-num">2</span>Zero Hunger</div>
+      <div class="sdg-item" style="background:#4C9F38;"><span class="sdg-num">3</span>Good Health</div>
+      <div class="sdg-item" style="background:#C5192D;"><span class="sdg-num">4</span>Quality Education</div>
+      <div class="sdg-item" style="background:#FF3A21;"><span class="sdg-num">5</span>Gender Equality</div>
+      <div class="sdg-item" style="background:#26BDE2;"><span class="sdg-num">6</span>Clean Water</div>
+      <div class="sdg-item" style="background:#FCC30B;"><span class="sdg-num">7</span>Clean Energy</div>
+      <div class="sdg-item" style="background:#A21942;"><span class="sdg-num">8</span>Decent Work</div>
+      <div class="sdg-item" style="background:#FD6925;"><span class="sdg-num">9</span>Industry & Innovation</div>
+      <div class="sdg-item" style="background:#DD1367;"><span class="sdg-num">10</span>Reduced Inequalities</div>
+      <div class="sdg-item" style="background:#FD9D24;"><span class="sdg-num">11</span>Sustainable Cities</div>
+      <div class="sdg-item" style="background:#BF8B2E;"><span class="sdg-num">12</span>Responsible Consumption</div>
+      <div class="sdg-item" style="background:#3F7E44;"><span class="sdg-num">13</span>Climate Action</div>
+      <div class="sdg-item" style="background:#0A97D9;"><span class="sdg-num">14</span>Life Below Water</div>
+      <div class="sdg-item" style="background:#56C02B;"><span class="sdg-num">15</span>Life on Land</div>
+      <div class="sdg-item" style="background:#00689D;"><span class="sdg-num">16</span>Peace & Justice</div>
+      <div class="sdg-item" style="background:#19486A;"><span class="sdg-num">17</span>Partnerships</div>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section" id="summary">
+    <div class="sec-title"><span>📋 Quick Summary</span></div>
+
+    <div class="card">
+      <div class="card-title">📌 Key Concepts to Remember</div>
+      <table class="compare-table">
+        <tr><th>Concept</th><th>Meaning</th></tr>
+        <tr><td><strong>Local Products</strong></td><td>Goods made using local resources and workers</td></tr>
+        <tr><td><strong>Secondary Crops</strong></td><td>Extra crops grown beside main crops (garlic, onions, peanuts)</td></tr>
+        <tr><td><strong>Minor Forest Products</strong></td><td>Non-lumber forest goods (rattan, anahaw, buri, etc.)</td></tr>
+        <tr><td><strong>Home Industries</strong></td><td>Small businesses using local materials</td></tr>
+        <tr><td><strong>Sustainable Development</strong></td><td>Meeting present needs without harming future generations</td></tr>
+        <tr><td><strong>SDGs</strong></td><td>17 global goals set by the United Nations</td></tr>
+        <tr><td><strong>5Rs</strong></td><td>Reuse, Reduce, Recycle, Repair, Rot (compost)</td></tr>
+        <tr><td><strong>Renewable Energy</strong></td><td>Solar, wind, biofuel — clean energy sources</td></tr>
+      </table>
+    </div>
+
+    <div class="card orange">
+      <div class="card-title">🌟 4 Pillars of Sustainable Development</div>
+      <div class="chips">
+        <span class="chip orange">👥 People</span>
+        <span class="chip orange">🌍 Planet</span>
+        <span class="chip orange">💰 Prosperity</span>
+        <span class="chip orange">☮️ Peace</span>
+      </div>
+    </div>
+
+    <div class="card blue">
+      <div class="card-title">🔗 Connections Between Topics</div>
+      <ul>
+        <li>Buying <strong>local products</strong> → Supports SDG 1 (No Poverty), SDG 8 (Decent Work), SDG 12 (Responsible Consumption)</li>
+        <li>Practicing <strong>5Rs</strong> → Supports SDG 12 (Responsible Consumption), SDG 13 (Climate Action)</li>
+        <li>Supporting <strong>farmers</strong> → Supports SDG 2 (Zero Hunger), SDG 8 (Decent Work)</li>
+        <li>Protecting <strong>forests</strong> → Supports SDG 15 (Life on Land)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">⚠️ Problems vs Solutions</div>
+      <table class="compare-table">
+        <tr><th>Problem</th><th>Solution</th></tr>
+        <tr><td>Poverty among farmers</td><td>Buy local; support home industries</td></tr>
+        <tr><td>Environmental damage</td><td>5Rs; renewable energy; protect forests</td></tr>
+        <tr><td>Lack of education</td><td>Donate materials; support scholarships</td></tr>
+        <tr><td>Pollution & waste</td><td>Recycle, reduce, compost</td></tr>
+        <tr><td>Inequality</td><td>Respect human rights; fight corruption</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="quiz">
+    <div class="sec-title"><span>🧠 Quiz Time!</span></div>
+    <div class="quiz-container">
+      <div class="quiz-header">
+        <div>
+          <h2>🌱 Test Your Knowledge!</h2>
+          <div style="font-size:0.85em;opacity:0.85;margin-top:4px;">Answer all 20 questions</div>
+        </div>
+        <div class="score-box">⭐ Score: <span id="score-display">0</span>/20</div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+      </div>
+
+      <div id="quiz-cards">
+        <!-- Questions injected by JS -->
+      </div>
+
+      <div id="result-screen">
+        <div class="result-emoji" id="result-emoji">🌟</div>
+        <div class="result-score" id="final-score">0/20</div>
+        <div class="result-msg" id="result-msg">Great job!</div>
+        <button class="restart-btn" onclick="restartQuiz()">🔄 Try Again!</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>🌱 Keep supporting local products & our planet! 🌍</footer>
+
+<script>
+const questions = [
+  {
+    q: "What are local products?",
+    choices: ["Goods imported from other countries","Goods made in our country using local resources and workers","Products sold in malls only","Items made by machines abroad"],
+    correct: 1,
+    explain: "Local products are goods made in our country using local resources and workers! 🇵🇭"
+  },
+  {
+    q: "Which of the following is an example of a FARM product?",
+    choices: ["Rattan furniture","Clay pots","Rice and vegetables","Varnish from almaciga"],
+    correct: 2,
+    explain: "Rice and vegetables are farm products grown by Filipino farmers! 🌾"
+  },
+  {
+    q: "What is a SECONDARY crop?",
+    choices: ["A main crop like rice","A crop grown in addition to the main crop","A foreign plant","A type of forest product"],
+    correct: 1,
+    explain: "Secondary crops are grown in addition to main crops to provide extra income! 🌱"
+  },
+  {
+    q: "Which is NOT a secondary crop?",
+    choices: ["Garlic","Onions","Peanuts","Rice"],
+    correct: 3,
+    explain: "Rice is a main crop. Secondary crops include garlic, onions, and peanuts! 🧄"
+  },
+  {
+    q: "Which part of peanuts can be used as animal food?",
+    choices: ["Roots","Seeds","Stems","Leaves only"],
+    correct: 2,
+    explain: "Peanut stems can be used as animal food! 🥜"
+  },
+  {
+    q: "What is RATTAN used for?",
+    choices: ["Food and cooking","Medicine and health","Furniture and baskets","Clothing and shoes"],
+    correct: 2,
+    explain: "Rattan is a minor forest product used for making furniture and baskets! 🪑"
+  },
+  {
+    q: "Which forest product is used for roofing and making fans?",
+    choices: ["Rattan","Anahaw","Buri palm","Almaciga"],
+    correct: 1,
+    explain: "Anahaw is used for roofing, hats, and fans! 🍃"
+  },
+  {
+    q: "What is almaciga resin used for?",
+    choices: ["Making candy","Varnish and incense","Animal feed","Water treatment"],
+    correct: 1,
+    explain: "Almaciga resin is used for making varnish and incense! 🪵"
+  },
+  {
+    q: "Which of the following is an example of a HOME INDUSTRY?",
+    choices: ["Building highways","Growing rice in farms","Basket making using local materials","Importing toys from other countries"],
+    correct: 2,
+    explain: "Basket making using local materials is a home industry! 🧺"
+  },
+  {
+    q: "Why is it important to support local products?",
+    choices: ["It only helps big businesses","It helps farmers and workers earn a living","It increases imports","It reduces the number of workers"],
+    correct: 1,
+    explain: "Supporting local products helps farmers, workers, and strengthens our economy! 💪"
+  },
+  {
+    q: "What is SUSTAINABLE DEVELOPMENT?",
+    choices: ["Building as many factories as possible","Development that meets present needs without harming future generations","Selling products to other countries","Using all natural resources quickly"],
+    correct: 1,
+    explain: "Sustainable development meets present needs without harming future generations! 🌍"
+  },
+  {
+    q: "How many Sustainable Development Goals (SDGs) are there?",
+    choices: ["10","15","17","20"],
+    correct: 2,
+    explain: "There are 17 Sustainable Development Goals set by the United Nations! 🎯"
+  },
+  {
+    q: "Which organization created the 17 SDGs?",
+    choices: ["World Health Organization","United Nations","Department of Education","Philippine Government"],
+    correct: 1,
+    explain: "The 17 SDGs were created by the United Nations! 🌐"
+  },
+  {
+    q: "What does SDG 1 stand for?",
+    choices: ["Zero Hunger","Climate Action","No Poverty","Clean Water"],
+    correct: 2,
+    explain: "SDG 1 is No Poverty — one of the most important goals! 💰"
+  },
+  {
+    q: "Which SDG is about protecting life underwater?",
+    choices: ["SDG 13","SDG 14","SDG 15","SDG 16"],
+    correct: 1,
+    explain: "SDG 14 is Life Below Water — protecting our oceans and sea life! 🌊"
+  },
+  {
+    q: "What does the '5Rs' in waste management stand for?",
+    choices: ["Run, Race, Rest, Read, Relax","Reuse, Reduce, Recycle, Repair, Rot","Rent, Resell, Return, Reload, Rebuild","Receive, Request, Report, Respond, Review"],
+    correct: 1,
+    explain: "The 5Rs are Reuse, Reduce, Recycle, Repair, and Rot (compost)! ♻️"
+  },
+  {
+    q: "Which of the following is a RENEWABLE energy source?",
+    choices: ["Coal","Gasoline","Solar energy","Charcoal"],
+    correct: 2,
+    explain: "Solar energy is a renewable energy source — clean and sustainable! ☀️"
+  },
+  {
+    q: "Which activity promotes sustainable development?",
+    choices: ["Burning all forest trees","Throwing garbage in rivers","Joining clean-up drives and barangay activities","Buying only imported goods"],
+    correct: 2,
+    explain: "Joining clean-up drives and community activities promotes sustainable development! 🤝"
+  },
+  {
+    q: "How does supporting local products connect to the SDGs?",
+    choices: ["It has no connection to SDGs","It helps achieve goals like No Poverty, Decent Work, and Responsible Consumption","It only helps SDG 14 (Life Below Water)","It only promotes imported goods"],
+    correct: 1,
+    explain: "Supporting local products connects to SDGs like No Poverty, Decent Work, and Responsible Consumption! 🔗"
+  },
+  {
+    q: "What is the main message of the SDGs?",
+    choices: ["Only rich countries matter","Every country should compete alone","No one is left behind","Only big cities need development"],
+    correct: 2,
+    explain: "The main message of the SDGs is: No one is left behind! 🌟"
+  }
+];
+
+let current = 0;
+let score = 0;
+let answered = false;
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-cards');
+  container.innerHTML = '';
+  questions.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'q-card' + (i === 0 ? ' active' : '');
+    div.id = 'q-' + i;
+    div.innerHTML = `
+      <div class="q-number">Question ${i+1} of ${questions.length}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="choices">
+        ${q.choices.map((c,j)=>`
+          <button class="choice-btn" onclick="answer(${i},${j})">
+            <span class="choice-letter">${['A','B','C','D'][j]}</span>
+            ${c}
+          </button>`).join('')}
+      </div>
+      <div class="feedback-box" id="fb-${i}"></div>
+      <button class="next-btn" id="next-${i}" onclick="nextQ(${i})">${i===questions.length-1?'🏁 Finish!':'Next ➡️'}</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function answer(qi, chosen) {
+  if (answered) return;
+  answered = true;
+  const q = questions[qi];
+  const btns = document.querySelectorAll(`#q-${qi} .choice-btn`);
+  const fb = document.getElementById('fb-'+qi);
+  btns.forEach(b => b.disabled = true);
+  btns[chosen].classList.add(chosen === q.correct ? 'correct' : 'wrong');
+  if (chosen !== q.correct) btns[q.correct].classList.add('correct');
+  if (chosen === q.correct) {
+    score++;
+    document.getElementById('score-display').textContent = score;
+    fb.className = 'feedback-box correct';
+    fb.innerHTML = '✅ Correct! ' + q.explain;
+  } else {
+    fb.className = 'feedback-box wrong';
+    fb.innerHTML = '❌ Not quite. ' + q.explain;
+  }
+  document.getElementById('next-'+qi).classList.add('show');
+  updateProgress();
+}
+
+function nextQ(qi) {
+  answered = false;
+  document.getElementById('q-'+qi).classList.remove('active');
+  if (qi + 1 < questions.length) {
+    document.getElementById('q-'+(qi+1)).classList.add('active');
+    current = qi + 1;
+  } else {
+    showResult();
+  }
+}
+
+function updateProgress() {
+  const pct = ((current+1)/questions.length)*100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+function showResult() {
+  document.getElementById('quiz-cards').style.display = 'none';
+  const rs = document.getElementById('result-screen');
+  rs.classList.add('show');
+  document.getElementById('final-score').textContent = score + '/20';
+  const pct = score/20;
+  let emoji, msg;
+  if (pct >= 0.9) { emoji='🏆'; msg='Outstanding! You\'re a sustainable superstar! 🌟'; }
+  else if (pct >= 0.75) { emoji='🌟'; msg='Great job! Keep learning and growing! 🌱'; }
+  else if (pct >= 0.6) { emoji='👍'; msg='Good effort! Review and try again! 📚'; }
+  else { emoji='💪'; msg='Keep studying — you can do it! 🌍'; }
+  document.getElementById('result-emoji').textContent = emoji;
+  document.getElementById('result-msg').textContent = msg;
+}
+
+function restartQuiz() {
+  score = 0; current = 0; answered = false;
+  document.getElementById('score-display').textContent = '0';
+  document.getElementById('progress-bar').style.width = '0%';
+  document.getElementById('result-screen').classList.remove('show');
+  document.getElementById('quiz-cards').style.display = 'block';
+  buildQuiz();
+}
+
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
