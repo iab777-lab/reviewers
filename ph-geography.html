@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philippines Geography - Interactive Reviewer & Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066CC;
+            --secondary: #FF6B35;
+            --accent: #FFC857;
+            --success: #06D6A0;
+            --danger: #EF476F;
+            --bg-dark: #0A1929;
+            --bg-light: #F0F4F8;
+            --text-dark: #1A2332;
+            --text-light: #FFFFFF;
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: linear-gradient(135deg, #0A1929 0%, #1E3A5F 100%);
+            color: var(--text-light);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 102, 204, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 200, 87, 0.05) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Righteous', cursive;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(255, 200, 87, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .topic-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            border-left: 6px solid var(--primary);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .topic-card h2 {
+            font-family: 'Righteous', cursive;
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .topic-card h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .topic-card h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem 0;
+            font-weight: 600;
+        }
+
+        .topic-card p, .topic-card ul {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .topic-card ul {
+            padding-left: 1.5rem;
+        }
+
+        .topic-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(255, 200, 87, 0.3) 0%, rgba(255, 107, 53, 0.2) 100%);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .stat-box {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            margin: 0.5rem 0.5rem 0.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+        }
+
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .region-item {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(255, 107, 53, 0.05));
+            border: 2px solid rgba(0, 102, 204, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .region-item:hover {
+            border-color: var(--secondary);
+            transform: scale(1.03);
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.2);
+        }
+
+        .region-item strong {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .mode-selector {
+                flex-direction: column;
+            }
+
+            .topic-card {
+                padding: 1.5rem;
+            }
+
+            .quiz-container {
+                padding: 1.5rem;
+            }
+
+            .quiz-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .results-score {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🇵🇭 Philippines Geography</h1>
+            <p class="subtitle">Master the Pacific Ring of Fire, Volcanoes, Natural Disasters, Preparedness & Regional Livelihoods</p>
+        </header>
+
+
+
+        <!-- Reviewer Section -->
+        <div class="content-section active" id="reviewer">
+            <div class="topic-card">
+                <h2><span class="emoji">🌋</span>Pacific Ring of Fire</h2>
+                
+                <h3>What is the Pacific Ring of Fire?</h3>
+                <p>The Pacific Ring of Fire, also known as the <span class="highlight">Circum-Pacific Belt</span>, is a major area in the basin of the Pacific Ocean where a large number of earthquakes and volcanic eruptions occur.</p>
+                
+                <div class="stat-box">40,000 km (25,000 miles) horseshoe shape</div>
+                <div class="stat-box">452 volcanoes</div>
+                <div class="stat-box">75% of world's active & dormant volcanoes</div>
+                
+                <h3>Earthquake Statistics</h3>
+                <ul>
+                    <li><strong>90%</strong> of the world's earthquakes occur in the Ring of Fire</li>
+                    <li><strong>80%</strong> of the world's largest earthquakes occur here</li>
+                </ul>
+
+                <h3>The Philippines & the Ring of Fire</h3>
+                <p>The Philippines is situated along a <span class="highlight">highly seismic area</span> lying along the Pacific Ring of Fire. This geographical location makes the country prone to natural disasters.</p>
+
+                <h3>Major Philippine Earthquakes</h3>
+                <p>While earthquake disasters are not as frequent as typhoons and flooding, the damage to affected communities is usually <span class="highlight">massive and devastating</span>. Within a 10-year period, five destructive earthquakes were recorded:</p>
+                <ul>
+                    <li><strong>2013 Bohol Earthquake</strong></li>
+                    <li><strong>1990 Luzon Earthquake</strong></li>
+                    <li><strong>1976 Moro Gulf Earthquake</strong></li>
+                </ul>
+
+                <h3>Two Major Tectonic Plates</h3>
+                <p>The Philippines sits at the boundary of two major tectonic plates: the <span class="highlight">Philippine Sea Plate</span> and the <span class="highlight">Eurasian Plate</span>. This makes the country highly prone to volcanic eruptions and earthquakes. There are around <strong>300 volcanoes</strong> within the Pacific Ring of Fire in the Philippines. Economic damage from earthquakes was estimated to reach <strong>₱2.5 billion</strong>.</p>
+                <p>The Philippines must adopt <span class="highlight">Disaster Risk Reduction and Management (DRRM)</span> and <span class="highlight">Climate Change Adaptation (CCA)</span> due to its geological vulnerability.</p>
+            </div>
+
+            <!-- Active Volcanoes Card -->
+            <div class="topic-card">
+                <h2><span class="emoji">🌋</span>Active Volcanoes in the Philippines</h2>
+
+                <h3>Mount Pinatubo</h3>
+                <p>Mount Pinatubo erupted in <span class="highlight">1991</span> and was considered a <strong>terrestrial eruption of the 20th century</strong>. Thousands of people were evacuated to save many lives. Fragmentation flows, ash deposits, and lahars destroyed thousands of houses, farmlands, and water resources.</p>
+
+                <h3>Mayon Volcano</h3>
+                <p>Known as the <span class="highlight">world's most perfect volcanic cone</span> because of its symmetrical shape, Mayon Volcano is found in <strong>Albay, Bicol</strong>. Its last major explosion was on <strong>September 23, 1984</strong>. Eruption characteristics include pyroclastic flow, lava flow, lahar, and ashfall. Its scope was up to <strong>1.7–16 kilometers</strong> eruption column, devastating lowland communities around its vicinity.</p>
+
+                <h3>Taal Volcano</h3>
+                <p>Taal is a <span class="highlight">small yet one of the most active volcanoes</span> in the Philippines with reported eruptions over the past years. The most recent activity was on <strong>March 26, 2022 — Alert Level 3 (Magmatic Unrest)</strong>. A phreatomagmatic eruption of the Main Crater generated up to <strong>3,000 tall eruption plumes</strong>. DOST-PHIVOLCS strongly recommends that islands near the volcano must evacuate due to volcanic tsunamis.</p>
+
+                <h3>Canlaon Volcano</h3>
+                <p>The most known active volcano in <span class="highlight">Central Philippines</span>. The last movement was reported on <strong>June 5 – July 3, 2022</strong>. PHIVOLCS Director Renato Solidum, Jr. advised the community near the <strong>4-kilometer permanent danger zone</strong> to avoid getting near the volcano. Increased activity includes volcanic gas and movements of tectonic plates.</p>
+
+                <div class="region-grid">
+                    <div class="region-item">
+                        <strong>🔥 Mt. Pinatubo</strong>
+                        Luzon — Erupted 1991 (20th century's major eruption)
+                    </div>
+                    <div class="region-item">
+                        <strong>🔥 Mayon Volcano</strong>
+                        Albay, Bicol — World's most perfect volcanic cone
+                    </div>
+                    <div class="region-item">
+                        <strong>🔥 Taal Volcano</strong>
+                        Batangas — Most active; Alert Level 3 in 2022
+                    </div>
+                    <div class="region-item">
+                        <strong>🔥 Canlaon Volcano</strong>
+                        Central Philippines — Active as of 2022
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tsunamis Card -->
+            <div class="topic-card">
+                <h2><span class="emoji">🌊</span>Tsunamis</h2>
+                <p>A tsunami is a <span class="highlight">series of sea waves commonly caused by earthquakes under the sea</span>. Places near coastal areas facing the <strong>Pacific Ocean, Celebes Sea, West Philippine Sea, and Sulu Sea</strong> are the first to be affected.</p>
+                <p>In August <strong>1976</strong>, the southwest coast of Mindanao had an earthquake with a magnitude of <strong>8.1</strong>, producing <strong>nine-meter-high tsunamis</strong>.</p>
+
+                <h3>PHIVOLCS Safety & Preparedness Measures for Tsunamis</h3>
+                <ul>
+                    <li>Do not stay in low-lying coastal areas after a felt earthquake. <strong>Move to higher grounds immediately.</strong></li>
+                    <li>If unusual sea conditions like <strong>rapid lowering of sea level</strong> are observed, immediately move toward higher ground.</li>
+                    <li><strong>Never go down the beach</strong> to watch for a tsunami. When you see the wave, you are too close to escape it.</li>
+                    <li>During the retreat of sea level, interesting sights are often revealed. <strong>Fishes may be stranded on dry land</strong> — do not be attracted to collect them; evacuate instead.</li>
+                </ul>
+            </div>
+
+            <!-- Storm Surge Card -->
+            <div class="topic-card">
+                <h2><span class="emoji">💨</span>Storm Surge</h2>
+                <p>Storm surge is a <span class="highlight">drastic change in water level with the presence of a storm</span>. It is the abnormal rise of water due to heavy storms, over and above the normal tide. As the tropical cyclone approaches the coast, strong winds strike the water over low-lying areas, which can produce flooding.</p>
+                <p>Storm surge becomes more threatening when it goes on top of a high tide — it may cause a flood. Big and strong waves are produced by the strong winds.</p>
+
+                <h3>Notable Storm Surges in the Philippines</h3>
+                <ul>
+                    <li><strong>Super Typhoon Yolanda</strong> — Most powerful tropical cyclone in the past 20 years; devastated most parts of the country, especially <strong>Leyte and Samar</strong>.</li>
+                    <li><strong>Tropical Cyclone Thelma (1991)</strong> — Raged in the Visayas Region; <strong>5,000–8,000 people died</strong>.</li>
+                    <li><strong>Typhoon Frank</strong> — Devastated Metro Manila and other provinces in Luzon.</li>
+                </ul>
+            </div>
+
+            <!-- Typhoon Warning Signals Card -->
+            <div class="topic-card">
+                <h2><span class="emoji">🌀</span>Typhoons & PAGASA Warning Signals</h2>
+                <p>The <span class="highlight">Philippine Public Storm Warning Signal</span> has different levels (Signal 1–Signal 5). Each signal level corresponds to its meteorological condition, wind impact, and precautionary measures needed.</p>
+                <p>The hazard map shows places prone to floods, tropical cyclones, and storm surges. Low-lying places near the seashore and the middle of each archipelago are most at risk.</p>
+
+                <h3>PAGASA Modified Tropical Cyclone Warning System (March 2022)</h3>
+                <div class="region-grid">
+                    <div class="region-item">
+                        <strong>🌀 Tropical Depression (TD)</strong>
+                        Wind: 61 km/h or less — Wind Signal 1
+                    </div>
+                    <div class="region-item">
+                        <strong>🌀 Tropical Storm (TS)</strong>
+                        Wind: 62–88 km/h — Wind Signal 2
+                    </div>
+                    <div class="region-item">
+                        <strong>🌀 Severe Tropical Storm (STS)</strong>
+                        Wind: 89–117 km/h — Wind Signal 3
+                    </div>
+                    <div class="region-item">
+                        <strong>🌀 Typhoon (TY)</strong>
+                        Wind: 118–184 km/h — Wind Signal 4
+                    </div>
+                    <div class="region-item">
+                        <strong>🌀 Super Typhoon (STY)</strong>
+                        Wind: 185 km/h or higher — Wind Signal 5
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disaster Preparedness Card -->
+            <div class="topic-card">
+                <h2><span class="emoji">⚠️</span>Disaster Preparedness</h2>
+                <p>As one of the priority areas of <span class="highlight">NDRRMC (National Disaster Risk Reduction and Management Council)</span>, it serves as a national guide for disaster prevention and mitigation, disaster preparedness, disaster response, and disaster rehabilitation and recovery — to make citizens prepared in times of calamity.</p>
+                <p>Different establishments conduct <strong>seminars and earthquake drills</strong> among their personnel. During calamities, <strong>timing is essential</strong> to an orderly, safe, and effective evacuation.</p>
+
+                <h3>During an Earthquake (NDRRMC Guidelines)</h3>
+                <ul>
+                    <li>Stay calm and look for the exit.</li>
+                    <li>Avoid using an elevator.</li>
+                    <li>Stay under a sturdy table or furniture to protect from falling debris.</li>
+                    <li>As soon as the situation normalizes, go outside and stay far from big buildings, structures, electric wires, or trees.</li>
+                </ul>
+
+                <h3>During Stormy Days</h3>
+                <ul>
+                    <li>It is safe to stay at home.</li>
+                    <li>Keep away from broken electric wires.</li>
+                    <li>Stay away from floods — dirty water can make you sick.</li>
+                </ul>
+
+                <div class="stat-box">Prevention is better than cure</div>
+                <div class="stat-box">NDRRMC — National Guide for DRRM</div>
+                <div class="stat-box">Families must prepare before disaster strikes</div>
+            </div>
+
+            <!-- References Card -->
+            <div class="topic-card" style="border-left-color: var(--accent);">
+                <h2><span class="emoji">📖</span>References</h2>
+                <ul>
+                    <li>Philippine Department of Education. <em>Araling Panlipunan — Grade 3 Learner's Material (Module 4, Lessons 1–2)</em>. DepEd, Philippines. (Pages 132–137)</li>
+                    <li>National Disaster Risk Reduction and Management Council (NDRRMC). <em>Disaster Risk Reduction and Management Guidelines.</em></li>
+                    <li>Philippine Institute of Volcanology and Seismology (PHIVOLCS/DOST-PHIVOLCS). <em>Introduction to Tsunami</em> (2021); Volcano Activity Updates (2022).</li>
+                    <li>Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA). <em>Modified Tropical Cyclone Warning System</em> (March 2022 update).</li>
+                    <li>National Disaster Risk Reduction and Management Council (NDRRMC). <em>Pacific Ring of Fire: Overview and Philippines Context.</em></li>
+                </ul>
+            </div>
+
+            <div class="topic-card">
+                <h2><span class="emoji">🏝️</span>Three Major Island Groups</h2>
+                <p>The Philippines is divided into three major island groups: <span class="highlight">Luzon</span>, <span class="highlight">Visayas</span>, and <span class="highlight">Mindanao</span>. Each region offers unique geographical features that greatly influence the ways of living and livelihoods of its inhabitants.</p>
+            </div>
+
+            <div class="topic-card">
+                <h2><span class="emoji">🌾</span>Luzon Regions</h2>
+                
+                <h3>Region 1: Ilocos Region</h3>
+                <p><strong>Geography:</strong> Rugged coastal strip between the Cordillera Mountains and the West Philippine Sea</p>
+                <p><strong>Provinces:</strong> Ilocos Norte, Ilocos Sur, La Union, Pangasinan</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Agriculture:</strong> High-value crops (garlic, onions, tobacco)</li>
+                    <li><strong>Salt-making:</strong> Pangasinan ("place where salt is made")</li>
+                    <li><strong>Wine-making:</strong> Basi (fermented sugarcane wine)</li>
+                    <li><strong>Crafts:</strong> Inabel weaving, Burnay (clay pot) making</li>
+                </ul>
+
+                <h3>Region 2: Cagayan Valley</h3>
+                <p><strong>Geography:</strong> Located in northeastern Luzon; the largest region in Luzon. Includes the Cagayan River, the longest river in the Philippines.</p>
+                <p><span class="highlight">"Tobacco Region of the Philippines"</span></p>
+                <p><strong>Provinces:</strong> Batanes, Cagayan, Isabela, Nueva Vizcaya, Quirino</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Farming:</strong> Top producer of yellow corn (Isabela), tobacco plantations</li>
+                    <li><strong>Logging:</strong> Sustainable forestry and wood processing</li>
+                    <li><strong>Fishing:</strong> Coastal and traditional Ivatan fishing</li>
+                </ul>
+
+                <h3>Cordillera Administrative Region (CAR)</h3>
+                <p><strong>Geography:</strong> Landlocked and mountainous; includes La Trinidad Valley - <span class="highlight">"Salad Bowl of the Philippines"</span></p>
+                <p><strong>Provinces:</strong> Abra, Apayao, Benguet, Ifugao, Kalinga, Mountain Province</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Highland Agriculture:</strong> Strawberries, lettuce, broccoli, "Baguio beans"</li>
+                    <li><strong>Mining:</strong> Gold and copper mining</li>
+                    <li><strong>Artisanship:</strong> Wood carving</li>
+                </ul>
+
+                <h3>Region 3: Central Luzon</h3>
+                <p><strong>Geography:</strong> The largest plain in the country.</p>
+                <p><span class="highlight">"Rice Granary of the Philippines"</span></p>
+                <p><strong>Provinces:</strong> Aurora, Bataan, Bulacan, Nueva Ecija, Pampanga, Tarlac, Zambales</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Rice Production:</strong> Nueva Ecija is the leading producer</li>
+                    <li><strong>Aquaculture:</strong> Large-scale Bangus (Milkfish) and Tilapia farming</li>
+                    <li><strong>Industrial:</strong> Manufacturing hubs (Clark and Subic Freeport Zones)</li>
+                </ul>
+
+                <h3>National Capital Region (NCR)</h3>
+                <p><strong>Geography:</strong> The urbanized capital of the Philippines; mainly industrial and commercial.</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Trade & Commerce:</strong> Banking, BPOs, corporate headquarters</li>
+                    <li><strong>Balut:</strong> Pateros (fertilized duck egg delicacy)</li>
+                    <li><strong>Shoes:</strong> Marikina - <span class="highlight">"Shoe Capital of the Philippines"</span></li>
+                    <li><strong>Others:</strong> Garments, electronics, food processing, fishing, salt making, furniture</li>
+                </ul>
+
+                <h3>Region IV-A: CALABARZON</h3>
+                <p><strong>Geography:</strong> Located in Southern Luzon; relatively mountainous with narrow plains.</p>
+                <p><strong>Provinces:</strong> Cavite, Laguna, Batangas, Rizal, Quezon</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Agriculture:</strong> Coconut (Quezon), Coffee Barako (Batangas)</li>
+                    <li><strong>Buntal hats:</strong> Quezon (handwoven from buri palm fibers)</li>
+                    <li><strong>Livestock:</strong> Batangas (cattle, poultry, beef, dairy)</li>
+                    <li><strong>Fishing:</strong> Coastal communities</li>
+                </ul>
+
+                <h3>Region IV-B: MIMAROPA</h3>
+                <p><strong>Geography:</strong> The "Island Neighbors" of Luzon on the south.</p>
+                <p><strong>Provinces:</strong> Mindoro (Oriental & Occidental), Marinduque, Romblon, Palawan</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Mining:</strong> Romblon - <span class="highlight">"Marble Capital"</span></li>
+                    <li><strong>Eco-Tourism & Fishing:</strong> Palawan (primary seafood source for Manila)</li>
+                </ul>
+
+                <h3>Region V: Bicol Region</h3>
+                <p><strong>Geography:</strong> Occupies the Bicol Peninsula in Southern Luzon. The terrain is generally mountainous and hilly.</p>
+                <p><span class="highlight">"Abaca Region of the Philippines"</span></p>
+                <p><strong>Provinces:</strong> Albay, Camarines Norte, Camarines Sur, Catanduanes, Masbate, Sorsogon</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Agriculture:</strong> Pili nuts, coconut-based dishes (Bicol Express, pinangat)</li>
+                    <li><strong>Fishing:</strong> Abundant marine resources</li>
+                    <li><strong>Mining:</strong> Gold and copper (Masbate)</li>
+                    <li><strong>Handicrafts:</strong> Abaca fiber products, ceramics, pili nut delicacies</li>
+                </ul>
+            </div>
+
+            <div class="topic-card">
+                <h2><span class="emoji">🏖️</span>Visayas Regions</h2>
+                
+                <h3>Region VI: Western Visayas</h3>
+                <p><strong>Geography:</strong> One of the island groups in Visayas, characterized by vast agricultural lands and rich fishing grounds.</p>
+                <p><strong>Character:</strong> Third largest rice producer in the country</p>
+                <p><strong>Provinces:</strong> Aklan, Antique, Capiz, Iloilo, Guimaras</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Agriculture:</strong> Guimaras (world's sweetest mangoes), Iloilo (major rice producer)</li>
+                    <li><strong>Fishing:</strong> Capiz - <span class="highlight">"Seafood Capital of the Philippines"</span></li>
+                </ul>
+
+                <h3>Region VII: Central Visayas</h3>
+                <p><strong>Geography:</strong> Located in the central part of the Philippines between the islands of Luzon and Mindanao.</p>
+                <p><strong>Provinces:</strong> Cebu, Bohol</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Fishing:</strong> Rich coastal waters</li>
+                    <li><strong>Cattle Raising:</strong> Livestock and dairy production</li>
+                    <li><strong>Farming:</strong> Corn (primary crop), rice, coconut</li>
+                    <li><strong>Weaving:</strong> Sinamay (woven abaca fiber), piña fabric (pineapple fiber)</li>
+                    <li><strong>Mining:</strong> Limestone, gold</li>
+                </ul>
+
+                <h3>Region 8: Eastern Visayas</h3>
+                <p><strong>Geography:</strong> These islands have wide coastal areas and are mountainous.</p>
+                <p><strong>Landmark:</strong> San Juanico Bridge - <span class="highlight">longest bridge in the Philippines</span> (connects Leyte and Samar)</p>
+                <p><strong>Provinces:</strong> Biliran, Leyte, Southern Leyte, Samar (Western, Northern, Eastern)</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Home Industries:</strong> Banig (mat) weaving in Basey, Samar</li>
+                    <li><strong>Agriculture:</strong> Coconut and rice farming</li>
+                    <li><strong>Others:</strong> Fishing, logging, mining</li>
+                </ul>
+
+                <h3>Negros Island Region</h3>
+                <p><strong>Geography:</strong> A diverse region with rugged, mountainous areas and the high peak of Mt. Kanlaon. Marked by wide, fertile volcanic plains.</p>
+                <p><span class="highlight">"Sugarbowl of the Philippines"</span> - produces over half of the country's sugar</p>
+                <p><strong>Provinces:</strong> Siquijor, Negros Occidental, Negros Oriental</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Sugar Industry:</strong> Major sugar production</li>
+                    <li><strong>Energy:</strong> Geothermal power production (Valencia, Negros Oriental)</li>
+                </ul>
+            </div>
+
+            <div class="topic-card">
+                <h2><span class="emoji">🌴</span>Mindanao Regions</h2>
+                
+                <h3>Region IX: Zamboanga Peninsula</h3>
+                <p><strong>Geography:</strong> Located in the southwestern part of the Philippines and connected to mainland Mindanao through a narrow strip of land.</p>
+                <p><strong>Provinces:</strong> Zamboanga del Norte, Zamboanga del Sur, Zamboanga Sibugay</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Sardine Industry:</strong> Zamboanga City - <span class="highlight">"Sardine Capital"</span></li>
+                    <li><strong>Cottage Industry:</strong> Weaving and brassware</li>
+                    <li><strong>Others:</strong> Farming, fishing</li>
+                </ul>
+
+                <h3>Region X: Northern Mindanao</h3>
+                <p><strong>Geography:</strong> Located in the north-central part of Mindanao. It is the gateway that links Mindanao to other parts of the Philippines.</p>
+                <p><strong>Provinces:</strong> Bukidnon, Camiguin, Lanao del Norte, Misamis Occidental, Misamis Oriental</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Plantations:</strong> Massive Pineapple (Del Monte) and Banana plantations (Bukidnon)</li>
+                    <li><strong>Industry:</strong> Heavy industries - steel and power (Iligan, Cagayan de Oro)</li>
+                    <li><strong>Others:</strong> Farming, fishing, mining, logging</li>
+                </ul>
+
+                <h3>Region XI: Davao Region</h3>
+                <p><strong>Geography:</strong> Composed of plateaus, plains, and mountains.</p>
+                <p><strong>Provinces:</strong> Davao de Oro, Davao del Norte, Davao del Sur, Davao Oriental, Davao Occidental</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Global Exports:</strong> Country's top exporter of Bananas, Durian, and Cacao</li>
+                    <li><strong>Others:</strong> Farming, fishing, mining</li>
+                </ul>
+
+                <h3>Region XII: SOCCSKSARGEN</h3>
+                <p><strong>Geography:</strong> Has a wide range of seashores, valleys, and mountain ranges. Known for its river systems which contribute to rich food sources and abundant water supply.</p>
+                <p><span class="highlight">"Rice Bowl of Mindanao"</span></p>
+                <p><strong>Provinces:</strong> South Cotabato, Cotabato, Sultan Kudarat, Sarangani</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Tuna Industry:</strong> General Santos City - <span class="highlight">"Tuna Capital"</span></li>
+                    <li><strong>Ceramics:</strong> Growing ceramic and pottery industry</li>
+                    <li><strong>Agriculture:</strong> Rice and corn (main products)</li>
+                </ul>
+
+                <h3>Region XIII: CARAGA</h3>
+                <p><strong>Geography:</strong> Located in the northeastern part of Mindanao. Generally mountainous, with valleys along the coast.</p>
+                <p><strong>Provinces:</strong> Agusan del Sur, Agusan del Norte, Surigao del Sur, Surigao del Norte, Dinagat Islands</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Mining:</strong> Center of the Philippines' Nickel and Gold mining industry</li>
+                    <li><strong>Forestry:</strong> Wood processing and matchwood production (Agusan)</li>
+                    <li><strong>Others:</strong> Agriculture, fishing, logging</li>
+                </ul>
+
+                <h3>Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)</h3>
+                <p><strong>Geography:</strong> Located in the southwestern part of the Philippines and comprises the Mindanao Island groups.</p>
+                <p><strong>Provinces:</strong> Basilan, Lanao del Sur, Maguindanao, Sulu, Tawi-Tawi</p>
+                <h4>Livelihoods:</h4>
+                <ul>
+                    <li><strong>Aquaculture:</strong> Pearl diving and seaweed farming (Agar-agar) in Tawi-Tawi</li>
+                    <li><strong>Crafts:</strong> Vinta making (Maguindanao), weaving</li>
+                    <li><strong>Others:</strong> Farming, fishing</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
