@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GMRC Reviewer + Quizzes – Lessons 14–20</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #F4B942;
+    --deep: #2B1A6E;
+    --purple: #5B3DBE;
+    --lavender: #EDE9FF;
+    --soft: #F7F5FF;
+    --text: #1E1053;
+    --green: #27AE60;
+    --red: #E74C3C;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #2B1A6E 0%, #5B3DBE 50%, #8B5CF6 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: var(--text);
+  }
+
+  .hero { text-align: center; padding: 32px 20px 20px; color: white; }
+  .hero .badge {
+    display: inline-block; background: var(--gold); color: var(--deep);
+    font-family: 'Fredoka One', cursive; font-size: 13px;
+    padding: 5px 16px; border-radius: 20px; letter-spacing: 1px; margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'Fredoka One', cursive; font-size: clamp(26px, 6vw, 42px);
+    line-height: 1.1; text-shadow: 2px 3px 0 rgba(0,0,0,.2); margin-bottom: 8px;
+  }
+  .hero p { font-size: 15px; opacity: .85; font-weight: 600; }
+
+  .mode-switch {
+    display: flex; justify-content: center; gap: 10px;
+    margin: 0 auto 20px; max-width: 400px;
+  }
+  .mode-btn {
+    flex: 1; padding: 11px 10px;
+    font-family: 'Fredoka One', cursive; font-size: 15px;
+    border-radius: 14px; border: 2.5px solid rgba(255,255,255,.4);
+    background: rgba(255,255,255,.15); color: white; cursor: pointer; transition: all .2s;
+  }
+  .mode-btn.active { background: var(--gold); border-color: var(--gold); color: var(--deep); }
+
+  .nav-tabs {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    margin: 0 auto 20px; max-width: 760px; padding: 0 10px;
+  }
+  .tab-btn {
+    background: rgba(255,255,255,.18); border: 2px solid rgba(255,255,255,.35);
+    color: white; font-family: 'Fredoka One', cursive; font-size: 12px;
+    padding: 6px 12px; border-radius: 30px; cursor: pointer; transition: all .2s;
+  }
+  .tab-btn:hover, .tab-btn.active {
+    background: var(--gold); border-color: var(--gold); color: var(--deep); transform: translateY(-1px);
+  }
+
+  .container { max-width: 760px; margin: 0 auto; }
+
+  .ctrl-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 16px; }
+  .ctrl-btn {
+    background: rgba(255,255,255,.2); border: 1.5px solid rgba(255,255,255,.4);
+    color: white; font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 13px;
+    padding: 7px 18px; border-radius: 30px; cursor: pointer; transition: all .2s;
+  }
+  .ctrl-btn:hover { background: white; color: var(--deep); }
+
+  .lesson-card {
+    background: white; border-radius: 20px; margin-bottom: 20px;
+    overflow: hidden; box-shadow: 0 6px 24px rgba(0,0,0,.18);
+    display: none; animation: fadeUp .35s ease;
+  }
+  .lesson-card.visible { display: block; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+
+  .lesson-header {
+    padding: 18px 24px; display: flex; align-items: center; gap: 14px;
+    cursor: pointer; user-select: none;
+  }
+  .lesson-num {
+    font-family: 'Fredoka One', cursive; font-size: 28px; color: white;
+    background: var(--purple); width: 50px; height: 50px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; box-shadow: 0 3px 8px rgba(91,61,190,.35);
+  }
+  .lesson-title-wrap { flex: 1; }
+  .lesson-label { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: var(--purple); text-transform: uppercase; margin-bottom: 2px; }
+  .lesson-title { font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--deep); line-height: 1.2; }
+  .lesson-toggle { font-size: 20px; color: var(--purple); transition: transform .3s; flex-shrink: 0; }
+  .lesson-toggle.open { transform: rotate(180deg); }
+
+  .lesson-body {
+    padding: 0 24px; overflow: hidden; max-height: 0;
+    transition: max-height .4s ease, padding .3s ease;
+  }
+  .lesson-body.open { max-height: 3000px; padding: 0 24px 22px; }
+  .divider { height: 2px; background: var(--lavender); margin-bottom: 16px; border-radius: 2px; }
+
+  .point-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .point-list li {
+    background: var(--soft); border-left: 4px solid var(--purple);
+    border-radius: 0 10px 10px 0; padding: 10px 14px;
+    font-size: 14px; line-height: 1.55; font-weight: 600; color: var(--text); transition: background .2s;
+  }
+  .point-list li:hover { background: var(--lavender); }
+  .point-list li strong { color: var(--purple); font-weight: 800; }
+
+  .qa-block { background: var(--lavender); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; }
+  .qa-question { font-family: 'Fredoka One', cursive; font-size: 15px; color: var(--deep); margin-bottom: 8px; display: flex; gap: 8px; align-items: flex-start; }
+  .qa-question span { font-size: 18px; }
+  .qa-answer { font-size: 14px; font-weight: 600; color: var(--text); line-height: 1.6; padding-left: 26px; }
+
+  /* color variants */
+  .l14 .lesson-num{background:#E07C4A}.l14 .lesson-label,.l14 .lesson-toggle{color:#E07C4A}
+  .l14 .point-list li{border-color:#E07C4A}.l14 .point-list li strong{color:#B85C28}
+  .l14 .point-list li:hover{background:#FFF0E8}.l14 .qa-block{background:#FFF0E8}.l14 .qa-question{color:#B85C28}
+  .l15 .lesson-num{background:#3AAFA9}.l15 .lesson-label,.l15 .lesson-toggle{color:#278380}
+  .l15 .point-list li{border-color:#3AAFA9}.l15 .point-list li strong{color:#1F6E6B}
+  .l15 .point-list li:hover{background:#E0F7F6}
+  .l16 .lesson-num{background:#D95F8C}.l16 .lesson-label,.l16 .lesson-toggle{color:#B8386C}
+  .l16 .point-list li{border-color:#D95F8C}.l16 .point-list li strong{color:#8C1F4A}
+  .l16 .point-list li:hover{background:#FFE8F0}
+  .l17 .lesson-num{background:#5B8AF5}.l17 .lesson-label,.l17 .lesson-toggle{color:#3265D8}
+  .l17 .point-list li{border-color:#5B8AF5}.l17 .point-list li strong{color:#1E46A8}
+  .l17 .point-list li:hover{background:#E8EFFF}
+  .l19 .lesson-num{background:#E0A029}.l19 .lesson-label,.l19 .lesson-toggle{color:#B87B10}
+  .l19 .point-list li{border-color:#E0A029}.l19 .point-list li strong{color:#8C5F00}
+  .l19 .point-list li:hover{background:#FFF5D6}
+  .l20 .lesson-num{background:#27AE60}.l20 .lesson-label,.l20 .lesson-toggle{color:#1A7A43}
+  .l20 .point-list li{border-color:#27AE60}.l20 .point-list li strong{color:#155C31}
+  .l20 .point-list li:hover{background:#E8FFF2}.l20 .qa-block{background:#E8FFF2}.l20 .qa-question{color:#1A7A43}
+
+  /* ===== QUIZ ===== */
+  #quizSection { display: none; }
+  .quiz-card {
+    background: white; border-radius: 20px; margin-bottom: 24px;
+    box-shadow: 0 6px 24px rgba(0,0,0,.18); overflow: hidden;
+    display: none; animation: fadeUp .35s ease;
+  }
+  .quiz-card.visible { display: block; }
+  .quiz-header { padding: 18px 24px; display: flex; align-items: center; gap: 14px; }
+  .quiz-num {
+    font-family: 'Fredoka One', cursive; font-size: 22px; color: white;
+    width: 50px; height: 50px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .quiz-title-wrap { flex: 1; }
+  .quiz-label { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2px; }
+  .quiz-title { font-family: 'Fredoka One', cursive; font-size: 18px; color: var(--deep); }
+  .q1 .quiz-num{background:#E07C4A}.q1 .quiz-label{color:#E07C4A}
+  .q2 .quiz-num{background:#3AAFA9}.q2 .quiz-label{color:#3AAFA9}
+  .q3 .quiz-num{background:#D95F8C}.q3 .quiz-label{color:#D95F8C}
+  .q4 .quiz-num{background:#5B8AF5}.q4 .quiz-label{color:#5B8AF5}
+  .q5 .quiz-num{background:#9B59B6}.q5 .quiz-label{color:#9B59B6}
+  .q6 .quiz-num{background:#E0A029}.q6 .quiz-label{color:#E0A029}
+  .q7 .quiz-num{background:#27AE60}.q7 .quiz-label{color:#27AE60}
+
+  .quiz-body { padding: 0 24px 24px; }
+  .section-title {
+    font-family: 'Fredoka One', cursive; font-size: 15px;
+    background: var(--lavender); color: var(--deep);
+    border-radius: 10px; padding: 8px 14px; margin: 16px 0 12px; display: inline-block;
+  }
+
+  .tf-item {
+    background: var(--soft); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px;
+    font-size: 14px; font-weight: 600; line-height: 1.5;
+  }
+  .tf-item .qnum { font-family: 'Fredoka One', cursive; color: var(--purple); margin-right: 6px; }
+  .tf-choices { display: flex; gap: 8px; margin-top: 10px; }
+  .tf-btn {
+    flex: 1; padding: 8px; border-radius: 10px; border: 2px solid #ddd;
+    background: white; font-family: 'Nunito', sans-serif; font-weight: 700;
+    font-size: 14px; cursor: pointer; transition: all .2s;
+  }
+  .tf-btn:hover:not(:disabled) { border-color: var(--purple); background: var(--lavender); }
+  .tf-btn.correct { background: #d4f5e2 !important; border-color: var(--green) !important; color: var(--green); }
+  .tf-btn.wrong { background: #ffe0e0 !important; border-color: var(--red) !important; color: var(--red); }
+  .tf-btn.reveal-correct { background: #d4f5e2 !important; border-color: var(--green) !important; color: var(--green); }
+  .tf-feedback { font-size: 12px; font-weight: 700; margin-top: 6px; min-height: 18px; }
+  .tf-feedback.ok { color: var(--green); }
+  .tf-feedback.no { color: var(--red); }
+
+  .open-item { background: var(--soft); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+  .open-item .qnum { font-family: 'Fredoka One', cursive; color: var(--purple); margin-right: 6px; }
+  .open-q { font-size: 14px; font-weight: 600; line-height: 1.5; margin-bottom: 8px; }
+  .open-input {
+    width: 100%; border: 2px solid #e0d8ff; border-radius: 10px; padding: 9px 12px;
+    font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 600;
+    color: var(--text); resize: none; min-height: 60px; transition: border .2s; background: white;
+  }
+  .open-input:focus { outline: none; border-color: var(--purple); }
+  .show-ans-btn {
+    margin-top: 8px; padding: 6px 14px; border-radius: 20px;
+    background: var(--lavender); border: 1.5px solid var(--purple);
+    color: var(--purple); font-family: 'Nunito', sans-serif; font-weight: 700;
+    font-size: 12px; cursor: pointer; transition: all .2s;
+  }
+  .show-ans-btn:hover { background: var(--purple); color: white; }
+  .answer-reveal {
+    display: none; margin-top: 8px; background: #d4f5e2;
+    border-radius: 10px; padding: 9px 12px; font-size: 13px;
+    font-weight: 700; color: #155C31; border-left: 4px solid var(--green); line-height: 1.55;
+  }
+  .answer-reveal.shown { display: block; }
+
+  .bonus-block {
+    background: linear-gradient(135deg, #FFF5D6, #FFE8B0);
+    border-radius: 14px; padding: 14px 16px; margin-top: 14px;
+    border-left: 4px solid var(--gold);
+  }
+  .bonus-label { font-family: 'Fredoka One', cursive; color: #8C5F00; font-size: 14px; margin-bottom: 8px; }
+  .bonus-q { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+
+  .quiz-score-area { text-align: center; margin-top: 16px; }
+  .check-btn {
+    padding: 12px 30px; font-family: 'Fredoka One', cursive; font-size: 16px;
+    background: var(--purple); color: white; border: none; border-radius: 30px;
+    cursor: pointer; box-shadow: 0 4px 12px rgba(91,61,190,.35); transition: all .2s;
+  }
+  .check-btn:hover { background: var(--deep); transform: translateY(-1px); }
+  .score-display {
+    display: none; margin-top: 14px; font-family: 'Fredoka One', cursive;
+    font-size: 22px; color: var(--deep);
+  }
+  .score-display span { color: var(--purple); font-size: 28px; }
+  .reset-btn {
+    margin-top: 10px; padding: 8px 20px; font-family: 'Nunito', sans-serif;
+    font-weight: 700; font-size: 13px; border-radius: 20px;
+    border: 2px solid var(--purple); background: white; color: var(--purple);
+    cursor: pointer; transition: all .2s; display: inline-block;
+  }
+  .reset-btn:hover { background: var(--purple); color: white; }
+
+  .footer { text-align: center; color: rgba(255,255,255,.6); font-size: 12px; padding: 24px 0 10px; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">📘 GMRC · LESSONS 14–20</div>
+  <h1>Reviewer + Quizzes</h1>
+  <p>Priest · Common Priesthood · Marriage · Family</p>
+</div>
+
+<div class="mode-switch">
+  <button class="mode-btn active" onclick="setMode('reviewer',this)">📖 Reviewer</button>
+  <button class="mode-btn" onclick="setMode('quiz',this)">✏️ Quizzes</button>
+</div>
+
+<!-- ====== REVIEWER ====== -->
+<div id="reviewerSection">
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="filterLesson('all',this)">📚 All</button>
+    <button class="tab-btn" onclick="filterLesson('l14',this)">L14</button>
+    <button class="tab-btn" onclick="filterLesson('l15',this)">L15</button>
+    <button class="tab-btn" onclick="filterLesson('l16',this)">L16</button>
+    <button class="tab-btn" onclick="filterLesson('l17',this)">L17</button>
+    <button class="tab-btn" onclick="filterLesson('l19',this)">L19</button>
+    <button class="tab-btn" onclick="filterLesson('l20',this)">L20</button>
+  </div>
+  <div class="container">
+    <div class="ctrl-row">
+      <button class="ctrl-btn" onclick="toggleAll(true)">➕ Expand All</button>
+      <button class="ctrl-btn" onclick="toggleAll(false)">➖ Collapse All</button>
+    </div>
+
+    <div class="lesson-card l14 visible" data-lesson="l14">
+      <div class="lesson-header" onclick="toggleLesson(this)">
+        <div class="lesson-num">14</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-label">Lesson 14 · Things to Remember</div>
+          <div class="lesson-title">Mission of the Priest</div>
+        </div>
+        <div class="lesson-toggle open">▼</div>
+      </div>
+      <div class="lesson-body open">
+        <div class="divider"></div>
+        <ul class="point-list">
+          <li><strong>Grace</strong> is the help that God gives so that we can become his children (see CCC 1996).</li>
+          <li>To be <strong>sanctified</strong> means to "live with God and act with his love" (see CCC 2000).</li>
+          <li>A <strong>priest</strong> is an essential coworker of the bishop in teaching, sanctifying, and governing Christian communities.</li>
+          <li>The three primary functions of a priest are <strong>"to preach the Gospel, shepherd the faithful, and celebrate the Holy Eucharist."</strong></li>
+          <li>Priests are the <strong>living and clear image of Jesus Christ</strong>.</li>
+          <li>Jesus also <strong>called men to be with him</strong>.</li>
+          <li>Priests are at the service of <strong>mediating the encounter between humanity and God</strong>.</li>
+          <li>Priests share in the priesthood of Jesus Christ through the <strong>Sacrament of Holy Orders</strong>.</li>
+          <li>Priests are the <strong>ministers of sanctification</strong> of God's people.</li>
+          <li>The priest represents Jesus Christ. He continues the mission of Jesus through the <strong>"word"</strong> and the <strong>"sacrament."</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lesson-card l15 visible" data-lesson="l15">
+      <div class="lesson-header" onclick="toggleLesson(this)">
+        <div class="lesson-num">15</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-label">Lesson 15 · Things to Remember</div>
+          <div class="lesson-title">Jesus' Priesthood / Common Priesthood</div>
+        </div>
+        <div class="lesson-toggle open">▼</div>
+      </div>
+      <div class="lesson-body open">
+        <div class="divider"></div>
+        <ul class="point-list">
+          <li>All Christians are also called to <strong>serve in God's name and for the salvation of others</strong>.</li>
+          <li>We became a member of the <strong>People of God</strong> during <strong>baptism</strong>.</li>
+          <li>As the People of God, our head is <strong>Jesus Christ</strong>.</li>
+          <li>Jesus Christ is anointed by the Father with the Holy Spirit and is established as <strong>priest, prophet, and king</strong>.</li>
+          <li>As the People of God, we share in <strong>Jesus' priesthood</strong>.</li>
+          <li>Our acts of charity make us <strong>"another Christ"</strong> for other people.</li>
+          <li>To practice our <strong>"common priesthood"</strong> means to represent Jesus Christ to the world faithfully.</li>
+          <li>As the People of God who share Jesus' priesthood, we are all called to offer <strong>spiritual sacrifices</strong>.</li>
+          <li>We can seek and receive God's help through the <strong>sacraments</strong>.</li>
+          <li>In the <strong>Holy Mass</strong>, the Church gathers to remember and to represent the sacrifice of Christ, which we share through the action of the priest and the power of the Holy Spirit.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lesson-card l16 visible" data-lesson="l16">
+      <div class="lesson-header" onclick="toggleLesson(this)">
+        <div class="lesson-num">16</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-label">Lesson 16 · Things to Remember</div>
+          <div class="lesson-title">Marriage in God's Plan</div>
+        </div>
+        <div class="lesson-toggle open">▼</div>
+      </div>
+      <div class="lesson-body open">
+        <div class="divider"></div>
+        <ul class="point-list">
+          <li>God created the first humans — <strong>Adam and Eve</strong> — in his image of love (see Gen 2:22, CCC 1604).</li>
+          <li>God created a woman as a <strong>suitable partner</strong> for a man.</li>
+          <li>Marriage between a man and a woman has an <strong>important place in God's plan</strong>.</li>
+          <li><strong>Sin</strong> destroys the human family and prevents us from becoming the "image and likeness of God."</li>
+          <li>Jesus was born to a family (see Lk 2:1-20) where he <strong>grew in wisdom</strong>.</li>
+          <li>Jesus died on the cross so that we might <strong>die to sin and live an upright life</strong>.</li>
+          <li>It is Jesus who <strong>redeemed the family</strong> and reconciled humankind to God.</li>
+          <li>Marriage between a man and a woman is <strong>forever</strong>, just as God had planned from the very beginning.</li>
+          <li>The union of a man with a woman and their commitment to each other reflects <strong>God's faithful love</strong> (see CCC 1603).</li>
+          <li>Marriage between a man and a woman is a <strong>sign of God's love and faithfulness</strong> (see CCC 1617).</li>
+          <li>Through God's grace, <strong>"man and woman can achieve the union of their lives for which God created them"</strong> (see CCC 1608).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lesson-card l17 visible" data-lesson="l17">
+      <div class="lesson-header" onclick="toggleLesson(this)">
+        <div class="lesson-num">17</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-label">Lesson 17 · Things to Remember</div>
+          <div class="lesson-title">Sacrament of Matrimony</div>
+        </div>
+        <div class="lesson-toggle open">▼</div>
+      </div>
+      <div class="lesson-body open">
+        <div class="divider"></div>
+        <ul class="point-list">
+          <li>God created man and woman to be <strong>together</strong> (see CCC 371).</li>
+          <li>The vocation of married couples is to <strong>create human life and be stewards of creation</strong> (see CCC 372).</li>
+          <li>Sin prevented the <strong>"first parents"</strong> from fulfilling God's original plan.</li>
+          <li>God the Father sent Jesus, his only Son, to <strong>redeem the world</strong>.</li>
+          <li>Jesus was born of a woman and <strong>grew in wisdom with a human family</strong>.</li>
+          <li>Jesus taught that <strong>marriage is forever</strong>.</li>
+          <li>Marriage is a <strong>sign of the saving presence of Christ</strong>.</li>
+          <li><strong>Divine love</strong> is the total giving of self. It is an offering that brings new life to the world.</li>
+          <li>A generous kind of love can be seen in the <strong>Christian family</strong>.</li>
+          <li>Married Christian couples need <strong>God's grace</strong> to practice divine love.</li>
+          <li>Jesus instituted the <strong>Sacrament of Matrimony</strong>.</li>
+          <li>Jesus helps couples to love each other with <strong>deep and holy love</strong>.</li>
+          <li>Christian marriage's grace is a <strong>fruit of Christ's cross</strong> (CCC 1615).</li>
+          <li>Christian marriage is also a <strong>sign of God's love for the world</strong>.</li>
+          <li>Just as the married couple is faithful to each other, Jesus is also <strong>devoted to the Church</strong>.</li>
+          <li>Christian marriage is <strong>Jesus' sacrament of love for his people</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lesson-card l19 visible" data-lesson="l19">
+      <div class="lesson-header" onclick="toggleLesson(this)">
+        <div class="lesson-num">19</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-label">Lesson 19 · Things to Remember</div>
+          <div class="lesson-title">Children's Mission &amp; Family Values</div>
+        </div>
+        <div class="lesson-toggle open">▼</div>
+      </div>
+      <div class="lesson-body open">
+        <div class="divider"></div>
+        <ul class="point-list">
+          <li>Filipinos are <strong>family-oriented</strong> (see CFC 34).</li>
+          <li>In the family, a person finds <strong>belongingness, security, and self-identity</strong>.</li>
+          <li>We grow up, nurtured, and supported by the <strong>trust, love, and fidelity</strong> of our family.</li>
+          <li>As young Christian disciples, we learned about Jesus first through our <strong>family</strong>.</li>
+          <li>Children help build the Christian family <strong>"through love, respect, and obedience towards their parents"</strong> (St. Pope John Paul II, 1981, para. 21).</li>
+          <li>In the family, we experience <strong>freedom and obligation</strong> (see CFC 146).</li>
+          <li>We can genuinely make the family a <strong>"communion of persons"</strong> by showing them love and care and mutual service every day.</li>
+          <li>The Church teaches us to reject <strong>"exclusivism,"</strong> that is, being concerned only with our own family (see CFC 296).</li>
+          <li>We have to recognize and respond to our <strong>responsibilities in the community</strong>.</li>
+          <li>By <strong>serving our fellowmen</strong>, we imitate Christ Jesus our Lord (see CFC 699).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="lesson-card l20 visible" data-lesson="l20">
+      <div class="lesson-header" onclick="toggleLesson(this)">
+        <div class="lesson-num">20</div>
+        <div class="lesson-title-wrap">
+          <div class="lesson-label">Lesson 20 · Things to Remember</div>
+          <div class="lesson-title">Role of the Family in Society</div>
+        </div>
+        <div class="lesson-toggle open">▼</div>
+      </div>
+      <div class="lesson-body open">
+        <div class="divider"></div>
+        <div class="qa-block">
+          <div class="qa-question"><span>❓</span> Why is the family called the vital cell of society?</div>
+          <div class="qa-answer">The family is the <strong>"first and vital cell of the society"</strong> (CCC 2207) because the family is the <strong>beginning of life</strong>. It is where children grow through the <strong>care and love of their parents</strong>. Each family member is being nourished and developed to be a <strong>mature individual</strong>.</div>
+        </div>
+        <div class="qa-block">
+          <div class="qa-question"><span>❓</span> What are the Christian duties of a family?</div>
+          <div class="qa-answer">Families have the duty to <strong>proclaim the Gospels</strong> not only within their family but also to society. Each family has the responsibility to be <strong>morally upright</strong> and show <strong>love and compassion</strong> to their neighbors especially, the <strong>least, the lost, and the last</strong>.</div>
+        </div>
+        <div class="qa-block">
+          <div class="qa-question"><span>❓</span> What are some of the examples of Filipino values?</div>
+          <div class="qa-answer">Filipinos are innately <strong>family-oriented, helpful, respectful, and optimistic</strong>. Other values include being <strong>hospitable, friendly, religious, and sociable</strong>.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ====== QUIZ SECTION ====== -->
+<div id="quizSection">
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="filterQuiz('all',this)">📝 All</button>
+    <button class="tab-btn" onclick="filterQuiz('q1',this)">Quiz 1</button>
+    <button class="tab-btn" onclick="filterQuiz('q2',this)">Quiz 2</button>
+    <button class="tab-btn" onclick="filterQuiz('q3',this)">Quiz 3</button>
+    <button class="tab-btn" onclick="filterQuiz('q4',this)">Quiz 4</button>
+    <button class="tab-btn" onclick="filterQuiz('q5',this)">Quiz 5</button>
+    <button class="tab-btn" onclick="filterQuiz('q6',this)">Quiz 6</button>
+    <button class="tab-btn" onclick="filterQuiz('q7',this)">Quiz 7</button>
+  </div>
+  <div class="container" id="quizContainer"></div>
+</div>
+
+<div class="footer">📘 GMRC · Lessons 14–20 · Reviewer + 7 Quizzes</div>
+
+<script>
+const quizData = [
+  {
+    id:'q1', title:'Quiz 1', topic:'Grace and Priesthood',
+    tf:[
+      {q:"Grace is the help that God gives so that we can become His children.", a:"True"},
+      {q:"We first received God's grace in our First Communion.", a:"False"},
+      {q:"To be sanctified means to live with God and act with His love.", a:"True"},
+      {q:"Priests are at the service of mediating the encounter between God and the people.", a:"True"},
+      {q:"Everybody has the grace of God.", a:"False"},
+    ],
+    open:[
+      {q:"What are the three primary functions of a priest?\na. ___\nb. ___\nc. ___", a:"a. Preach the Gospel\nb. Shepherd the faithful\nc. Celebrate the Holy Eucharist"},
+      {q:"Who is the living and clear image of Jesus Christ?", a:"Priests"},
+      {q:"In what Sacrament do priests share in the priesthood of Jesus?", a:"Sacrament of Holy Orders"},
+    ]
+  },
+  {
+    id:'q2', title:'Quiz 2', topic:'People of God and Sacraments',
+    tf:[
+      {q:"As the People of God, we share in Jesus' priesthood.", a:"True"},
+      {q:"Everyone belongs to the People of God.", a:"False"},
+      {q:"We are called to be instruments of salvation.", a:"True"},
+      {q:"We make Jesus real and present when we help the poor and the needy.", a:"True"},
+      {q:"The Holy Eucharist is a sacrifice and a meal.", a:"True"},
+      {q:"We can receive communion even with an impure heart.", a:"False"},
+      {q:"We can seek and receive God's help through the sacraments.", a:"True"},
+    ],
+    open:[
+      {q:"When do we become a member of the People of God?", a:"During baptism"},
+      {q:'Give one way on how we can practice our "common priesthood."', a:"By representing Jesus Christ to the world faithfully / offering spiritual sacrifices / acts of charity"},
+      {q:'What is another term for "communion of desire"?', a:"Spiritual communion"},
+    ]
+  },
+  {
+    id:'q3', title:'Quiz 3', topic:'Marriage and Family (Part 1)',
+    tf:[
+      {q:"All married couples are called to love and support each other.", a:"True"},
+      {q:"All married couples are also called to nurture a deep relationship with God.", a:"True"},
+      {q:"Marriage between man and woman has an important place in God's plan.", a:"True"},
+      {q:"God created a woman as a suitable partner for a man.", a:"True"},
+      {q:"The union and commitment of a man and a woman reflects God's mercifulness.", a:"False"},
+      {q:"Jesus redeemed the family and reconciled humankind to God.", a:"True"},
+      {q:'Sin destroys the human family and prevents us from becoming the "image and likeness of God."', a:"True"},
+      {q:"Through God's forgiveness, man and woman can achieve the union that God created for them.", a:"False"},
+      {q:"All married couples are called to be righteous.", a:"True"},
+      {q:"The marriage between a man and a woman is forever.", a:"True"},
+    ],
+    bonus:{q:"In what book in the Bible is the communion between man, woman, and God proclaimed?", a:"Genesis (Gen 2:22)"}
+  },
+  {
+    id:'q4', title:'Quiz 4', topic:'Sacrament of Matrimony',
+    tf:[
+      {q:"A Christian wedding is a sign of God's love for us.", a:"True"},
+      {q:"Christian marriage is Jesus' sacrament of love for His people.", a:"True"},
+      {q:"Jesus helps couples love each other with deep and holy love.", a:"True"},
+      {q:"Marriage is a sign of the saving presence of St. Joseph and Mama Mary.", a:"False"},
+      {q:"Married Christian couples need God's grace to practice divine love.", a:"True"},
+      {q:"Married couples' only vocation is to be stewards of God's creation.", a:"False"},
+    ],
+    open:[
+      {q:"Who instituted the Sacrament of Matrimony?", a:"Jesus Christ"},
+      {q:"What do we call the sacred promises married couples make to each other?", a:"Marriage vows"},
+      {q:'What prevented the "first parents" from fulfilling God\'s original plan?', a:"Sin"},
+      {q:"What is the total giving of self, an offering that brings new life to the world?", a:"Divine love"},
+    ]
+  },
+  {
+    id:'q5', title:'Quiz 5', topic:'The Christian Family',
+    tf:[
+      {q:"The family is the basic unit of the Christian life.", a:"True"},
+      {q:"The family is a communion of love and infidelity.", a:"False"},
+      {q:"The Holy Family taught us the mission of parents to their children.", a:"True"},
+      {q:"St. Joseph expressed his fatherhood by making an offering of himself in love.", a:"True"},
+      {q:"Mama Mary showed the child Jesus to fully trust in God.", a:"True"},
+      {q:"The family is a replaceable school where children learn and develop social virtues and values.", a:"False"},
+      {q:"Through the family, God's plan to share in His divine life with humankind is carried out.", a:"True"},
+      {q:"Responsible parents help their children become honest citizens and good Christians.", a:"True"},
+      {q:"Christian parents must provide for their children's education.", a:"True"},
+      {q:"Parents assign schools to teach children about their responsibilities in the mission of the Church.", a:"False"},
+    ],
+    bonus:{q:'Who was the pope who said that the mission of the family is to be an "intimate community of life and love"?', a:"Pope Paul VI"}
+  },
+  {
+    id:'q6', title:'Quiz 6', topic:'Service and Responsibility',
+    tf:[
+      {q:"Generosity is the virtue of giving good things to others freely and abundantly.", a:"True"},
+      {q:"In the family, a person finds belongingness, security, and self-identity.", a:"True"},
+      {q:"Our parents are our role models of unconditional love and whole-hearted service to the family.", a:"True"},
+      {q:"Children help build the Christian family through love, respect, and obedience.", a:"True"},
+      {q:"As young Christian disciples, we learned about Jesus first through nursery school.", a:"False"},
+      {q:'The Church teaches us to accept "exclusivism" to bring the family closer together.', a:"False"},
+      {q:"We have to recognize and respond to our responsibilities in the community.", a:"True"},
+      {q:"By serving our fellowmen, we imitate Jesus our Lord.", a:"True"},
+    ],
+    open:[
+      {q:"What are the things you can do to serve your family?", a:"Answers may vary (e.g., doing chores, helping siblings, showing respect and love)"},
+      {q:"What are the things you can do to serve your school?", a:"Answers may vary (e.g., joining activities, keeping the school clean, helping classmates)"},
+    ]
+  },
+  {
+    id:'q7', title:'Quiz 7', topic:'Family and Filipino Values',
+    tf:[
+      {q:'The family is the "first and vital cell of the society."', a:"True"},
+      {q:"The family is the biggest unit of society.", a:"False"},
+      {q:"Families have the duty to proclaim the Gospel not only within their family but also to society.", a:"True"},
+      {q:"Families can share material things with the poor people in the community.", a:"True"},
+      {q:"Filipinos are innately family-oriented, hospitable, and religious.", a:"True"},
+      {q:"Christian families are like the Church itself.", a:"True"},
+    ],
+    open:[
+      {q:"Give two Filipino values that every family member should observe.\na. ___\nb. ___", a:"Any two from: family-oriented, helpful, respectful, optimistic, hospitable, friendly, religious, sociable"},
+      {q:"Give two ways on how you show your love for your parents.\na. ___\nb. ___", a:"Answers may vary (e.g., obeying them, helping at home, expressing gratitude, spending time with them)"},
+    ]
+  }
+];
+
+const tfState = {};
+
+function buildQuizCards() {
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = '';
+  quizData.forEach((quiz, qi) => {
+    const card = document.createElement('div');
+    card.className = `quiz-card ${quiz.id} visible`;
+    card.dataset.quiz = quiz.id;
+
+    let tfHTML = quiz.tf.map((item, i) => `
+      <div class="tf-item" id="${quiz.id}-item-${i}">
+        <span class="qnum">${i+1}.</span>${item.q}
+        <div class="tf-choices">
+          <button class="tf-btn" onclick="answerTF('${quiz.id}',${i},'True')">✅ TRUE</button>
+          <button class="tf-btn" onclick="answerTF('${quiz.id}',${i},'False')">❌ FALSE</button>
+        </div>
+        <div class="tf-feedback" id="${quiz.id}-fb-${i}"></div>
+      </div>`).join('');
+
+    let openHTML = '';
+    if (quiz.open) {
+      openHTML = `<div class="section-title">B. Answer the following</div>` +
+        quiz.open.map((item, i) => `
+        <div class="open-item">
+          <div class="open-q"><span class="qnum">${i+1}.</span>${item.q.replace(/\n/g,'<br>')}</div>
+          <textarea class="open-input" rows="3" placeholder="Write your answer here..."></textarea>
+          <br><button class="show-ans-btn" onclick="toggleAns(this)">💡 Show Answer</button>
+          <div class="answer-reveal">✅ ${item.a.replace(/\n/g,'<br>')}</div>
+        </div>`).join('');
+    }
+
+    let bonusHTML = '';
+    if (quiz.bonus) {
+      bonusHTML = `<div class="section-title">⭐ Bonus</div>
+        <div class="bonus-block">
+          <div class="bonus-q">${quiz.bonus.q}</div>
+          <textarea class="open-input" rows="2" placeholder="Write your answer here..."></textarea>
+          <br><button class="show-ans-btn" onclick="toggleAns(this)">💡 Show Answer</button>
+          <div class="answer-reveal">✅ ${quiz.bonus.a}</div>
+        </div>`;
+    }
+
+    card.innerHTML = `
+      <div class="quiz-header">
+        <div class="quiz-num">${qi+1}</div>
+        <div class="quiz-title-wrap">
+          <div class="quiz-label">${quiz.title}</div>
+          <div class="quiz-title">${quiz.topic}</div>
+        </div>
+      </div>
+      <div class="quiz-body">
+        <div class="section-title">A. True or False</div>
+        ${tfHTML}
+        ${openHTML}
+        ${bonusHTML}
+        <div class="quiz-score-area">
+          <button class="check-btn" onclick="checkScore('${quiz.id}')">✅ Check True/False Score</button>
+          <div class="score-display" id="${quiz.id}-score"></div><br>
+          <button class="reset-btn" onclick="resetQuiz('${quiz.id}')">🔄 Reset Quiz</button>
+        </div>
+      </div>`;
+    container.appendChild(card);
+  });
+}
+
+function answerTF(qid, idx, chosen) {
+  const key = `${qid}-${idx}`;
+  if (tfState[key]) return;
+  tfState[key] = chosen;
+  const quiz = quizData.find(q => q.id === qid);
+  const correct = quiz.tf[idx].a;
+  const isRight = chosen === correct;
+  const item = document.getElementById(`${qid}-item-${idx}`);
+  const fb = document.getElementById(`${qid}-fb-${idx}`);
+  item.querySelectorAll('.tf-btn').forEach(btn => {
+    btn.disabled = true;
+    const label = btn.textContent.includes('TRUE') ? 'True' : 'False';
+    if (label === correct) btn.classList.add('reveal-correct');
+    if (label === chosen && !isRight) btn.classList.add('wrong');
+    if (label === chosen && isRight) btn.classList.add('correct');
+  });
+  fb.textContent = isRight ? '🎉 Correct!' : `❌ The correct answer is ${correct}.`;
+  fb.className = `tf-feedback ${isRight ? 'ok' : 'no'}`;
+}
+
+function checkScore(qid) {
+  const quiz = quizData.find(q => q.id === qid);
+  const total = quiz.tf.length;
+  let correct = 0;
+  quiz.tf.forEach((item, i) => { if (tfState[`${qid}-${i}`] === item.a) correct++; });
+  const el = document.getElementById(`${qid}-score`);
+  el.style.display = 'block';
+  const emoji = correct === total ? '🎉 Perfect!' : correct >= Math.ceil(total/2) ? '👍 Good job!' : '📖 Keep studying!';
+  el.innerHTML = `Score: <span>${correct}/${total}</span> ${emoji}`;
+}
+
+function resetQuiz(qid) {
+  const quiz = quizData.find(q => q.id === qid);
+  quiz.tf.forEach((_, i) => delete tfState[`${qid}-${i}`]);
+  buildQuizCards();
+  filterQuiz(currentQuizFilter, null);
+}
+
+function toggleAns(btn) {
+  const reveal = btn.nextElementSibling;
+  reveal.classList.toggle('shown');
+  btn.textContent = reveal.classList.contains('shown') ? '🙈 Hide Answer' : '💡 Show Answer';
+}
+
+let currentQuizFilter = 'all';
+function filterQuiz(cls, el) {
+  currentQuizFilter = cls;
+  document.querySelectorAll('#quizSection .tab-btn').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  document.querySelectorAll('.quiz-card').forEach(c => {
+    c.classList.toggle('visible', cls === 'all' || c.dataset.quiz === cls);
+  });
+}
+
+function toggleLesson(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.lesson-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  toggle.classList.toggle('open', !isOpen);
+}
+function toggleAll(expand) {
+  document.querySelectorAll('.lesson-body').forEach(b => b.classList.toggle('open', expand));
+  document.querySelectorAll('.lesson-toggle').forEach(t => t.classList.toggle('open', expand));
+}
+function filterLesson(cls, el) {
+  document.querySelectorAll('#reviewerSection .tab-btn').forEach(b => b.classList.remove('active'));
+  if (el) el.classList.add('active');
+  document.querySelectorAll('.lesson-card').forEach(c => {
+    c.classList.toggle('visible', cls === 'all' || c.dataset.lesson === cls);
+  });
+}
+function setMode(mode, btn) {
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('reviewerSection').style.display = mode === 'reviewer' ? 'block' : 'none';
+  document.getElementById('quizSection').style.display = mode === 'quiz' ? 'block' : 'none';
+}
+
+buildQuizCards();
+</script>
+</body>
+</html>
