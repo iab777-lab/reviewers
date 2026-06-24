@@ -56,11 +56,11 @@
   /* MODE SELECT */
   .mode-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr 1fr 1fr;
     gap:20px;
     margin-top:20px;
   }
-  @media (max-width:600px){ .mode-grid{ grid-template-columns:1fr; } }
+  @media (max-width:700px){ .mode-grid{ grid-template-columns:1fr; } }
 
   .mode-card{
     background:white;
@@ -77,10 +77,12 @@
   .mode-card:active{ transform: translateY(2px); }
   .mode-card.addition{ border-color:var(--green); }
   .mode-card.subtraction{ border-color:var(--pink); }
+  .mode-card.wordproblem{ border-color:var(--purple); }
   .mode-card .emoji{ font-size:3rem; }
   .mode-card h2{ margin:10px 0 5px; font-size:1.5rem; }
   .mode-card.addition h2{ color:var(--green); }
   .mode-card.subtraction h2{ color:var(--pink); }
+  .mode-card.wordproblem h2{ color:var(--purple); }
   .mode-card p{ color:#777; margin:0; font-size:0.95rem; }
 
   .settings-box{
@@ -184,6 +186,19 @@
   }
   .question-text .op{
     color:var(--blue);
+  }
+  .question-text.story{
+    font-family:'Nunito';
+    font-weight:700;
+    font-size:1.4rem;
+    line-height:1.5;
+    color:var(--dark);
+    text-align:left;
+    margin-bottom:20px;
+  }
+  .question-text.story .highlight{
+    color:var(--purple);
+    font-family:'Fredoka One';
   }
 
   .answers-grid{
@@ -359,6 +374,11 @@
         <h2>Subtraction</h2>
         <p>Take numbers away!</p>
       </div>
+      <div class="mode-card wordproblem" data-mode="wordproblem">
+        <div class="emoji">📖</div>
+        <h2>Word Problems</h2>
+        <p>Read and solve story problems! (No timer)</p>
+      </div>
     </div>
 
     <div class="settings-box">
@@ -383,7 +403,7 @@
     <div class="quiz-top">
       <div class="pill score">⭐ Score: <span id="score-display">0</span></div>
       <div class="pill streak">🔥 Streak: <span id="streak-display">0</span></div>
-      <div class="pill timer">⏱️ <span id="timer-display">15</span>s</div>
+      <div class="pill timer" id="timer-pill">⏱️ <span id="timer-display">15</span>s</div>
     </div>
     <div class="progress-bar-bg"><div class="progress-bar-fill" id="progress-fill"></div></div>
 
@@ -464,6 +484,45 @@
   // default select addition visually
   document.querySelector('.mode-card.addition').style.transform = 'scale(1.03)';
 
+  // ---- Word problem templates ----
+  const names = ['Maria','Juan','Ana','Liam','Sofia','Diego','Mika','Carlo','Bea','Noah'];
+  const items = ['apples','marbles','stickers','candies','balloons','pencils','cookies','toy cars','flowers','seashells'];
+
+  function buildWordProblem(){
+    const [min,max] = getRange();
+    const name = names[randInt(0,names.length-1)];
+    const item = items[randInt(0,items.length-1)];
+    let a,b,answer,text;
+    const isAddition = Math.random() < 0.5;
+    if(isAddition){
+      a = randInt(min,max);
+      b = randInt(min,max);
+      answer = a+b;
+      const templates = [
+        `${name} has <span class="highlight">${a}</span> ${item}. Then ${name} gets <span class="highlight">${b}</span> more ${item}. How many ${item} does ${name} have now?`,
+        `There are <span class="highlight">${a}</span> ${item} in a basket. Someone adds <span class="highlight">${b}</span> more ${item}. How many ${item} are in the basket now?`,
+        `${name} collected <span class="highlight">${a}</span> ${item} in the morning and <span class="highlight">${b}</span> ${item} in the afternoon. How many ${item} did ${name} collect in total?`
+      ];
+      text = templates[randInt(0,templates.length-1)];
+    } else {
+      a = randInt(min,max);
+      b = randInt(min,max);
+      if(b>a){ const t=a; a=b; b=t; }
+      answer = a-b;
+      const templates = [
+        `${name} has <span class="highlight">${a}</span> ${item}. ${name} gives away <span class="highlight">${b}</span> ${item}. How many ${item} does ${name} have left?`,
+        `There are <span class="highlight">${a}</span> ${item} on the table. <span class="highlight">${b}</span> ${item} are taken away. How many ${item} are left?`,
+        `${name} had <span class="highlight">${a}</span> ${item} but lost <span class="highlight">${b}</span> ${item}. How many ${item} does ${name} have now?`
+      ];
+      text = templates[randInt(0,templates.length-1)];
+    }
+    currentAnswer = answer;
+    const qEl = document.getElementById('question-text');
+    qEl.classList.add('story');
+    qEl.innerHTML = text;
+    renderAnswers(answer);
+  }
+
   document.querySelectorAll('#level-row .level-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       document.querySelectorAll('#level-row .level-btn').forEach(b=>b.classList.remove('selected'));
@@ -495,6 +554,12 @@
   }
 
   function generateQuestion(){
+    const qEl = document.getElementById('question-text');
+    if(mode==='wordproblem'){
+      buildWordProblem();
+      return;
+    }
+    qEl.classList.remove('story');
     const [min,max] = getRange();
     let a,b,answer,text;
     if(mode==='addition'){
@@ -510,7 +575,7 @@
       text = `${a} <span class="op">−</span> ${b} = ?`;
     }
     currentAnswer = answer;
-    document.getElementById('question-text').innerHTML = text;
+    qEl.innerHTML = text;
     renderAnswers(answer);
   }
 
@@ -582,6 +647,12 @@
   }
 
   function startTimer(){
+    const timerPill = document.getElementById('timer-pill');
+    if(mode==='wordproblem'){
+      timerPill.style.display = 'none';
+      return;
+    }
+    timerPill.style.display = '';
     timeLeft = TIME_LIMIT;
     document.getElementById('timer-display').textContent = timeLeft;
     timerInterval = setInterval(()=>{
